@@ -13,6 +13,7 @@ import appStore from './store';
 import AppContainer from './App';
 import AdminContainer from './Admin';
 import Dashboard from '../Views/AdminDashboard';
+import Settings from '../Views/AdminSettings';
 import Header from 'Containers/Header';
 import ForumFeed from '../Views/ForumFeed';
 import SingleDiscussion from '../Views/SingleDiscussion';
@@ -33,7 +34,7 @@ ReactDOM.render (
     <Router history={browserHistory}>
       <Route path="/admin" component={AdminContainer}>
         <IndexRoute component={Dashboard} />
-        <Route path="/admin/settings" component={AdminSettings} />
+        <Route path="/admin/settings" component={Settings} />
       </Route>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={ForumFeed} />

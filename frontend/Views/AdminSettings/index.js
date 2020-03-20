@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'redux';
+import { connect } from 'react-redux';
 import classnames from 'classnames';
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
@@ -30,4 +30,4 @@ export default connect(
   (dispatch) => { return {
 
   }; }
-)(Dashboard);
+)(Settings);
