@@ -16,6 +16,7 @@ class AdminHeader extends Component {
   renderNavLinks() {
     return [
       { name: 'Dashboard', link: '/admin' },
+      { name: 'Settings', link: '/admin/settings' },
     ];
   }
 
