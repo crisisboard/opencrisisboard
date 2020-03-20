@@ -32,7 +32,7 @@ class AdminHeader extends Component {
       <div className={classnames(appLayout.constraintWidth)}>
         <div className={styles.headerTop}>
           <Logo />
-          Welcome Admin
+          {/* Welcome Admin - this text should be moved into a header element inside of the admin dashboard */}
           <UserMenu
             signedIn={authenticated}
             username={username}

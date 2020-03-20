@@ -24,7 +24,7 @@ import NotFound from '../Views/NotFound';
 // geocode configs
 Geocode.setApiKey(MAP_KEY);
 Geocode.setLanguage("en");
- 
+
 // Enable or disable logs. Its optional.
 Geocode.enableDebug();
 
@@ -33,6 +33,7 @@ ReactDOM.render (
     <Router history={browserHistory}>
       <Route path="/admin" component={AdminContainer}>
         <IndexRoute component={Dashboard} />
+        <Route path="/admin/settings" component={AdminSettings} />
       </Route>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={ForumFeed} />
