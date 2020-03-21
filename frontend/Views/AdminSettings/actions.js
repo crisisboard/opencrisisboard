@@ -1,7 +1,7 @@
 import {
-  GET_SETTINGS_INFO_START,
-  GET_SETTINGS_INFO_SUCCESS,
-  GET_SETTINGS_INFO_FAILURE,
+  GET_SETTINGS_START,
+  GET_SETTINGS_SUCCESS,
+  GET_SETTINGS_FAILURE,
 
   UPDATE_BOARD_NAME,
   UPDATE_BOARD_NAME_SUCCESS,
@@ -24,11 +24,11 @@ import {
  */
 export const getAdminSettingsInfo = () => {
   return (dispatch, getState) => {
-    dispatch({ type: GET_SETTINGS_INFO_START });
+    dispatch({ type: GET_SETTINGS_START });
 
     getAdminSettingsInfoAPI().then(
-      data => dispatch({ type: GET_SETTINGS_INFO_SUCCESS, payload: data.data }),
-      error => dispatch({ type: GET_SETTINGS_INFO_FAILURE, payload: error })
+      data => dispatch({ type: GET_SETTINGS_SUCCESS, payload: data.data }),
+      error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
     )
   };
 };
@@ -45,15 +45,15 @@ export const updateAdminBoardName = (newBoardName) => {
     updateAdminBoardNameAPI(newBoardName).then(
       data => {
         // After updating the board name, need to ensure it changed and then update the name in AdminHeader somehow
-        dispatch({ type: GET_SETTINGS_INFO_START });
+        dispatch({ type: GET_SETTINGS_START });
         getAdminSettingsInfoAPI().then(
           data => {
             // data is refreshed
-            dispatch({type: GET_SETTINGS_INFO_SUCCESS, payload: data.data});
+            dispatch({type: GET_SETTINGS_SUCCESS, payload: data.data});
 
             // TODO: update the board name in AdminHeader here
           },
-          error => dispatch({ type: GET_SETTINGS_INFO_FAILURE, payload: error })
+          error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
         );
 
         // eventually in this branch there will be a success action returned
@@ -76,15 +76,15 @@ export const updateAdminBoardLogo = (newBoardLogoURL) => {
     updateAdminBoardLogoAPI(newBoardLogoURL).then(
       data => {
         // After updating the board logo, need to ensure it changed and then update the logo in AdminHeader somehow
-        dispatch({ type: GET_SETTINGS_INFO_START });
+        dispatch({ type: GET_SETTINGS_START });
           getAdminSettingsInfoAPI().then(
             data => {
               // data is refreshed
-              dispatch({type: GET_SETTINGS_INFO_SUCCESS, payload: data.data});
+              dispatch({type: GET_SETTINGS_SUCCESS, payload: data.data});
 
               // TODO: update the board logo in AdminHeader here
             },
-            error => dispatch({ type: GET_SETTINGS_INFO_FAILURE, payload: error })
+            error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
           );
 
         // eventually in this branch there will be a success action returned

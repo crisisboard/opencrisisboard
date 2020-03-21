@@ -1,7 +1,7 @@
 import {
-  GET_SETTINGS_INFO_START,
-  GET_SETTINGS_INFO_SUCCESS,
-  GET_SETTINGS_INFO_FAILURE,
+  GET_SETTINGS_START,
+  GET_SETTINGS_SUCCESS,
+  GET_SETTINGS_FAILURE,
 
   UPDATE_BOARD_NAME,
   UPDATE_BOARD_NAME_SUCCESS,
@@ -13,54 +13,75 @@ import {
 } from './constants';
 
 const initialState = {
-  // TODO: fill in initialState object appropriately
+  fetchingSettings: false,
+  error: null,
+  settings: {
+    boardName: '',
+    boardLogoURL: ''
+  },
+
+  updatingBoardName: false,
+  updatingBoardNameError: null,
+
+  updatingBoardLogo: false,
+  updatingBoardLogoError: false
 };
 
 export const adminSettingsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_SETTINGS_INFO_START:
+    case GET_SETTINGS_START:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        fetchingSettings: true,
+        error: null
       });
 
-    case GET_SETTINGS_INFO_SUCCESS:
+    case GET_SETTINGS_SUCCESS:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        fetchingSettings: false,
+        settings: action.payload,
+        error: null
       });
 
-    case GET_SETTINGS_INFO_FAILURE:
+    case GET_SETTINGS_FAILURE:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        fetchingSettings: false,
+        error: 'Something went wrong while fetching the current admin settings'
       });
 
     case UPDATE_BOARD_NAME:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        updatingBoardName: true,
+        updatingBoardNameError: null
       });
 
     case UPDATE_BOARD_NAME_SUCCESS:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        updatingBoardName: false,
+        updatingBoardNameError: null
       });
 
     case UPDATE_BOARD_NAME_FAILURE:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        updatingBoardName: false,
+        updatingBoardNameError: 'Something went wrong while updating the board name'
       });
 
     case UPDATE_BOARD_LOGO:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        updatingBoardLogo: true,
+        updatingBoardLogoError: null
       });
 
     case UPDATE_BOARD_LOGO_SUCCESS:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        updatingBoardLogo: false,
+        updatingBoardLogoError: null
       });
 
     case UPDATE_BOARD_LOGO_FAILURE:
       return Object.assign({}, state, {
-        // TODO: fill this in appropriately
+        updatingBoardLogo: false,
+        updatingBoardLogoError: 'Something went wrong while updating the board logo'
       });
   }
 };
