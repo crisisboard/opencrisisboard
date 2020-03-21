@@ -70,25 +70,27 @@ export const updateAdminBoardName = (newBoardName) => {
  * @return {action}
  */
 export const updateAdminBoardLogo = (newBoardLogoURL) => {
-  dispatch({ type: UPDATE_BOARD_LOGO });
+  return (dispatch, getState) => {
+    dispatch({ type: UPDATE_BOARD_LOGO });
 
-  updateAdminBoardLogoAPI(newBoardLogoURL).then(
-    data => {
-      // After updating the board logo, need to ensure it changed and then update the logo in AdminHeader somehow
-      dispatch({ type: GET_SETTINGS_INFO_START });
-        getAdminSettingsInfoAPI().then(
-          data => {
-            // data is refreshed
-            dispatch({type: GET_SETTINGS_INFO_SUCCESS, payload: data.data});
+    updateAdminBoardLogoAPI(newBoardLogoURL).then(
+      data => {
+        // After updating the board logo, need to ensure it changed and then update the logo in AdminHeader somehow
+        dispatch({ type: GET_SETTINGS_INFO_START });
+          getAdminSettingsInfoAPI().then(
+            data => {
+              // data is refreshed
+              dispatch({type: GET_SETTINGS_INFO_SUCCESS, payload: data.data});
 
-            // TODO: update the board logo in AdminHeader or whatever here
-          },
-          error => dispatch({ type: GET_SETTINGS_INFO_FAILURE, payload: error })
-        );
+              // TODO: update the board logo in AdminHeader here
+            },
+            error => dispatch({ type: GET_SETTINGS_INFO_FAILURE, payload: error })
+          );
 
-      // eventually in this branch there will be a success action returned
-      dispatch({ type: UPDATE_BOARD_LOGO_SUCCESS, payload: data.data })
-    },
-    error => dispatch({ type: UPDATE_BOARD_LOGO_FAILURE, payload: error })
-  )
+        // eventually in this branch there will be a success action returned
+        dispatch({ type: UPDATE_BOARD_LOGO_SUCCESS, payload: data.data })
+      },
+      error => dispatch({ type: UPDATE_BOARD_LOGO_FAILURE, payload: error })
+    );
+  }
 };

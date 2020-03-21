@@ -4,7 +4,11 @@ import classnames from 'classnames';
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
-import {} from './actions';
+import {
+  getAdminSettingsInfo,
+  updateAdminBoardName,
+  updateAdminBoardLogo
+} from './actions';
 
 class Settings extends Component {
   componentDidMount() {
