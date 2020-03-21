@@ -44,12 +44,12 @@ To have social login you will also need keys for Twitter and/or Facebook and/or 
 
 * [GitHub Developer Portal](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
 
-We need to grab the following information from the application.
+You need to grab the following information from the application.
 * Client ID
 * Client Secret
 * Callback URL
 
-The `Callback URL` is the domain where Twitter or Facebook or Github will redirect the user after a successful login. You can use a domain name or local host. But we need to append the URL with the path `/api/user/authViaTwitter/callback` or `/api/user/authViaFacebook/callback`.
+The `Callback URL` is the domain where Twitter or Facebook or Github will redirect the user after a successful login. You can use a domain name or local host. But you need to append the URL with the path `/api/user/authViaTwitter/callback` or `/api/user/authViaFacebook/callback`.
 
 * So, the complete url will look like:
 `https://TheNameOfYourApp.herokuapp.com/api/user/authViaTwitter/callback` or `https://TheNameOfYourApp.herokuapp.com/api/user/authViaFacebook/callback` or
@@ -98,7 +98,7 @@ ports:
 
 Then once you're all setup, simply run `docker-compose up` to launch the full forum
 
-## Deploy on you own server
+## Deploy on your own server
 
 Please make sure you have following software installed in your system:
 * Node.js > 6.0
@@ -106,12 +106,12 @@ Please make sure you have following software installed in your system:
 * Git
 * MongoDB
 
-First we need to clone the repository:
+First you need to clone the repository:
 ```
 $ git clone https://github.com/crisisboard/opencrisisboard
 ```
 
-Then we have to install the necessary dependencies using either NPM or Yarn:
+Then you have to install the necessary dependencies using either NPM or Yarn:
 ```
 $ npm i
 ```
@@ -119,7 +119,9 @@ $ npm i
 $ yarn
 ```
 
-Since the app currently uses Twitter and Facebook authentication, we need to configure a Twitter and Facebook application and/or GitHub. You can register a new application from these links: 
+Then, ensure the mongodb service is installed and running locally. There are multiple ways of doing this, but [this guide](https://medium.com/swlh/get-up-and-running-with-mongodb-in-under-5-minutes-abc8770b1ef8) should help if you don't know how to do this.
+
+Since the app currently uses Twitter, Facebook, and Github authentication, we need to configure a Twitter and Facebook application and/or GitHub. You can register a new application from these links: 
 
 [Twitter Developer Portal](https://developer.twitter.com/)
 
@@ -132,8 +134,8 @@ We need to grab the following information from the application.
 * Client Secret
 * Callback URL
 
-The `Callback URL` is the domain where Twitter or Facebook will redirect the user after a successful login. You can use a domain name or local host. But we need to append the URL with the path `/api/user/authViaTwitter/callback` or `/api/user/authViaFacebook/callback`. So, the complete url will look like:
-`https://localhost:8080/api/user/authViaTwitter/callback` or `https://localhost:8080/api/user/authViaFacebook/callback`
+The `Callback URL (CBURL)` is the domain where Twitter, Facebook or Github will redirect the user after a successful login. You can use a domain name or local host. But we need to append the URL with the path `/api/user/authViaTwitter/callback` or `/api/user/authViaFacebook/callback`. So, the complete url will look like:
+`https://localhost:8080/api/user/authViaTwitter/callback`, `https://localhost:8080/api/user/authViaFacebook/callback`, or `https://localhost:8080/api/user/authViaGithub/callback`
 
 Additionally to add map functionality you will need to obtain keys from Google (this is the only required key needed to deploy)
 

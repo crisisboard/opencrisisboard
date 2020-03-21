@@ -12,7 +12,7 @@ import {
 
 class Settings extends Component {
   componentDidMount() {
-
+    this.props.getAdminSettingsInfo();
   }
 
   render () {
@@ -28,9 +28,16 @@ class Settings extends Component {
 
 export default connect(
   (state) => { return {
-
+    settings: state.settings,
+    fetchingSettings: state.fetchingSettings,
+    updatingBoardName: state.updatingBoardName,
+    updatingBoardNameError: state.updatingBoardNameError,
+    updatingBoardLogo: state.updatingBoardLogo,
+    updatingBoardLogoError: state.updatingBoardLogoError
   }; },
   (dispatch) => { return {
-
+    getAdminSettingsInfo: () => dispatch(getAdminSettingsInfo()),
+    updateAdminBoardName: (newBoardName) => dispatch(updateAdminBoardName((newBoardName))),
+    updateAdminBoardLogo: (newBoardLogoURL) => dispatch(updateAdminBoardLogo((newBoardLogoURL)))
   }; }
 )(Settings);
