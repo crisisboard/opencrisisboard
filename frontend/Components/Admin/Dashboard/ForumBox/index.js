@@ -108,7 +108,7 @@ class ForumBox extends Component {
               <input
                 type={'text'}
                 className={styles.createInput}
-                placeholder={'forum_slug'}
+                placeholder={'Forum Slug'}
                 onChange={(e) => { this.setState({ newForumSlug: e.target.value }); }}
               />
             </div>

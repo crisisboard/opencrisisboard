@@ -11,8 +11,8 @@ import {
   createForum,
   deleteForum,
 } from './actions';
-import Counts from 'Components/Dashboard/Counts';
-import ForumBox from 'Components/Dashboard/ForumBox';
+import Counts from 'Components/Admin/Dashboard/Counts';
+import ForumBox from 'Components/Admin/Dashboard/ForumBox';
 
 class Dashboard extends Component {
   componentDidMount() {

@@ -6,7 +6,7 @@ import { appReducer, userReducer } from './reducers';
 import { feedReducer } from '../Views/ForumFeed/reducers';
 import { singleDiscussionReducer } from '../Views/SingleDiscussion/reducers';
 import { newDiscussionReducer } from '../Views/NewDiscussion/reducers';
-import { adminInfoReducer } from '../Views/AdminDashboard/reducers';
+import { adminInfoReducer } from '../Views/Admin/Dashboard/reducers';
 import { userProfileReducer } from '../Views/UserProfile/reducers';
 
 // root reducer for app

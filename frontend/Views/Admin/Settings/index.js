@@ -9,6 +9,7 @@ import {
   updateAdminBoardName,
   updateAdminBoardLogo
 } from './actions';
+import LogoForm from 'Components/Admin/Settings/LogoForm';
 
 class Settings extends Component {
   componentDidMount() {
@@ -21,6 +22,10 @@ class Settings extends Component {
         <h1>
           This is the settings tab for the Admin panel.
         </h1>
+        <LogoForm
+          updateBoardNameAction={(newBoardName) => {updateAdminBoardName(newBoardName)}}
+          updateBoardLogoAction={(newBoardLogoURL) => {updateAdminBoardLogo(newBoardLogoURL)}}
+        />
       </div>
     );
   }

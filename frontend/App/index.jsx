@@ -12,8 +12,8 @@ import appStore from './store';
 // app views
 import AppContainer from './App';
 import AdminContainer from './Admin';
-import Dashboard from '../Views/AdminDashboard';
-import Settings from '../Views/AdminSettings';
+import Dashboard from '../Views/Admin/Dashboard';
+import Settings from '../Views/Admin/Settings';
 import Header from 'Containers/Header';
 import ForumFeed from '../Views/ForumFeed';
 import SingleDiscussion from '../Views/SingleDiscussion';

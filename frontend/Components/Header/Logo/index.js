@@ -4,8 +4,8 @@ import styles from './styles';
 import LogoImage from 'SharedStyles/logo.png';
 
 const Logo = (props) => {
-  const boardName = this.props.boardName ? this.props.boardName : "OpenCrisisBoard";
-  const logoImage = this.props.logoImage ? this.props.logoImage : LogoImage;
+  const boardName = props.boardName ? props.boardName : "OpenCrisisBoard";
+  const logoImage = props.logoImage ? props.logoImage : LogoImage;
   return (
     <div className={styles.logoContainer}>
       <Link to='/' className={styles.logo}>
