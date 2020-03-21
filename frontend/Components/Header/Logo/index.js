@@ -3,14 +3,16 @@ import { Link } from 'react-router'
 import styles from './styles';
 import LogoImage from 'SharedStyles/logo.png';
 
-const Logo = () => {
+const Logo = (props) => {
+  const boardName = this.props.boardName ? this.props.boardName : "OpenCrisisBoard";
+  const logoImage = this.props.logoImage ? this.props.logoImage : LogoImage;
   return (
     <div className={styles.logoContainer}>
       <Link to='/' className={styles.logo}>
-        <img className={styles.logoImage} src={LogoImage} />
+        <img className={styles.logoImage} src={logoImage} />
       </Link>
       <h1 className={styles.logoTitle}>
-        <Link to="/">OpenCrisisBoard</Link>
+        <Link to="/">{boardName}</Link>
       </h1>
     </div>
   );
