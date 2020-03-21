@@ -28,7 +28,7 @@ export const getAdminDashboardInfo = () => {
 
     getAdminDashboardInfoAPI().then(
       data => dispatch({ type: GET_ALL_INFO_SUCCESS, payload: data.data }),
-      error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
+      error => dispatch({ type: GET_ALL_INFO_FAILURE, payload: error }) // Changed this, need to test if it breaks
     );
   };
 };
@@ -55,7 +55,7 @@ export const createForum = (forumObj) => {
             if (forumData.data.created) { dispatch({ type: CREATE_FORUM_SUCCESS }); }
             else dispatch({ type: CREATE_FORUM_FAILURE });
           },
-          error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
+          error => dispatch({ type: GET_ALL_INFO_FAILURE, payload: error }) // another instance of the above issue
         );
       },
       error => dispatch({ type: CREATE_FORUM_FAILURE })
@@ -80,10 +80,10 @@ export const deleteForum = (forumId) => {
             if (forumData.data.deleted) { dispatch({ type: DELETE_FORUM_SUCCESS }); }
             else dispatch({ type: DELETE_FORUM_FAILURE });
           },
-          error => dispatch({ type: FETCHING_DISCUSSIONS_FAILURE, payload: error })
+          error => dispatch({ type: GET_ALL_INFO_FAILURE, payload: error }) // another instance of the above issue
         );
       },
-      error => dispatch({ type: DELETE_FORUM_FAILURE })
+      error => dispatch({ type: DELETE_FORUM_FAILURE }) // is there no payload here for a reason? maybe add it?
     );
   };
 };
