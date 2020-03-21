@@ -20,8 +20,8 @@ class Settings extends Component {
     return (
       <div className={classnames(appLayout.constraintWidth, styles.container)}>
         <LogoForm
-          updateBoardNameAction={(newBoardName) => {updateAdminBoardName(newBoardName)}}
-          updateBoardLogoAction={(newBoardLogoURL) => {updateAdminBoardLogo(newBoardLogoURL)}}
+          updateBoardNameAction={(newBoardName) => {this.props.updateAdminBoardName(newBoardName)}}
+          updateBoardLogoAction={(newBoardLogoURL) => {this.props.updateAdminBoardLogo(newBoardLogoURL)}}
         />
       </div>
     );

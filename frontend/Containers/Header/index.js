@@ -57,6 +57,6 @@ class Header extends Component {
 export default connect(
   (state) => { return {
     user: state.user,
-    forums: state.app.forums,
+    forums: state.app.forums
   }; }
 )(Header);
