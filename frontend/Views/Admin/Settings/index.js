@@ -19,9 +19,6 @@ class Settings extends Component {
   render () {
     return (
       <div className={classnames(appLayout.constraintWidth, styles.container)}>
-        <h1>
-          This is the settings tab for the Admin panel.
-        </h1>
         <LogoForm
           updateBoardNameAction={(newBoardName) => {updateAdminBoardName(newBoardName)}}
           updateBoardLogoAction={(newBoardLogoURL) => {updateAdminBoardLogo(newBoardLogoURL)}}

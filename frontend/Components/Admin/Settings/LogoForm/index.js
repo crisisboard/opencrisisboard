@@ -10,7 +10,7 @@ class LogoForm extends Component {
     this.state = {
       newBoardName: '',
       // TODO: For now, just a string. Look into ImageUploader components
-      newBoardLogoSrc: '',
+      newBoardLogoImg: '',
       errorMsg: null
     };
 
@@ -21,24 +21,51 @@ class LogoForm extends Component {
     this.props.updateBoardNameAction(this.state.newBoardName);
 
     // TODO: Figure out the code before this line (to do with ImageUploader)
-    this.props.updateBoardLogoAction(this.state.newBoardLogoSrc);
+    this.props.updateBoardLogoAction(this.state.newBoardLogoImg);
   }
 
   render () {
     let {
-      currentBoardName
+      currentBoardName,
+      currentBoardLogoImg
     } = this.props;
 
     return (
-      <div className={styles.adminSettingsLogoForm}>
-        <input
-          type={'text'}
-          className={styles.newBoardNameInput}
-          placeholder={currentBoardName}
-          onChange={(e) => {this.setState({newBoardName: e.target.value});}}
-        />
-        {/* ImageUploader goes here */}
+      <div className={styles.logoFormWrapper}>
+        <div className={styles.logoFormHeader}>
+          Change Admin Settings
+        </div>
+        <div className={styles.logoFormNameInputWrapper}>
+          <label className={styles.logoFormInputLabel}>
+            Board name:
+          </label>
+          <input
+            type={'text'}
+            className={styles.logoFormInput}
+            placeholder={currentBoardName}
+            onChange={(e) => {this.setState({newBoardName: e.target.value});}}
+          />
+        </div>
+
+        <div className={styles.logoFormImgInputWrapper}>
+          <div className={styles.logoImgPreviewWrapper}>
+            <img
+              src={'https://i.imgur.com/dE24m6H.png'}
+              className={styles.logoImgPreview}
+            />
+          </div>
+          <label className={styles.logoFormInputLabel}>
+            Board logo image:
+          </label>
+          <input
+            type={'text'}
+            className={styles.logoFormInput}
+            placeholder={currentBoardLogoImg}
+            onChange={(e) => {this.setState({newBoardLogoImg: e.target.value});}}
+          />
+        </div>
         <Button
+          className={styles.logoFormSubmitButton}
           onClick={this.handleSubmit}
         >
           Submit Changes
@@ -50,14 +77,14 @@ class LogoForm extends Component {
 
 LogoForm.defaultProps = {
   currentBoardName: 'OpenCrisisBoard',
-  currentBoardLogoImageURL: '',
+  currentBoardLogoImg: 'https://i.imgur.com/dE24m6H.png',
 
   // TODO: Figure out if I need to add props to signify updating state
 };
 
 LogoForm.propTypes = {
   currentBoardName: React.PropTypes.string,
-  currentBoardLogoImageURL: React.PropTypes.string,
+  currentBoardLogoImg: React.PropTypes.string,
   updateBoardNameAction: React.PropTypes.func,
   updateBoardLogoAction: React.PropTypes.func
 };

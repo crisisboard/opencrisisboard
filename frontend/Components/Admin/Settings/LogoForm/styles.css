@@ -1,8 +1,42 @@
-.adminSettingsLogoForm {
-  /* TODO: styles */
+ @value borderColor from 'SharedStyles/globalStyles.css';
 
+.logoFormWrapper {
+  padding: 0 10px 10px 10px;
+  border: 1px solid borderColor;
 }
 
-.newBoardNameInput {
-  /* TODO: styles */
+.logoFormHeader {
+  padding: 10px 10px 10px 0;
+}
+
+/* TODO: Reduce duplicate code in styles */
+.logoFormInput {
+  outline: none;
+  padding: 5px 10px;
+  min-width: 200px;
+}
+
+.logoFormInputLabel {
+  margin-right: 10px;
+}
+
+.logoImgPreviewWrapper {
+  text-align: center;
+}
+
+.logoImgPreview {
+  padding: 10px;
+}
+
+.logoFormSubmitButton {
+  padding: 10px 10px 10px 15px;
+}
+
+.logoFormNameInputWrapper {
+  display: inline-block;
+}
+
+.logoFormImgInputWrapper {
+  display: inline-block;
+  margin-left: 15px;
 }

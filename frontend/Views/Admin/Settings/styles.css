@@ -1,5 +1,5 @@
 /* TODO: Reduce duplicate code. For now, these styles are copied directly from the AdminDashboard directory */
-@value smallBP from 'SharedStyles/globalStyles';
+@value smallBP, borderColor from 'SharedStyles/globalStyles';
 
 .container {
   margin-top: 20px;
@@ -32,4 +32,9 @@
   font-size: 12px;
   line-height: 14px;
   text-align: center;
+}
+
+.adminSettingsHeader {
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
