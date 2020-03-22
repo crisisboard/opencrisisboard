@@ -17,6 +17,7 @@ const getAdminSettings = () => {
     .exec((error, adminSettings) => {
       if (error) { console.log(error); reject(error);}
       else if (!adminSettings) {
+        console.log('AdminSettings doesn\'t exist yet');
         // AdminSettings doesn't yet exist in the db, create it
         const newAdminSettings = new Admin({
           board_name: 'OpenCrisisBoard',

@@ -28,11 +28,18 @@ class AdminHeader extends Component {
       avatarUrl,
     } = this.props.user;
 
+    const {
+      boardName,
+      boardLogoImage
+    } = this.props.adminSettings;
+
     return (
       <div className={classnames(appLayout.constraintWidth)}>
         <div className={styles.headerTop}>
-          <Logo />
-          {/* Welcome Admin - this text should be moved into a header element inside of the admin dashboard */}
+          <Logo
+            boardName={boardName}
+            logoImage={boardLogoImage}
+          />
           <UserMenu
             signedIn={authenticated}
             username={username}
@@ -51,5 +58,6 @@ export default connect(
   (state) => { return {
     user: state.user,
     forums: state.app.forums,
+    adminSettings: state.adminSettings
   }; }
 )(AdminHeader);
