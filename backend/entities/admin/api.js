@@ -23,7 +23,7 @@ const adminAPI = (app) => {
   });
 
   // get admin settings
-  app.get('./api/admin/admin_settings', (req, res) => {
+  app.get('/api/admin/admin_settings', (req, res) => {
     if (req.user && req.user.role === 'admin') {
       getAdminSettings().then(
         (data) => {res.send(data); },
