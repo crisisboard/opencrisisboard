@@ -1,11 +1,11 @@
 /**
- * admin model, singleton instance in the DB
+ * admin model (Singleton)
  */
 const mongoose = require('mongoose');
 
 const adminSchema = mongoose.Schema({
-  boardName: String,
-  boardLogoImageURL: String,
+  board_name: String,
+  board_logo_URL: String,
 });
 
 module.exports = mongoose.model('admin', adminSchema);

@@ -17,9 +17,13 @@ const getAdminSettings = () => {
     .exec((error, adminSettings) => {
       if (error) { console.log(error); reject(error);}
       else if (Object.keys(adminSettings).length === 0) {
+        // TODO: TEST THIS AND MAKE SURE IT WORKS LOL
         // AdminSettings doesn't yet exist in the db, create it
-        adminSettings = Object.assign({}, new Admin('OpenCrisisBoard', ''));
-        Admin.save((error) => {
+        adminSettings = new Admin({
+          board_name: 'OpenCrisisBoard',
+          board_logo_image_URL: '' // TODO: Fill this in with default logo URL
+        });
+        adminSettings.save((error) => {
           if (error) {reject(error);}
         });
         resolve(adminSettings);
@@ -89,7 +93,7 @@ const createForum = ({ forum_name, forum_slug }) => {
       if (error) { console.log(error); reject({ serverError: true }); }
       else if (forum) { reject({ alreadyExists: true }); }
       else {
-        // forum does not exists, so create a new one
+        // forum does not exist, so create a new one
         const newForum = new Forum({
           forum_slug,
           forum_name,
@@ -99,6 +103,53 @@ const createForum = ({ forum_name, forum_slug }) => {
           if (error) { console.log(error); reject({ created: false }); }
           else { resolve(Object.assign({}, newForum, { created: true })); }
         });
+      }
+    });
+  });
+};
+
+/**
+ * update the board name in the Admin model
+ * @param  {String} new_board_name
+ * @return {Promise}
+ */
+const updateAdminBoardName = (new_board_name) => {
+  return new Promise((reject, resolve) => {
+    Admin.findOne({})
+    .exec((error, adminSettings) => {
+      if (error) { reject(error); }
+      else {
+        adminSettings.overwrite({
+          board_name: new_board_name,
+          board_logo_URL: adminSettings.board_logo_URL
+        });
+        adminSettings.save();
+        // TODO: Maybe need .exec and error handling for this
+        resolve(adminSettings);
+      }
+    });
+  });
+};
+
+
+/**
+ * update the board logo image URL in the Admin model
+ * @param  {String} new_board_logo_URL
+ * @return {Promise}
+ */
+const updateAdminBoardLogo = (new_board_logo_URL) => {
+  return new Promise((reject, resolve) => {
+    Admin.findOne({})
+    .exec((error, adminSettings) => {
+      if (error) { reject(error); }
+      else {
+        adminSettings.overwrite({
+          board_name: adminSettings.board_name,
+          board_logo_URL: new_board_logo_URL
+        });
+        adminSettings.save();
+        // TODO: Maybe need .exec and error handling for this
+        resolve(adminSettings);
       }
     });
   });
@@ -180,7 +231,10 @@ const deleteDiscussion = ({ discussion_id }) => {
 };
 
 module.exports = {
+  getAdminSettings,
   getAdminDashInfo,
+  updateAdminBoardName,
+  updateAdminBoardLogo,
   createForum,
   deleteForum,
   deleteUser,

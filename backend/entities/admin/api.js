@@ -1,6 +1,8 @@
 // controllers
 const getAdminDashInfo = require('./controller').getAdminDashInfo;
 const getAdminSettings = require('./controller').getAdminSettings;
+const updateAdminBoardName = require('./controller').updateAdminBoardName;
+const updateAdminBoardLogo = require('./controller').updateAdminBoardLogo;
 const createForum = require('./controller').createForum;
 const deleteForum = require('./controller').deleteForum;
 const deleteUser = require('./controller').deleteUser;
@@ -26,8 +28,30 @@ const adminAPI = (app) => {
   app.get('/api/admin/admin_settings', (req, res) => {
     if (req.user && req.user.role === 'admin') {
       getAdminSettings().then(
-        (data) => {res.send(data); },
-        (error) => {res.send(error); }
+        (data) => { res.send(data); },
+        (error) => { res.send(error); }
+      );
+    }
+    else res.send({ error: 'You are not admin buddy 😛' });
+  });
+
+  // update board name
+  app.put('/api/admin/update_board_name', (req, res) => {
+    if (req.user && req.user.role === 'admin') {
+      updateAdminBoardName(req.body).then(
+        (data) => { res.send(data); },
+        (error) => { res.send(error); }
+      );
+    }
+    else res.send({ error: 'You are not admin buddy 😛' });
+  });
+
+  // update board logo image
+  app.put('/api/admin/update_board_image_logo', (req, res) => {
+    if (req.user && req.user.role === 'admin') {
+      updateAdminBoardLogo(req.body).then(
+        (data) => { res.send(data); },
+        (error) => { res.send(error); }
       );
     }
     else res.send({ error: 'You are not admin buddy 😛' });
