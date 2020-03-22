@@ -36,10 +36,18 @@ class Header extends Component {
       avatarUrl,
     } = this.props.user;
 
+    const {
+      boardName,
+      boardLogoImage
+    } = this.props.adminSettings;
+
     return (
       <div className={classnames(appLayout.constraintWidth)}>
         <div className={styles.headerTop}>
-          <Logo />
+          <Logo
+            boardName={boardName}
+            logoImage={boardLogoImage}
+          />
           <UserMenu
             signedIn={authenticated}
             userName={username}
@@ -57,6 +65,7 @@ class Header extends Component {
 export default connect(
   (state) => { return {
     user: state.user,
-    forums: state.app.forums
+    forums: state.app.forums,
+    adminSettings: state.adminSettings
   }; }
 )(Header);

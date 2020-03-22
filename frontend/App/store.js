@@ -6,6 +6,7 @@ import { appReducer, userReducer } from './reducers';
 import { feedReducer } from '../Views/ForumFeed/reducers';
 import { singleDiscussionReducer } from '../Views/SingleDiscussion/reducers';
 import { newDiscussionReducer } from '../Views/NewDiscussion/reducers';
+import { adminSettingsReducer } from '../Views/Admin/Settings/reducers';
 import { adminInfoReducer } from '../Views/Admin/Dashboard/reducers';
 import { userProfileReducer } from '../Views/UserProfile/reducers';
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   feed: feedReducer,
   discussion: singleDiscussionReducer,
   newDiscussion: newDiscussionReducer,
+  adminSettings: adminSettingsReducer,
   adminInfo: adminInfoReducer,
   userProfile: userProfileReducer,
 });

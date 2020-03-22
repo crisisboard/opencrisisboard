@@ -17,7 +17,7 @@ const initialState = {
   error: null,
   settings: {
     boardName: '',
-    boardLogoURL: ''
+    boardLogoImage: ''
   },
 
   updatingBoardName: false,

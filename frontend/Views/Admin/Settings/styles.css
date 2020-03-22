@@ -6,16 +6,6 @@
   position: relative;
 }
 
-.countsContainer {
-  margin-top: 40px;
-  margin-bottom: 40px;
-
-  display: flex;
-  justify-content: space-around;
-
-  @media smallBP { flex-wrap: wrap; }
-}
-
 .loadingMsg {
   margin-top: -30px;
   position: absolute;
@@ -32,9 +22,4 @@
   font-size: 12px;
   line-height: 14px;
   text-align: center;
-}
-
-.adminSettingsHeader {
-  padding-left: 10px;
-  padding-bottom: 10px;
 }
