@@ -9,14 +9,14 @@ export const getAdminSettingsAPI = () => {
 
 // Function that issues a PUT request to update the current board's name
 export const updateAdminBoardNameAPI = (new_board_name) => {
-  return axios.put('/api/admin/admin_update_board_name', {
+  return axios.put('/api/admin/name', {
     new_board_name
   });
 };
 
 // Function that issues a PUT request to update the current board's logo
 export const updateAdminBoardLogoAPI = (new_board_logo_URL) => {
-  return axios.put('/api/admin/admin_update_board_logo', {
+  return axios.put('/api/admin/logo', {
     new_board_logo_URL
   });
 };

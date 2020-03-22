@@ -36,7 +36,7 @@ const adminAPI = (app) => {
   });
 
   // update board name
-  app.put('/api/admin/update_board_name', (req, res) => {
+  app.put('/api/admin/name', (req, res) => {
     if (req.user && req.user.role === 'admin') {
       updateAdminBoardName(req.body).then(
         (data) => { res.send(data); },
@@ -47,7 +47,7 @@ const adminAPI = (app) => {
   });
 
   // update board logo image
-  app.put('/api/admin/update_board_image_logo', (req, res) => {
+  app.put('/api/admin/logo', (req, res) => {
     if (req.user && req.user.role === 'admin') {
       updateAdminBoardLogo(req.body).then(
         (data) => { res.send(data); },

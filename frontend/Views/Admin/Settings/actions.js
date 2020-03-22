@@ -46,7 +46,7 @@ export const updateAdminBoardName = (newBoardName) => {
       data => {
         // After updating the board name, need to ensure it changed and then update the name in AdminHeader somehow
         dispatch({ type: GET_SETTINGS_START });
-        getAdminSettingsInfoAPI().then(
+        getAdminSettingsAPI().then(
           data => {
             // data is refreshed
             dispatch({type: GET_SETTINGS_SUCCESS, payload: data.data});
@@ -75,7 +75,7 @@ export const updateAdminBoardLogo = (newBoardLogoURL) => {
       data => {
         // After updating the board logo, need to ensure it changed and then update the logo in AdminHeader somehow
         dispatch({ type: GET_SETTINGS_START });
-          getAdminSettingsInfoAPI().then(
+          getAdminSettingsAPI().then(
             data => {
               // data is refreshed
               dispatch({type: GET_SETTINGS_SUCCESS, payload: data.data});

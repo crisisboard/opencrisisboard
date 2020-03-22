@@ -16,20 +16,19 @@ const getAdminSettings = () => {
     Admin.findOne({})
     .exec((error, adminSettings) => {
       if (error) { console.log(error); reject(error);}
-      else if (Object.keys(adminSettings).length === 0) {
-        // TODO: TEST THIS AND MAKE SURE IT WORKS LOL
+      else if (!adminSettings) {
         // AdminSettings doesn't yet exist in the db, create it
-        adminSettings = new Admin({
+        const newAdminSettings = new Admin({
           board_name: 'OpenCrisisBoard',
-          board_logo_image_URL: '' // TODO: Fill this in with default logo URL
+          board_logo_URL: '' // TODO: Fill this in with default logo URL
         });
-        adminSettings.save((error) => {
-          if (error) {reject(error);}
+        newAdminSettings.save((error) => {
+          if (error) { console.log(error); reject(error); }
         });
-        resolve(adminSettings);
+        resolve(Object.assign({}, newAdminSettings));
       }
       else {
-        resolve(adminSettings);
+        resolve(Object.assign({}, adminSettings));
       }
     })
   });
@@ -79,6 +78,47 @@ const getAdminDashInfo = () => {
 };
 
 /**
+ * update the board name in the Admin model
+ * @param  {String} new_board_name
+ * @return {Promise}
+ */
+const updateAdminBoardName = (new_board_name) => {
+  return new Promise((reject, resolve) => {
+    Admin.findOneAndUpdate({},
+    {
+      board_name: new_board_name
+    })
+    .exec((error, adminSettings) => {
+      if (error) { reject(error); }
+      else {
+        resolve(Object.assign({}, adminSettings));
+      }
+    });
+  });
+};
+
+
+/**
+ * update the board logo image URL in the Admin model
+ * @param  {String} new_board_logo_URL
+ * @return {Promise}
+ */
+const updateAdminBoardLogo = (new_board_logo_URL) => {
+  return new Promise((reject, resolve) => {
+    Admin.findOneAndUpdate({},
+    {
+      board_logo_URL: new_board_logo_URL
+    })
+    .exec((error, adminSettings) => {
+      if (error) { reject(error); }
+      else {
+        resolve(Object.assign({}, adminSettings));
+      }
+    });
+  });
+};
+
+/**
  * create a new forum
  * @param  {String} forum_name
  * @param  {String} forum_slug
@@ -103,53 +143,6 @@ const createForum = ({ forum_name, forum_slug }) => {
           if (error) { console.log(error); reject({ created: false }); }
           else { resolve(Object.assign({}, newForum, { created: true })); }
         });
-      }
-    });
-  });
-};
-
-/**
- * update the board name in the Admin model
- * @param  {String} new_board_name
- * @return {Promise}
- */
-const updateAdminBoardName = (new_board_name) => {
-  return new Promise((reject, resolve) => {
-    Admin.findOne({})
-    .exec((error, adminSettings) => {
-      if (error) { reject(error); }
-      else {
-        adminSettings.overwrite({
-          board_name: new_board_name,
-          board_logo_URL: adminSettings.board_logo_URL
-        });
-        adminSettings.save();
-        // TODO: Maybe need .exec and error handling for this
-        resolve(adminSettings);
-      }
-    });
-  });
-};
-
-
-/**
- * update the board logo image URL in the Admin model
- * @param  {String} new_board_logo_URL
- * @return {Promise}
- */
-const updateAdminBoardLogo = (new_board_logo_URL) => {
-  return new Promise((reject, resolve) => {
-    Admin.findOne({})
-    .exec((error, adminSettings) => {
-      if (error) { reject(error); }
-      else {
-        adminSettings.overwrite({
-          board_name: adminSettings.board_name,
-          board_logo_URL: new_board_logo_URL
-        });
-        adminSettings.save();
-        // TODO: Maybe need .exec and error handling for this
-        resolve(adminSettings);
       }
     });
   });
