@@ -15,6 +15,8 @@ const deleteDiscussion = require('./controller').deleteDiscussion;
 const adminAPI = (app) => {
   // get all info for admin dashboard
   app.get('/api/admin/admin_dashboard_info', (req, res) => {
+    // TODO: NOT SECURE: Admin should not be verified by whether or not a flag is present in the request
+    // TODO: as this could be easily faked. This should be handled by checking the user's role in the database
     if (req.user && req.user.role === 'admin') {
       getAdminDashInfo().then(
         (data) => { res.send(data); },

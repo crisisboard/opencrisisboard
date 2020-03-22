@@ -39,7 +39,7 @@ class Header extends Component {
     const {
       boardName,
       boardLogoImage
-    } = this.props.adminSettings.settings;
+    } = this.props.adminSettings;
 
     return (
       <div className={classnames(appLayout.constraintWidth)}>
@@ -66,6 +66,6 @@ export default connect(
   (state) => { return {
     user: state.user,
     forums: state.app.forums,
-    adminSettings: state.adminSettings
+    adminSettings: state.adminSettings.settings
   }; }
 )(Header);
