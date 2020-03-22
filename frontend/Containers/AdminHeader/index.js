@@ -15,8 +15,8 @@ import PlaceholderImage from 'SharedStyles/placeholder.jpg';
 class AdminHeader extends Component {
   renderNavLinks() {
     return [
-      { name: 'Dashboard', link: '/admin' },
-      { name: 'Settings', link: '/admin/settings' },
+      { name: 'Dashboard', link: '/admin', onlyActiveOnIndex: true },
+      { name: 'Settings', link: '/admin/settings', onlyActiveOnIndex: false },
     ];
   }
 
