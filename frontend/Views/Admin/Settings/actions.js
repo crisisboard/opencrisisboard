@@ -13,7 +13,7 @@ import {
 } from './constants';
 
 import {
-  getAdminSettingsInfoAPI,
+  getAdminSettingsAPI,
   updateAdminBoardNameAPI,
   updateAdminBoardLogoAPI
 } from './api';
@@ -22,11 +22,11 @@ import {
  * get all the info needed for settings page
  * @return {action}
  */
-export const getAdminSettingsInfo = () => {
+export const getAdminSettings = () => {
   return (dispatch, getState) => {
     dispatch({ type: GET_SETTINGS_START });
 
-    getAdminSettingsInfoAPI().then(
+    getAdminSettingsAPI().then(
       data => dispatch({ type: GET_SETTINGS_SUCCESS, payload: data.data }),
       error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
     )
@@ -50,8 +50,6 @@ export const updateAdminBoardName = (newBoardName) => {
           data => {
             // data is refreshed
             dispatch({type: GET_SETTINGS_SUCCESS, payload: data.data});
-
-            // TODO: update the board name in AdminHeader here
           },
           error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
         );
@@ -81,8 +79,6 @@ export const updateAdminBoardLogo = (newBoardLogoURL) => {
             data => {
               // data is refreshed
               dispatch({type: GET_SETTINGS_SUCCESS, payload: data.data});
-
-              // TODO: update the board logo in AdminHeader here
             },
             error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
           );

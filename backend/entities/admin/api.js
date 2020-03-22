@@ -1,5 +1,6 @@
 // controllers
 const getAdminDashInfo = require('./controller').getAdminDashInfo;
+const getAdminSettings = require('./controller').getAdminSettings;
 const createForum = require('./controller').createForum;
 const deleteForum = require('./controller').deleteForum;
 const deleteUser = require('./controller').deleteUser;
@@ -16,6 +17,17 @@ const adminAPI = (app) => {
       getAdminDashInfo().then(
         (data) => { res.send(data); },
         (error) => { res.send(error); }
+      );
+    }
+    else res.send({ error: 'You are not admin buddy 😛' });
+  });
+
+  // get admin settings
+  app.get('./api/admin/admin_settings', (req, res) => {
+    if (req.user && req.user.role === 'admin') {
+      getAdminSettings().then(
+        (data) => {res.send(data); },
+        (error) => {res.send(error); }
       );
     }
     else res.send({ error: 'You are not admin buddy 😛' });

@@ -3,8 +3,8 @@ import axios from 'axios';
 // TODO: Implement these API endpoints in the backend
 
 // Function that issues a GET request to receive the current name and logo for the board
-export const getAdminSettingsInfoAPI = () => {
-  return axios.get('/api/admin/admin_settings_info');
+export const getAdminSettingsAPI = () => {
+  return axios.get('/api/admin/admin_settings');
 };
 
 // Function that issues a PUT request to update the current board's name

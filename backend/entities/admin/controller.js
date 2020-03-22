@@ -1,10 +1,35 @@
 const waterfall = require('async/waterfall');
 
 // models
+const Admin = require('../admin/model');
 const Discussion = require('../discussion/model');
 const Opinion = require('../opinion/model');
 const Forum = require('../forum/model');
 const User = require('../user/model');
+
+/**
+ * get the admin settings (from admin model)
+ * @return {Promise}
+ */
+const getAdminSettings = () => {
+  return new Promise((resolve, reject) => {
+    Admin.findOne({})
+    .exec((error, adminSettings) => {
+      if (error) { console.log(error); reject(error);}
+      else if (Object.keys(adminSettings).length === 0) {
+        // AdminSettings doesn't yet exist in the db, create it
+        adminSettings = Object.assign({}, new Admin('OpenCrisisBoard', ''));
+        Admin.save((error) => {
+          if (error) {reject(error);}
+        });
+        resolve(adminSettings);
+      }
+      else {
+        resolve(adminSettings);
+      }
+    })
+  });
+};
 
 /**
  * get the information for admin dashboard
@@ -107,13 +132,13 @@ const deleteForum = ({ forum_id }) => {
 };
 
 /**
- * delete an user
+ * delete a user
  * @param  {String} user_id
  * @return {Promise}
  */
 const deleteUser = ({ user_id }) => {
   return new Promise((resolve, reject) => {
-    // first we need to remvoe any discussion the user created
+    // first we need to remove any discussion the user created
     Discussion.remove({ user_id }).exec((error) => {
       if (error) { console.log(error); reject({ deleted: false }); }
       else {

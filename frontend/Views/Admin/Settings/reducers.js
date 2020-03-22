@@ -83,5 +83,8 @@ export const adminSettingsReducer = (state = initialState, action) => {
         updatingBoardLogo: false,
         updatingBoardLogoError: 'Something went wrong while updating the board logo'
       });
+
+    default:
+      return state;
   }
 };

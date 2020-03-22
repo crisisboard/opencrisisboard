@@ -5,7 +5,7 @@ import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
 import {
-  getAdminSettingsInfo,
+  getAdminSettings,
   updateAdminBoardName,
   updateAdminBoardLogo
 } from './actions';
@@ -13,7 +13,7 @@ import LogoForm from 'Components/Admin/Settings/LogoForm';
 
 class Settings extends Component {
   componentDidMount() {
-    this.props.getAdminSettingsInfo();
+    this.props.getAdminSettings();
   }
 
   render () {
@@ -38,7 +38,7 @@ export default connect(
     updatingBoardLogoError: state.updatingBoardLogoError
   }; },
   (dispatch) => { return {
-    getAdminSettingsInfo: () => dispatch(getAdminSettingsInfo()),
+    getAdminSettings: () => dispatch(getAdminSettings()),
     updateAdminBoardName: (newBoardName) => dispatch(updateAdminBoardName((newBoardName))),
     updateAdminBoardLogo: (newBoardLogoURL) => dispatch(updateAdminBoardLogo((newBoardLogoURL)))
   }; }
