@@ -11,8 +11,10 @@ class LogoForm extends Component {
     super(props);
     this.state = {
       newBoardName: '',
+      newBoardNameChanged: false,
       // TODO: For now, just a string. Look into ImageUploader components
       newBoardLogoImg: '',
+      newBoardLogoImgChanged: false,
       errorMsg: null
     };
 
@@ -20,8 +22,13 @@ class LogoForm extends Component {
   }
 
   handleSubmit () {
-    this.props.updateBoardNameAction(this.state.newBoardName);
-    this.props.updateBoardLogoAction(this.state.newBoardLogoImg);
+    if (this.state.newBoardNameChanged) {
+      this.props.updateBoardNameAction(this.state.newBoardName);
+    }
+
+    if (this.state.newBoardLogoImgChanged){
+      this.props.updateBoardLogoAction(this.state.newBoardLogoImg);
+    }
   }
 
   render () {
@@ -43,7 +50,12 @@ class LogoForm extends Component {
             type={'text'}
             className={styles.logoFormInput}
             placeholder={boardName}
-            onChange={(e) => {this.setState({ newBoardName: e.target.value });}}
+            onChange={(e) => {
+              this.setState({
+                newBoardName: e.target.value,
+                newBoardNameChanged: true
+              });
+            }}
           />
         </div>
 
@@ -61,7 +73,12 @@ class LogoForm extends Component {
             type={'text'}
             className={styles.logoFormInput}
             placeholder={boardLogoImage}
-            onChange={(e) => {this.setState({ newBoardLogoImg: e.target.value });}}
+            onChange={(e) => {
+              this.setState({
+                newBoardLogoImg: e.target.value,
+                newBoardLogoImgChanged: true
+              });
+            }}
           />
         </div>
         <Button
