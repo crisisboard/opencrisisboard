@@ -25,7 +25,7 @@ const adminAPI = (app) => {
   });
 
   // get admin settings
-  app.get('/api/admin/admin_settings', (req, res) => {
+  app.get('/api/admin/settings', (req, res) => {
     if (req.user && req.user.role === 'admin') {
       getAdminSettings().then(
         (data) => { res.send(data); },
@@ -38,7 +38,7 @@ const adminAPI = (app) => {
   // update board name
   app.put('/api/admin/name', (req, res) => {
     if (req.user && req.user.role === 'admin') {
-      updateAdminBoardName(req.body).then(
+      updateAdminBoardName(req.body.new_board_name).then(
         (data) => { res.send(data); },
         (error) => { res.send(error); }
       );
@@ -49,7 +49,8 @@ const adminAPI = (app) => {
   // update board logo image
   app.put('/api/admin/logo', (req, res) => {
     if (req.user && req.user.role === 'admin') {
-      updateAdminBoardLogo(req.body).then(
+      console.log('put req data logo:', req.body);
+      updateAdminBoardLogo(req.body.new_board_logo_URL).then(
         (data) => { res.send(data); },
         (error) => { res.send(error); }
       );

@@ -43,14 +43,14 @@ class LogoForm extends Component {
             type={'text'}
             className={styles.logoFormInput}
             placeholder={currentBoardName}
-            onChange={(e) => {this.setState({newBoardName: e.target.value});}}
+            onChange={(e) => {this.setState({ newBoardName: e.target.value });}}
           />
         </div>
 
         <div className={styles.logoFormImgInputWrapper}>
           <div className={styles.logoImgPreviewWrapper}>
             <img
-              src={'https://i.imgur.com/dE24m6H.png'}
+              src={'https://i.imgur.com/dE24m6H.png' /* TODO: This should be currentImageURL */}
               className={styles.logoImgPreview}
             />
           </div>
@@ -61,7 +61,7 @@ class LogoForm extends Component {
             type={'text'}
             className={styles.logoFormInput}
             placeholder={currentBoardLogoImg}
-            onChange={(e) => {this.setState({newBoardLogoImg: e.target.value});}}
+            onChange={(e) => {this.setState({ newBoardLogoImg: e.target.value });}}
           />
         </div>
         <Button
@@ -77,7 +77,7 @@ class LogoForm extends Component {
 
 LogoForm.defaultProps = {
   currentBoardName: 'OpenCrisisBoard',
-  currentBoardLogoImg: 'https://i.imgur.com/dE24m6H.png',
+  currentBoardLogoImg: 'https://i.imgur.com/dE24m6H.png', // TODO: fix placeholder text
 
   // TODO: Figure out if I need to add props to signify updating state
 };

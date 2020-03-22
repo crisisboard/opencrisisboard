@@ -31,7 +31,7 @@ class AdminHeader extends Component {
     const {
       boardName,
       boardLogoImage
-    } = this.props.adminSettings;
+    } = this.props.adminSettings.settings;
 
     return (
       <div className={classnames(appLayout.constraintWidth)}>

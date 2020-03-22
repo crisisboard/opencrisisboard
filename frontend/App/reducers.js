@@ -9,7 +9,6 @@ import {
   FETCHING_USER_FAILURE,
 } from './constants';
 
-// TODO: Add AdminSettings to app state
 const initialState = {
   fetchingForums: false,
   forums: null,

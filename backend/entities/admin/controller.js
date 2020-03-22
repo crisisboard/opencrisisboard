@@ -29,7 +29,10 @@ const getAdminSettings = () => {
         resolve(Object.assign({}, newAdminSettings));
       }
       else {
-        resolve(Object.assign({}, adminSettings));
+        resolve(Object.assign({}, {
+          boardName: adminSettings.board_name,
+          boardLogoImage: adminSettings.board_logo_URL
+        }));
       }
     })
   });
