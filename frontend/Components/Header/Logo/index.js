@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
 import { Link } from 'react-router'
-=======
 import React from 'react';
->>>>>>> just realized that the App reducer will likely have to get involved for this change, shouldn't be too difficult though hopefully
 import styles from './styles';
 import LogoImage from 'SharedStyles/logo.png';
 
