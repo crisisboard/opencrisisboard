@@ -9,10 +9,6 @@ import {
   updateAdminBoardLogo
 } from './actions';
 
-import {
-  getSettings
-} from '../../../App/actions';
-
 import LogoForm from 'Components/Admin/Settings/LogoForm';
 
 const Settings = (props) => {
@@ -20,7 +16,6 @@ const Settings = (props) => {
     <div className={classnames(appLayout.constraintWidth, styles.container)}>
       <LogoForm
         settings={props.settings}
-        getSettingsAction={() => {props.getSettings()}}
         updateBoardNameAction={(newBoardName) => {props.updateAdminBoardName(newBoardName)}}
         updateBoardLogoAction={(newBoardLogoURL) => {props.updateAdminBoardLogo(newBoardLogoURL)}}
       />
@@ -38,7 +33,6 @@ export default connect(
     updatingBoardLogoError: state.updatingBoardLogoError
   }; },
   (dispatch) => { return {
-    getSettings: () => dispatch(getSettings()),
     updateAdminBoardName: (newBoardName) => dispatch(updateAdminBoardName((newBoardName))),
     updateAdminBoardLogo: (newBoardLogoURL) => dispatch(updateAdminBoardLogo((newBoardLogoURL)))
   }; }

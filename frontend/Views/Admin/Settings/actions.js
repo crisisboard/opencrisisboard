@@ -13,6 +13,16 @@ import {
   updateAdminBoardLogoAPI
 } from './api';
 
+import {
+  fetchSettings
+} from '../../../App/api';
+
+import {
+  START_FETCHING_SETTINGS,
+  FETCHING_SETTINGS_SUCCESS,
+  FETCHING_SETTINGS_FAILURE
+} from '../../../App/constants';
+
 /**
  * update the current board name
  * @param {string} newBoardName
@@ -24,7 +34,16 @@ export const updateAdminBoardName = (newBoardName) => {
 
     updateAdminBoardNameAPI(newBoardName).then(
       data => {
-        dispatch({ type: UPDATE_BOARD_NAME_SUCCESS, payload: data.data })
+        dispatch({ type: UPDATE_BOARD_NAME_SUCCESS, payload: data.data });
+
+        dispatch({ type: START_FETCHING_SETTINGS });
+
+        // Refresh the settings data
+        fetchSettings()
+        .then(
+          data => dispatch({ type: FETCHING_SETTINGS_SUCCESS, payload: data.data }),
+          error => dispatch({ type: FETCHING_SETTINGS_FAILURE, payload: error })
+        );
       },
       error => dispatch({ type: UPDATE_BOARD_NAME_FAILURE, payload: error })
     );
@@ -43,6 +62,13 @@ export const updateAdminBoardLogo = (newBoardLogoURL) => {
     updateAdminBoardLogoAPI(newBoardLogoURL).then(
       data => {
         dispatch({ type: UPDATE_BOARD_LOGO_SUCCESS, payload: data.data })
+        // Refresh the settings data
+        dispatch({ type: START_FETCHING_SETTINGS });
+        fetchSettings()
+        .then(
+          data => dispatch({ type: FETCHING_SETTINGS_SUCCESS, payload: data.data }),
+          error => dispatch({ type: FETCHING_SETTINGS_FAILURE, payload: error })
+        );
       },
       error => dispatch({ type: UPDATE_BOARD_LOGO_FAILURE, payload: error })
     );

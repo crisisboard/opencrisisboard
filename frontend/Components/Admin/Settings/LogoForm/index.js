@@ -22,8 +22,6 @@ class LogoForm extends Component {
   handleSubmit () {
     this.props.updateBoardNameAction(this.state.newBoardName);
     this.props.updateBoardLogoAction(this.state.newBoardLogoImg);
-    // TODO: Fix this race condition. It means that sometimes the data will refresh before the update actions are completed
-    this.props.getSettingsAction();
   }
 
   render () {
@@ -86,8 +84,7 @@ LogoForm.propTypes = {
   boardName: React.PropTypes.string,
   boardLogoImage: React.PropTypes.string,
   updateBoardNameAction: React.PropTypes.func,
-  updateBoardLogoAction: React.PropTypes.func,
-  getSettingsAction: React.PropTypes.func
+  updateBoardLogoAction: React.PropTypes.func
 };
 
 export default LogoForm;
