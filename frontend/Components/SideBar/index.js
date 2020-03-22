@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import NewDiscussionButton from '../NewDiscussionButton';
 import styles from './styles';
-
-import Button from 'Components/Button';
 
 class SideBar extends Component {
   render() {
     const {
-      currentForum,
+      currentForum
     } = this.props;
 
     return (
       <div className={styles.sidebarContainer}>
-        <Link to={`/${currentForum}/new_discussion`}>
-          <Button type='primary' fullWidth noUppercase>
-            New Discussion
-          </Button>
-        </Link>
+        <NewDiscussionButton />
       </div>
     );
   }

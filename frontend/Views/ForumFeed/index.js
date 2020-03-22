@@ -10,7 +10,7 @@ import {
   updateSortingMethod,
 } from './actions';
 
-import Button from 'Components/Button';
+import NewDiscussionButton from 'Components/NewDiscussionButton';
 import FeedBox from 'Components/FeedBox';
 import SideBar from 'Components/SideBar';
 
@@ -66,11 +66,7 @@ class ForumFeed extends Component {
 
     return (
       <div className={classnames(appLayout.showOnMediumBP, styles.newDiscussionBtn)}>
-        <Link to={`/${currentForum}/new_discussion`}>
-          <Button type='primary' fullWidth noUppercase>
-            New Discussion
-          </Button>
-        </Link>
+        <NewDiscussionButton />
       </div>
     );
   }
@@ -99,6 +95,8 @@ class ForumFeed extends Component {
         <Helmet><title>{`OpenCrisisBoard | ${currentForum}`}</title></Helmet>
 
         <div className={appLayout.primaryContent}>
+          { this.renderNewDiscussionButtion() }
+
           <FeedBox
             type='pinned'
             loading={fetchingPinnedDiscussions}
@@ -114,8 +112,6 @@ class ForumFeed extends Component {
             onChangeSortingMethod={this.handleSortingChange.bind(this)}
             activeSortingMethod={sortingMethod}
           />
-
-          { this.renderNewDiscussionButtion() }
         </div>
 
         <div className={appLayout.secondaryContent}>

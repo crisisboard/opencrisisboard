@@ -1,0 +1,9 @@
+@value secondaryFontColor from 'SharedStyles/globalStyles';
+
+.signInMsg {
+  color: secondaryFontColor;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 10px;
+}

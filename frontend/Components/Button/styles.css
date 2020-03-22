@@ -16,6 +16,10 @@ button {
   user-select: none;
   outline: none;
   cursor: pointer;
+
+  &[disabled] {
+    cursor: default;
+  }
 }
 
 .buttonDefaults {
@@ -47,9 +51,14 @@ button {
   background: #4ce0b3;
   border: 2px solid borderColor;
   transition: color 0.3s, border 0.3s;
-  &:hover {
+
+  &:not([disabled]):hover {
     color: primaryFontColor;
     border: 2px solid primaryFontColor;
+  }
+
+  &[disabled] {
+    background: #c3d9d2;
   }
 }
 

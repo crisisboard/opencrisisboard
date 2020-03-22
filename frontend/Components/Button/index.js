@@ -11,6 +11,7 @@ class Button extends Component {
       className,
       style,
       onClick,
+      disabled,
       alwaysActive,
     } = this.props;
 
@@ -26,6 +27,7 @@ class Button extends Component {
           alwaysActive && styles.alwaysActive,
           className
         )}
+        disabled={disabled}
         style={style}
       >
         {this.props.children}
@@ -52,6 +54,7 @@ Button.propTypes = {
   className: React.PropTypes.string,
   style: React.PropTypes.object,
   onClick: React.PropTypes.func,
+  disabled: React.PropTypes.bool
 };
 
 export default Button;
