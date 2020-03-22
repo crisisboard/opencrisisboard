@@ -1,42 +1,10 @@
 const waterfall = require('async/waterfall');
 
 // models
-const Admin = require('../admin/model');
 const Discussion = require('../discussion/model');
 const Opinion = require('../opinion/model');
 const Forum = require('../forum/model');
 const User = require('../user/model');
-
-/**
- * get the admin settings (from admin model)
- * @return {Promise}
- */
-const getAdminSettings = () => {
-  return new Promise((resolve, reject) => {
-    Admin.findOne({})
-    .exec((error, adminSettings) => {
-      if (error) { console.log(error); reject(error);}
-      else if (!adminSettings) {
-        console.log('AdminSettings doesn\'t exist yet');
-        // AdminSettings doesn't yet exist in the db, create it
-        const newAdminSettings = new Admin({
-          board_name: 'OpenCrisisBoard',
-          board_logo_URL: '' // TODO: Fill this in with default logo URL
-        });
-        newAdminSettings.save((error) => {
-          if (error) { console.log(error); reject(error); }
-        });
-        resolve(Object.assign({}, newAdminSettings));
-      }
-      else {
-        resolve(Object.assign({}, {
-          boardName: adminSettings.board_name,
-          boardLogoImage: adminSettings.board_logo_URL
-        }));
-      }
-    })
-  });
-};
 
 /**
  * get the information for admin dashboard
@@ -77,47 +45,6 @@ const getAdminDashInfo = () => {
     ], (error, result) => {
       if (error) { console.log(error); reject(error); }
       else resolve(result);
-    });
-  });
-};
-
-/**
- * update the board name in the Admin model
- * @param  {String} new_board_name
- * @return {Promise}
- */
-const updateAdminBoardName = (new_board_name) => {
-  return new Promise((reject, resolve) => {
-    Admin.findOneAndUpdate({},
-    {
-      board_name: new_board_name
-    })
-    .exec((error, adminSettings) => {
-      if (error) { reject(error); }
-      else {
-        resolve(Object.assign({}, adminSettings));
-      }
-    });
-  });
-};
-
-
-/**
- * update the board logo image URL in the Admin model
- * @param  {String} new_board_logo_URL
- * @return {Promise}
- */
-const updateAdminBoardLogo = (new_board_logo_URL) => {
-  return new Promise((reject, resolve) => {
-    Admin.findOneAndUpdate({},
-    {
-      board_logo_URL: new_board_logo_URL
-    })
-    .exec((error, adminSettings) => {
-      if (error) { reject(error); }
-      else {
-        resolve(Object.assign({}, adminSettings));
-      }
     });
   });
 };
@@ -228,10 +155,7 @@ const deleteDiscussion = ({ discussion_id }) => {
 };
 
 module.exports = {
-  getAdminSettings,
   getAdminDashInfo,
-  updateAdminBoardName,
-  updateAdminBoardLogo,
   createForum,
   deleteForum,
   deleteUser,

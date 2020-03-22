@@ -5,32 +5,31 @@ import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
 import {
-  getAdminSettings,
   updateAdminBoardName,
   updateAdminBoardLogo
 } from './actions';
 import LogoForm from 'Components/Admin/Settings/LogoForm';
 
-class Settings extends Component {
-  componentDidMount() {
-    this.props.getAdminSettings();
-  }
+const Settings = (props) => {
+  return (
+    <div className={classnames(appLayout.constraintWidth, styles.container)}>
+      <LogoForm
+        updateBoardNameAction={(newBoardName) => {props.updateAdminBoardName(newBoardName)}}
+        updateBoardLogoAction={(newBoardLogoURL) => {props.updateAdminBoardLogo(newBoardLogoURL)}}
+      />
+    </div>
+  );
+};
 
-  render () {
-    return (
-      <div className={classnames(appLayout.constraintWidth, styles.container)}>
-        <LogoForm
-          updateBoardNameAction={(newBoardName) => {this.props.updateAdminBoardName(newBoardName)}}
-          updateBoardLogoAction={(newBoardLogoURL) => {this.props.updateAdminBoardLogo(newBoardLogoURL)}}
-        />
-      </div>
-    );
-  }
-}
+Settings.defaultProps = {
+};
+
+Settings.PropTypes = {
+};
 
 export default connect(
   (state) => { return {
-    settings: state.settings,
+    settings: state.app.settings,
     fetchingSettings: state.fetchingSettings,
     updatingBoardName: state.updatingBoardName,
     updatingBoardNameError: state.updatingBoardNameError,
@@ -38,7 +37,6 @@ export default connect(
     updatingBoardLogoError: state.updatingBoardLogoError
   }; },
   (dispatch) => { return {
-    getAdminSettings: () => dispatch(getAdminSettings()),
     updateAdminBoardName: (newBoardName) => dispatch(updateAdminBoardName((newBoardName))),
     updateAdminBoardLogo: (newBoardLogoURL) => dispatch(updateAdminBoardLogo((newBoardLogoURL)))
   }; }

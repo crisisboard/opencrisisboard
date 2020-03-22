@@ -4,9 +4,9 @@
 const mongoose = require('mongoose');
 
 // TODO: Create a new model for AdminSettings
-const adminSchema = mongoose.Schema({
+const settingsSchema = mongoose.Schema({
   board_name: String,
   board_logo_URL: String,
 });
 
-module.exports = mongoose.model('admin', adminSchema);
+module.exports = mongoose.model('settings', settingsSchema);

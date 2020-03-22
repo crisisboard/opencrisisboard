@@ -8,11 +8,16 @@ import {
   START_FETCHING_USER,
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
+
+  GET_SETTINGS_START,
+  GET_SETTINGS_SUCCESS,
+  GET_SETTINGS_FAILURE
 } from './constants';
 import {
   fetchForums,
   fetchUser,
   signOut,
+  fetchSettings
 } from './api';
 
 /**
@@ -57,5 +62,20 @@ export const getUser = () => {
       },
       error => dispatch({ type: FETCHING_USER_FAILURE })
     );
+  };
+};
+
+/**
+ * get all the info needed for settings page
+ * @return {action}
+ */
+export const getSettings = () => {
+  return (dispatch, getState) => {
+    dispatch({ type: GET_SETTINGS_START });
+
+    fetchSettings().then(
+      data => dispatch({ type: GET_SETTINGS_SUCCESS, payload: data.data }),
+      error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
+    )
   };
 };

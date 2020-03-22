@@ -4,10 +4,11 @@ import styles from './styles';
 import LogoImage from 'SharedStyles/logo.png';
 
 const Logo = (props) => {
+
   return (
     <div className={styles.logoContainer}>
       <Link to='/' className={styles.logo}>
-        <img className={styles.logoImage} src={props.logoImage} />
+        <img className={styles.logoImage} src={props.logoImage ? props.logoImage: LogoImage} />
       </Link>
       <h1 className={styles.logoTitle}>
         <Link to="/">{props.boardName}</Link>

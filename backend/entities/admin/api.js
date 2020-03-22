@@ -1,8 +1,5 @@
 // controllers
 const getAdminDashInfo = require('./controller').getAdminDashInfo;
-const getAdminSettings = require('./controller').getAdminSettings;
-const updateAdminBoardName = require('./controller').updateAdminBoardName;
-const updateAdminBoardLogo = require('./controller').updateAdminBoardLogo;
 const createForum = require('./controller').createForum;
 const deleteForum = require('./controller').deleteForum;
 const deleteUser = require('./controller').deleteUser;
@@ -17,42 +14,9 @@ const adminAPI = (app) => {
   app.get('/api/admin/admin_dashboard_info', (req, res) => {
     // TODO: NOT SECURE: Admin should not be verified by whether or not a flag is present in the request
     // TODO: as this could be easily faked. This should be handled by checking the user's role in the database
+    // TODO: This needs to change for all admin endpoints, will create an issue
     if (req.user && req.user.role === 'admin') {
       getAdminDashInfo().then(
-        (data) => { res.send(data); },
-        (error) => { res.send(error); }
-      );
-    }
-    else res.send({ error: 'You are not admin buddy 😛' });
-  });
-
-  // get admin settings
-  app.get('/api/admin/settings', (req, res) => {
-    if (req.user && req.user.role === 'admin') {
-      getAdminSettings().then(
-        (data) => { res.send(data); },
-        (error) => { res.send(error); }
-      );
-    }
-    else res.send({ error: 'You are not admin buddy 😛' });
-  });
-
-  // update board name
-  app.put('/api/admin/name', (req, res) => {
-    if (req.user && req.user.role === 'admin') {
-      updateAdminBoardName(req.body.new_board_name).then(
-        (data) => { res.send(data); },
-        (error) => { res.send(error); }
-      );
-    }
-    else res.send({ error: 'You are not admin buddy 😛' });
-  });
-
-  // update board logo image
-  app.put('/api/admin/logo', (req, res) => {
-    if (req.user && req.user.role === 'admin') {
-      console.log('put req data logo:', req.body);
-      updateAdminBoardLogo(req.body.new_board_logo_URL).then(
         (data) => { res.send(data); },
         (error) => { res.send(error); }
       );
