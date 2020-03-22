@@ -49,7 +49,7 @@ class ForumFeed extends Component {
 
   handleSortingChange(newSortingMethod) {
     const {
-      currentForum,
+      currentForumId,
       getDiscussions,
       updateSortingMethod,
       sortingMethod,
@@ -57,7 +57,7 @@ class ForumFeed extends Component {
 
     if (sortingMethod !== newSortingMethod) {
       updateSortingMethod(newSortingMethod);
-      getDiscussions(currentForum, false, true);
+      getDiscussions(currentForumId(), false, true);
     }
   }
 
