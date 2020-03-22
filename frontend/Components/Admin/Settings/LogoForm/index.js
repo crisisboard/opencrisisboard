@@ -22,13 +22,14 @@ class LogoForm extends Component {
 
     // TODO: Figure out the code before this line (to do with ImageUploader)
     this.props.updateBoardLogoAction(this.state.newBoardLogoImg);
+    this.props.getSettingsAction();
   }
 
   render () {
     let {
-      currentBoardName,
-      currentBoardLogoImg
-    } = this.props;
+      boardName,
+      boardLogoImage
+    } = this.props.settings;
 
     return (
       <div className={styles.logoFormWrapper}>
@@ -42,7 +43,7 @@ class LogoForm extends Component {
           <input
             type={'text'}
             className={styles.logoFormInput}
-            placeholder={currentBoardName}
+            placeholder={boardName}
             onChange={(e) => {this.setState({ newBoardName: e.target.value });}}
           />
         </div>
@@ -50,7 +51,7 @@ class LogoForm extends Component {
         <div className={styles.logoFormImgInputWrapper}>
           <div className={styles.logoImgPreviewWrapper}>
             <img
-              src={'https://i.imgur.com/dE24m6H.png' /* TODO: This should be currentImageURL */}
+              src={boardLogoImage}
               className={styles.logoImgPreview}
             />
           </div>
@@ -60,7 +61,7 @@ class LogoForm extends Component {
           <input
             type={'text'}
             className={styles.logoFormInput}
-            placeholder={currentBoardLogoImg}
+            placeholder={boardLogoImage}
             onChange={(e) => {this.setState({ newBoardLogoImg: e.target.value });}}
           />
         </div>
@@ -76,8 +77,8 @@ class LogoForm extends Component {
 }
 
 LogoForm.defaultProps = {
-  currentBoardName: 'OpenCrisisBoard',
-  currentBoardLogoImg: 'https://i.imgur.com/dE24m6H.png', // TODO: fix placeholder text
+  boardName: 'OpenCrisisBoard',
+  boardLogoImage: 'https://i.imgur.com/dE24m6H.png', // TODO: fix placeholder text
 
   // TODO: Figure out if I need to add props to signify updating state
 };
@@ -86,7 +87,8 @@ LogoForm.propTypes = {
   currentBoardName: React.PropTypes.string,
   currentBoardLogoImg: React.PropTypes.string,
   updateBoardNameAction: React.PropTypes.func,
-  updateBoardLogoAction: React.PropTypes.func
+  updateBoardLogoAction: React.PropTypes.func,
+  getSettingsAction: React.PropTypes.func
 };
 
 export default LogoForm;
