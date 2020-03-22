@@ -1,9 +1,8 @@
 /**
- * admin model (Singleton)
+ * Settings model (Singleton)
  */
 const mongoose = require('mongoose');
 
-// TODO: Create a new model for AdminSettings
 const settingsSchema = mongoose.Schema({
   board_name: String,
   board_logo_URL: String,

@@ -9,9 +9,9 @@ import {
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
 
-  GET_SETTINGS_START,
-  GET_SETTINGS_SUCCESS,
-  GET_SETTINGS_FAILURE
+  START_FETCHING_SETTINGS,
+  FETCHING_SETTINGS_SUCCESS,
+  FETCHING_SETTINGS_FAILURE
 } from './constants';
 import {
   fetchForums,
@@ -71,11 +71,11 @@ export const getUser = () => {
  */
 export const getSettings = () => {
   return (dispatch, getState) => {
-    dispatch({ type: GET_SETTINGS_START });
+    dispatch({ type: START_FETCHING_SETTINGS });
 
     fetchSettings().then(
-      data => dispatch({ type: GET_SETTINGS_SUCCESS, payload: data.data }),
-      error => dispatch({ type: GET_SETTINGS_FAILURE, payload: error })
+      data => dispatch({ type: FETCHING_SETTINGS_SUCCESS, payload: data.data }),
+      error => dispatch({ type: FETCHING_SETTINGS_FAILURE, payload: error })
     )
   };
 };

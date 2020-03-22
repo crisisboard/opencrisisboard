@@ -29,12 +29,6 @@ const Settings = (props) => {
   );
 };
 
-Settings.defaultProps = {
-};
-
-Settings.PropTypes = {
-};
-
 export default connect(
   (state) => { return {
     settings: state.app.settings,

@@ -11,6 +11,6 @@ export const FETCHING_USER_FAILURE = 'fetching_user_failure';
 export const SIGNOUT_USER_SUCCESS = 'signOut_user_success';
 export const SIGNOUT_USER_FAILURE = 'signOut_user_failure';
 
-export const GET_SETTINGS_START = 'get_settings_start';
-export const GET_SETTINGS_SUCCESS = 'get_settings_success';
-export const GET_SETTINGS_FAILURE = 'get_settings_failure';
+export const START_FETCHING_SETTINGS = 'start_fetching_settings';
+export const FETCHING_SETTINGS_SUCCESS = 'fetching_settings_success';
+export const FETCHING_SETTINGS_FAILURE = 'fetching_settings_failure';

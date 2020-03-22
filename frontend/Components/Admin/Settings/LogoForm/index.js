@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import styles from './styles.css';
 
 import Button from 'Components/Button';
+import LogoImage from 'SharedStyles/logo.png';
 
 class LogoForm extends Component {
   constructor(props) {
@@ -19,8 +20,6 @@ class LogoForm extends Component {
 
   handleSubmit () {
     this.props.updateBoardNameAction(this.state.newBoardName);
-
-    // TODO: Figure out the code before this line (to do with ImageUploader)
     this.props.updateBoardLogoAction(this.state.newBoardLogoImg);
     this.props.getSettingsAction();
   }
@@ -78,14 +77,12 @@ class LogoForm extends Component {
 
 LogoForm.defaultProps = {
   boardName: 'OpenCrisisBoard',
-  boardLogoImage: 'https://i.imgur.com/dE24m6H.png', // TODO: fix placeholder text
-
-  // TODO: Figure out if I need to add props to signify updating state
+  boardLogoImage: LogoImage,
 };
 
 LogoForm.propTypes = {
-  currentBoardName: React.PropTypes.string,
-  currentBoardLogoImg: React.PropTypes.string,
+  boardName: React.PropTypes.string,
+  boardLogoImage: React.PropTypes.string,
   updateBoardNameAction: React.PropTypes.func,
   updateBoardLogoAction: React.PropTypes.func,
   getSettingsAction: React.PropTypes.func

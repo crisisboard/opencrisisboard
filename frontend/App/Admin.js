@@ -35,7 +35,7 @@ class AdminContainer extends Component {
     if (user.role === 'admin') {
       return (
         <div>
-          <Helmet><title>OpenCrisisBoard | Admin</title></Helmet>
+          <Helmet><title>{settings.boardName} | Admin</title></Helmet>
           <AdminHeader settings={settings}/>
           {this.props.children}
         </div>

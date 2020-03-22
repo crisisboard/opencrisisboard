@@ -21,7 +21,7 @@ const settingsAPI = (app) => {
     } else res.send({error: 'You are not admin buddy 😛'});
   });
 
-   // update board name
+  // update board name
   app.put('/api/settings/name', (req, res) => {
     if (req.user && req.user.role === 'admin') {
       updateBoardName(req.body.new_board_name).then(

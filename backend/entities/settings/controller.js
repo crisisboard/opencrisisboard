@@ -1,7 +1,7 @@
 const Settings = require('./model');
 
 /**
- * get the admin settings (from admin model)
+ * get the Settings singleton
  * @return {Promise}
  */
 const getSettings = () => {
@@ -10,7 +10,7 @@ const getSettings = () => {
     .exec((error, settings) => {
       if (error) { console.log(error); reject(error);}
       else if (!settings) {
-        // AdminSettings doesn't yet exist in the db, create it
+        // Settings singleton doesn't yet exist in the db, create it
         const newSettings = new Settings({
           board_name: 'OpenCrisisBoard',
           board_logo_URL: ''
@@ -31,7 +31,7 @@ const getSettings = () => {
 };
 
 /**
- * update the board name in the Admin model
+ * update the board name in the Settings model
  * @param  {String} new_board_name
  * @return {Promise}
  */
@@ -52,7 +52,7 @@ const updateBoardName = (new_board_name) => {
 
 
 /**
- * update the board logo image URL in the Admin model
+ * update the board logo image URL in the Settings model
  * @param  {String} new_board_logo_URL
  * @return {Promise}
  */

@@ -7,9 +7,9 @@ import {
   START_FETCHING_USER,
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
-  GET_SETTINGS_START,
-  GET_SETTINGS_SUCCESS,
-  GET_SETTINGS_FAILURE
+  START_FETCHING_SETTINGS,
+  FETCHING_SETTINGS_SUCCESS,
+  FETCHING_SETTINGS_FAILURE
 } from './constants';
 
 import LogoImage from 'SharedStyles/logo.png';
@@ -58,20 +58,20 @@ export const appReducer = (state = initialState, action) => {
         currentForum: action.payload,
       });
 
-    case GET_SETTINGS_START:
+    case START_FETCHING_SETTINGS:
       return Object.assign({}, state, {
         fetchingSettings: true,
         error: null
       });
 
-    case GET_SETTINGS_SUCCESS:
+    case FETCHING_SETTINGS_SUCCESS:
       return Object.assign({}, state, {
         fetchingSettings: false,
         settings: action.payload,
         error: null
       });
 
-    case GET_SETTINGS_FAILURE:
+    case FETCHING_SETTINGS_FAILURE:
       return Object.assign({}, state, {
         fetchingSettings: false,
         error: 'Something went wrong while fetching the current admin settings'
