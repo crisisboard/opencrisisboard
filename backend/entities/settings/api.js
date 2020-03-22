@@ -35,7 +35,6 @@ const settingsAPI = (app) => {
   // update board logo image
   app.put('/api/settings/logo', (req, res) => {
     if (req.user && req.user.role === 'admin') {
-      console.log('put req data logo:', req.body);
       updateBoardLogo(req.body.new_board_logo_URL).then(
         (data) => { res.send(data); },
         (error) => { res.send(error); }

@@ -9,7 +9,6 @@ import {
   updateAdminBoardLogo
 } from './actions';
 
-// TODO: Not sure if this type of import is bad practice, just want to reuse the code instead of duplicating it
 import {
   getSettings
 } from '../../../App/actions';
@@ -21,7 +20,7 @@ const Settings = (props) => {
     <div className={classnames(appLayout.constraintWidth, styles.container)}>
       <LogoForm
         settings={props.settings}
-        getSettingsAction={() => props.getSettings()}
+        getSettingsAction={() => {props.getSettings()}}
         updateBoardNameAction={(newBoardName) => {props.updateAdminBoardName(newBoardName)}}
         updateBoardLogoAction={(newBoardLogoURL) => {props.updateAdminBoardLogo(newBoardLogoURL)}}
       />
