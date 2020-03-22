@@ -5,7 +5,7 @@ import styles from './styles.css';
 
 class NewDiscussionButton extends React.Component {
   render() {
-    const { authenticated } = this.props;
+    const { authenticated, currentForum } = this.props;
 
     const button = (
       <Button type='primary' fullWidth noUppercase disabled={!authenticated}>
@@ -26,6 +26,11 @@ class NewDiscussionButton extends React.Component {
         </div>
       );
   }
+}
+
+NewDiscussionButton.propTypes = {
+  authenticated: React.PropTypes.bool,
+  currentForum: React.PropTypes.string
 }
 
 const mapStateToProps = state => ({ authenticated: state.user.authenticated });

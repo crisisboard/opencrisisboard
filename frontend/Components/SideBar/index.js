@@ -12,7 +12,7 @@ class SideBar extends Component {
 
     return (
       <div className={styles.sidebarContainer}>
-        <NewDiscussionButton />
+        <NewDiscussionButton currentForum={currentForum} />
       </div>
     );
   }

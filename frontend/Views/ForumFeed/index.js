@@ -66,7 +66,7 @@ class ForumFeed extends Component {
 
     return (
       <div className={classnames(appLayout.showOnMediumBP, styles.newDiscussionBtn)}>
-        <NewDiscussionButton />
+        <NewDiscussionButton currentForum={currentForum} />
       </div>
     );
   }
