@@ -24,6 +24,7 @@ class AdminHeader extends Component {
     const {
       authenticated,
       name,
+      role,
       username,
       avatarUrl,
     } = this.props.user;
@@ -42,6 +43,7 @@ class AdminHeader extends Component {
           />
           <UserMenu
             signedIn={authenticated}
+            isAdmin={role === 'admin'}
             username={username}
             avatar={avatarUrl}
           />
