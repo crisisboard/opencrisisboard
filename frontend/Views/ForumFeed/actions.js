@@ -12,6 +12,7 @@ import {
 
   UPDATE_SORTING_METHOD,
   INVALID_FORUM,
+  SEARCH
 } from './constants';
 import {
   fetchDiscussions,
@@ -92,3 +93,7 @@ export const getPinnedDiscussions = (forumId, feedChanged) => {
 export const updateSortingMethod = (method) => {
   return { type: UPDATE_SORTING_METHOD, payload: method };
 };
+
+export const search = (searchInput) => { 
+  return {type:SEARCH, payload:searchInput}
+}

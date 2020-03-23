@@ -1,0 +1,17 @@
+@value smallBP, mediumBP, largeBP from 'SharedStyles/globalStyles';
+
+/**
+ * SearchBar component styles
+ */
+.search {
+  width: 250px;
+  margin-left: 10px;
+}
+
+.search-label {
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}

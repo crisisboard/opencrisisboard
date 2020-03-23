@@ -11,6 +11,7 @@ import {
 
   UPDATE_SORTING_METHOD,
   INVALID_FORUM,
+  SEARCH,
 } from './constants';
 
 const initialState = {
@@ -77,13 +78,24 @@ export const feedReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         sortingMethod: action.payload,
       });
-
+    
+    
+    case SEARCH:
+      const searchInput = action.payload;
+      const filteredDiscussions = state.discussions.filter((discussion) => discussion.title.toLowerCase().includes(searchInput.toLowerCase()));
+      return Object.assign({}, state, {
+        filteredDiscussions:filteredDiscussions,
+        searchInput:searchInput
+      })
+    
+    
     case INVALID_FORUM:
       return Object.assign({}, state, {
         error: 'Sorry, couldn\'t find the forum.',
         fetchingPinnedDiscussions: false,
         fetchingDiscussions: false,
       });
+    
 
     default:
       return state;
