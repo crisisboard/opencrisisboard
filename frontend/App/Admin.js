@@ -3,7 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
-import { getUser } from './actions';
+import { getUser, getSettings } from './actions';
 
 import AdminHeader from 'Containers/AdminHeader';
 import appLayout from 'SharedStyles/appLayout.css';
@@ -11,12 +11,18 @@ import styles from './styles.css';
 
 class AdminContainer extends Component {
   componentDidMount() {
+    const { getUser, getSettings } = this.props;
+
     // fetch the user
-    this.props.getUser();
+    getUser();
+
+    // fetch the settings
+    getSettings();
+
   }
 
   render() {
-    const { user } = this.props;
+    const { user, settings } = this.props;
 
     if (user.fetchingUser) {
       return (
@@ -29,8 +35,8 @@ class AdminContainer extends Component {
     if (user.role === 'admin') {
       return (
         <div>
-          <Helmet><title>OpenCrisisBoard | Admin</title></Helmet>
-          <AdminHeader />
+          <Helmet><title>{settings.boardName} | Admin</title></Helmet>
+          <AdminHeader settings={settings}/>
           {this.props.children}
         </div>
       );
@@ -56,8 +62,10 @@ class AdminContainer extends Component {
 export default connect(
   (state) => { return {
     user: state.user,
+    settings: state.app.settings
   }; },
   (dispatch) => { return {
     getUser: () => { dispatch(getUser()); },
+    getSettings: () => { dispatch(getSettings()); }
   }; }
 )(AdminContainer);

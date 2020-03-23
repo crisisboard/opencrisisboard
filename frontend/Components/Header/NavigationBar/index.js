@@ -34,6 +34,7 @@ class NavigationBar extends Component {
                   className={styles.links}
                   activeClassName={styles.linkActive}
                   to={link.link}
+                  onlyActiveOnIndex={link.onlyActiveOnIndex}
                 >
                   {link.name}
                 </Link>

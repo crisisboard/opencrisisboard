@@ -64,7 +64,7 @@ const createForum = ({ forum_name, forum_slug }) => {
       if (error) { console.log(error); reject({ serverError: true }); }
       else if (forum) { reject({ alreadyExists: true }); }
       else {
-        // forum does not exists, so create a new one
+        // forum does not exist, so create a new one
         const newForum = new Forum({
           forum_slug,
           forum_name,
@@ -107,13 +107,13 @@ const deleteForum = ({ forum_id }) => {
 };
 
 /**
- * delete an user
+ * delete a user
  * @param  {String} user_id
  * @return {Promise}
  */
 const deleteUser = ({ user_id }) => {
   return new Promise((resolve, reject) => {
-    // first we need to remvoe any discussion the user created
+    // first we need to remove any discussion the user created
     Discussion.remove({ user_id }).exec((error) => {
       if (error) { console.log(error); reject({ deleted: false }); }
       else {

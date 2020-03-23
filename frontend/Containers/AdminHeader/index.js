@@ -15,7 +15,8 @@ import PlaceholderImage from 'SharedStyles/placeholder.jpg';
 class AdminHeader extends Component {
   renderNavLinks() {
     return [
-      { name: 'Dashboard', link: '/admin' },
+      { name: 'Dashboard', link: '/admin', onlyActiveOnIndex: true },
+      { name: 'Settings', link: '/admin/settings', onlyActiveOnIndex: false },
     ];
   }
 
@@ -23,17 +24,26 @@ class AdminHeader extends Component {
     const {
       authenticated,
       name,
+      role,
       username,
       avatarUrl,
     } = this.props.user;
 
+    const {
+      boardName,
+      boardLogoImage
+    } = this.props.settings;
+
     return (
       <div className={classnames(appLayout.constraintWidth)}>
         <div className={styles.headerTop}>
-          <Logo />
-          Welcome Admin
+          <Logo
+            boardName={boardName}
+            logoImage={boardLogoImage}
+          />
           <UserMenu
             signedIn={authenticated}
+            isAdmin={role === 'admin'}
             username={username}
             avatar={avatarUrl}
           />

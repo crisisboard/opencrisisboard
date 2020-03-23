@@ -1,19 +1,30 @@
-import React, { Component } from 'react';
 import { Link } from 'react-router'
+import React from 'react';
 import styles from './styles';
 import LogoImage from 'SharedStyles/logo.png';
 
-const Logo = () => {
+const Logo = (props) => {
+
   return (
     <div className={styles.logoContainer}>
       <Link to='/' className={styles.logo}>
-        <img className={styles.logoImage} src={LogoImage} />
+        <img className={styles.logoImage} src={props.logoImage ? props.logoImage: LogoImage} />
       </Link>
       <h1 className={styles.logoTitle}>
-        <Link to="/">OpenCrisisBoard</Link>
+        <Link to="/">{props.boardName}</Link>
       </h1>
     </div>
   );
+};
+
+Logo.defaultProps = {
+  boardName: 'OpenCrisisBoard',
+  logoImage: LogoImage
+};
+
+Logo.PropTypes = {
+  boardName: React.PropTypes.string,
+  logoImage: React.PropTypes.string
 };
 
 export default Logo;

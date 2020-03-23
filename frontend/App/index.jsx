@@ -12,7 +12,8 @@ import appStore from './store';
 // app views
 import AppContainer from './App';
 import AdminContainer from './Admin';
-import Dashboard from '../Views/AdminDashboard';
+import Dashboard from '../Views/Admin/Dashboard';
+import Settings from '../Views/Admin/Settings';
 import Header from 'Containers/Header';
 import ForumFeed from '../Views/ForumFeed';
 import SingleDiscussion from '../Views/SingleDiscussion';
@@ -24,7 +25,7 @@ import NotFound from '../Views/NotFound';
 // geocode configs
 Geocode.setApiKey(MAP_KEY);
 Geocode.setLanguage("en");
- 
+
 // Enable or disable logs. Its optional.
 Geocode.enableDebug();
 
@@ -33,6 +34,7 @@ ReactDOM.render (
     <Router history={browserHistory}>
       <Route path="/admin" component={AdminContainer}>
         <IndexRoute component={Dashboard} />
+        <Route path="/admin/settings" component={Settings} />
       </Route>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={ForumFeed} />

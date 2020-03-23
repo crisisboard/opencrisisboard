@@ -27,7 +27,8 @@ class UserMenu extends Component {
     const { activeSubMenu } = this.state;
     const {
       signedIn,
-      userName,
+      isAdmin,
+      userName
     } = this.props;
 
     if (activeSubMenu) {
@@ -66,9 +67,22 @@ class UserMenu extends Component {
             </div>
           ) }
 
-          { signedIn && <span onClick={this.toggleSubMenu}><Link className={styles.subMenuItem} to={`/user/${userName}`}>My Profile</Link></span> }
-          {/* { signedIn && <a className={styles.subMenuItem} href={'#'}>Settings</a> } */}
-          { signedIn && <a className={styles.subMenuItem} href={'/api/user/signout'}>Sign Out</a> }
+          { signedIn &&
+            <span onClick={this.toggleSubMenu}>
+              <Link className={styles.subMenuItem} to={`/user/${userName}`}>
+                My Profile
+              </Link>
+            </span> }
+
+          { signedIn && isAdmin &&
+            <Link className={styles.subMenuItem} to='/admin'>
+              Admin Panel
+            </Link> }
+
+          { signedIn &&
+            <a className={styles.subMenuItem} href='/api/user/signout'>
+              Sign Out
+            </a> }
         </div>
       );
     }
@@ -114,14 +128,16 @@ class UserMenu extends Component {
 
 UserMenu.defaultProps = {
   signedIn: false,
+  isAdmin: false,
   userName: '',
-  avatar: '',
+  avatar: ''
 };
 
 UserMenu.propTypes = {
   signedIn: React.PropTypes.bool.isRequired,
+  isAdmin: React.PropTypes.bool.isRequired,
   userName: React.PropTypes.string,
-  avatar: React.PropTypes.string,
+  avatar: React.PropTypes.string
 };
 
 export default onClickOutside(UserMenu);

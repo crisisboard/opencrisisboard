@@ -1,0 +1,6 @@
+/* TODO: Reduce duplicate code. For now, these styles are copied directly from the AdminDashboard directory */
+
+.container {
+  margin-top: 20px;
+  position: relative;
+}
