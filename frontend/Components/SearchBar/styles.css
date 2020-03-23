@@ -3,13 +3,20 @@
 /**
  * SearchBar component styles
  */
-.search {
-  width: 250px;
-  margin-left: 10px;
+ .search {
+     margin-top:20px;
+     display:flex;
+     justify-content:space-around;
+ }
+
+.searchBox{
+  width: 35rem;
+ 
+  padding:10px;
 }
 
-.search-label {
-    padding-left: 10px;
+.searchLabel {
+    padding:10px;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.5px;
