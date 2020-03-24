@@ -18,5 +18,5 @@ module.exports = {
   GH_SECRET : process.env.GH_SECRET || null,
 
   // google map key for geocode and map
-  MAP_KEY: ""
+  MAP_KEY: process.env.MAP_KEY || ""
 };

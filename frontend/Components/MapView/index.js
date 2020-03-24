@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import styles from './styles.css';
+
 import { MAP_KEY } from '../../../config/credentials';
 
 import DiscussionPin from './DiscussionPin';
@@ -30,12 +31,6 @@ class MapView extends Component {
     const {
       discussions
     } = this.props;
-
-    // just for testing
-    const defaultProps = {
-      center: {lat: 40.73, lng: -73.93},
-      zoom: 12,
-    };
 
     return (
       <div className={styles.mapViewContainer}>

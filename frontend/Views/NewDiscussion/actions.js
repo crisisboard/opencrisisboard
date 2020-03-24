@@ -1,7 +1,6 @@
 import { browserHistory } from 'react-router';
 import {
   POSTING_DISCUSSION_START,
-  POSTING_DISCUSSION_END,
   POSTING_DISCUSSION_SUCCESS,
   POSTING_DISCUSSION_FAILURE,
 
@@ -152,6 +151,7 @@ export const updateDiscussionTags = (value) => {
   };
 };
 
+// TODO: The geolocation doesn't actually get written to the database even though there is a field in the model for it. fix this
 /**
  * update the geolocation in redux state
  * @param  {Object} value

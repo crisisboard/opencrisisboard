@@ -86,6 +86,8 @@ class ForumFeed extends Component {
       filteredDiscussions
     } = this.props;
 
+    console.log(pinnedDiscussions);
+
     if (error) {
       return (
         <div className={classnames(styles.errorMsg)}>
@@ -128,9 +130,9 @@ class ForumFeed extends Component {
 
         </div>
 
-        {/*<div className={appLayout.secondaryContent}>*/}
-        {/*  <SideBar currentForum={currentForum} />*/}
-        {/*</div>*/}
+        <div className={appLayout.secondaryContent}>
+          <SideBar currentForum={currentForum} />
+        </div>
       </div>
     );
   }

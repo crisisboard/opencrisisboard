@@ -31,7 +31,7 @@ class NewDiscussion extends Component {
       userId: null,
       fatalError: null,
       browserLocationNotAvailable: false,
-      address: '',  // not saving with post object, only saving geolocation 
+      address: '',  // not saving with post object, only saving geolocation
     };
   }
 
@@ -71,6 +71,7 @@ class NewDiscussion extends Component {
     }
   }
 
+  // TODO: This should be in a utils directory or something, not part of a component
   getBrowserLocation() {
     if (!navigator.geolocation) {
       this.setState({ browserLocationNotAvailable: true })
@@ -87,6 +88,7 @@ class NewDiscussion extends Component {
     }
   }
 
+  // TODO: This should also be a util
   getGeolocationFromAddress() {
     const { address } = this.state;
 
@@ -101,6 +103,7 @@ class NewDiscussion extends Component {
     );
   }
 
+  // TODO: This too should be a util
   getMapAddress() {
     const { geoLocation } = this.props.newDiscussion;
     if (!geoLocation) return null;
@@ -154,9 +157,9 @@ class NewDiscussion extends Component {
           type="text"
           className={styles.addressInput}
           placeholder={'Address...'}
-          value={address} 
+          value={address}
           onChange={(event) => { this.setState({ address: event.target.value }); }}
-          onBlur={(event) => { 
+          onBlur={(event) => {
             const { value } = event.target;
             if (value !== '') this.getGeolocationFromAddress();
           }}
@@ -182,10 +185,9 @@ class NewDiscussion extends Component {
           {geoLocation && <img
             className={styles.locationMap}
             src={this.getMapAddress()}
-            alt="Map of the given location" 
+            alt="Map of the given location"
           />}
-        </div>,
-        ,
+        </div>
       ];
     }
 
