@@ -14,6 +14,8 @@ import NewDiscussionButton from 'Components/NewDiscussionButton';
 import FeedBox from 'Components/FeedBox';
 import SideBar from 'Components/SideBar';
 import SearchBar from 'Components/SearchBar';
+import MapView from 'Components/MapView';
+
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
@@ -22,7 +24,7 @@ class ForumFeed extends Component {
     const {
       currentForumId,
       getDiscussions,
-      getPinnedDiscussions, 
+      getPinnedDiscussions,
     } = this.props;
 
     // get the discussions and pinned discussions
@@ -96,29 +98,39 @@ class ForumFeed extends Component {
       <div className={classnames(appLayout.constraintWidth, styles.contentArea)}>
         <Helmet><title>{`OpenCrisisBoard | ${currentForum}`}</title></Helmet>
 
-        <div className={appLayout.primaryContent}>
+        <div className={classnames(appLayout.primaryContent, styles.forumFeedContainer)}>
           { this.renderNewDiscussionButtion() }
+          <div className={styles.feedBoxContainer}>
+            <FeedBox
+              type='pinned'
+              loading={fetchingPinnedDiscussions}
+              discussions={searchInput ? filteredDiscussions : discussions}
+              currentForum={currentForum}
+            />
 
-          <FeedBox
-            type='pinned'
-            loading={fetchingPinnedDiscussions}
-            discussions={pinnedDiscussions}
-            currentForum={currentForum}
-          />
-          <SearchBar />
-          <FeedBox
-            type='general'
+            <FeedBox
+              type='general'
+              loading={fetchingDiscussions}
+              discussions={discussions}
+              currentForum={currentForum}
+              onChangeSortingMethod={this.handleSortingChange.bind(this)}
+              activeSortingMethod={sortingMethod}
+            />
+          </div>
+
+          <MapView
             loading={fetchingDiscussions}
-             discussions={searchInput ? filteredDiscussions : discussions}
+            discussions={[]}
             currentForum={currentForum}
-            onChangeSortingMethod={this.handleSortingChange.bind(this)}
-            activeSortingMethod={sortingMethod}
+            center={{lat: 49.2, lng: -123.1}}
+            zoom={12}
           />
+
         </div>
 
-        <div className={appLayout.secondaryContent}>
-          <SideBar currentForum={currentForum} />
-        </div>
+        {/*<div className={appLayout.secondaryContent}>*/}
+        {/*  <SideBar currentForum={currentForum} />*/}
+        {/*</div>*/}
       </div>
     );
   }

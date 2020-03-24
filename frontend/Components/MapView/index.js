@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import styles from './styles.css';
+import { MAP_KEY } from '../../../config/credentials';
 
+import DiscussionPin from './DiscussionPin';
 import GoogleMapReact from 'google-map-react';
 
 class MapView extends Component {
@@ -24,16 +26,22 @@ class MapView extends Component {
   }
 
   render () {
+
+    const {
+      discussions
+    } = this.props;
+
+    // just for testing
     const defaultProps = {
       center: {lat: 40.73, lng: -73.93},
       zoom: 12,
     };
 
     return (
-      <div>
+      <div className={styles.mapViewContainer}>
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: this.props.apiKey,
+            key: MAP_KEY,
             language: 'en'
           }}
           defaultCenter={this.props.center}
@@ -41,20 +49,25 @@ class MapView extends Component {
           defaultZoom={this.props.zoom}
           onChildMouseEnter={this.onChildMouseEnter}
           onChildMouseLeave={this.onChildMouseLeave}
+          yesIWantToUseGoogleMapApiInternals
         >
-
+          {discussions.map(discussion => (
+            <DiscussionPin
+              // TODO: add data props
+            />
+          ))}
         </GoogleMapReact>
       </div>
     );
   }
-};
+}
 
 MapView.defaultProps = {
-
+  discussions: []
 };
 
 MapView.PropTypes = {
-
+  discussions: React.PropTypes.array
 };
 
 export default MapView;

@@ -1,0 +1,8 @@
+/* TODO: Figure out correct bounds for container */
+@value borderColor from 'SharedStyles/globalStyles';
+.mapViewContainer {
+  height: 100vh;
+  width: 50%;
+  border: 1px solid borderColor;
+  margin-left: 20px;
+}
