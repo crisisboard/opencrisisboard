@@ -11,7 +11,7 @@ import {
 
   UPDATE_SORTING_METHOD,
   INVALID_FORUM,
-  SEARCH,
+  SEARCH_FILTERING_SYNC,
 } from './constants';
 
 const initialState = {
@@ -80,7 +80,7 @@ export const feedReducer = (state = initialState, action) => {
       });
     
     
-    case SEARCH:
+    case SEARCH_FILTERING_SYNC:
       const searchInput = action.payload;
       const filteredDiscussions = state.discussions.filter((discussion) => discussion.title.toLowerCase().includes(searchInput.toLowerCase()));
       return Object.assign({}, state, {

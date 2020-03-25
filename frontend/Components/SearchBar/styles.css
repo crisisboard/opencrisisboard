@@ -1,11 +1,13 @@
 /**
  * SearchBar component styles
  */
+
 .search {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
   padding: 0 10px;
+  align-items:center;
 }
 
 .searchBox {

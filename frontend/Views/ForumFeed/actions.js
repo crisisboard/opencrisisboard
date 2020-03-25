@@ -12,7 +12,7 @@ import {
 
   UPDATE_SORTING_METHOD,
   INVALID_FORUM,
-  SEARCH
+  SEARCH_FILTERING_SYNC
 } from './constants';
 import {
   fetchDiscussions,
@@ -94,6 +94,11 @@ export const updateSortingMethod = (method) => {
   return { type: UPDATE_SORTING_METHOD, payload: method };
 };
 
+/**
+ * action to filter discussions synchronously
+ * @param  {String} searchInput
+ * @return {action}
+ */
 export const search = (searchInput) => { 
-  return {type:SEARCH, payload:searchInput}
+  return { type: SEARCH_FILTERING_SYNC, payload: searchInput };
 }
