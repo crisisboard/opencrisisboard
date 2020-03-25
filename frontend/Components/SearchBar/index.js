@@ -4,11 +4,11 @@ import styles from "./styles";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { search } from "../../Views/ForumFeed/actions";
+import { search_filtering_sync } from "../../Views/ForumFeed/actions";
 
 class SearchBar extends Component {
   render() {
-    const { search, searchInput } = this.props;
+    const { search_filtering_sync, searchInput } = this.props;
 
     return (
       <div className={styles.search}>
@@ -19,7 +19,7 @@ class SearchBar extends Component {
           className={styles.searchBox}
           type="text"
           placeholder="Search..."
-          onChange={e => search(e.target.value)}
+          onChange={e => search_filtering_sync(e.target.value)}
           value={searchInput}
         />
       </div>
@@ -30,7 +30,7 @@ function mapStateToProps({ searchInput }) {
   return { searchInput };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ search }, dispatch);
+  return bindActionCreators({ search_filtering_sync }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

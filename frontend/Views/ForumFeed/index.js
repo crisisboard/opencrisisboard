@@ -22,8 +22,7 @@ class ForumFeed extends Component {
     const {
       currentForumId,
       getDiscussions,
-      getPinnedDiscussions,
-     
+      getPinnedDiscussions, 
     } = this.props;
 
     // get the discussions and pinned discussions

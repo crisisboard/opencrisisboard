@@ -73,12 +73,10 @@ export const feedReducer = (state = initialState, action) => {
         error: 'Unable to fetch pinned discussions at the moment.',
       });
 
-
     case UPDATE_SORTING_METHOD:
       return Object.assign({}, state, {
         sortingMethod: action.payload,
       });
-    
     
     case SEARCH_FILTERING_SYNC:
       const searchInput = action.payload;
@@ -88,7 +86,6 @@ export const feedReducer = (state = initialState, action) => {
         searchInput:searchInput
       })
     
-    
     case INVALID_FORUM:
       return Object.assign({}, state, {
         error: 'Sorry, couldn\'t find the forum.',
@@ -96,7 +93,6 @@ export const feedReducer = (state = initialState, action) => {
         fetchingDiscussions: false,
       });
     
-
     default:
       return state;
   }

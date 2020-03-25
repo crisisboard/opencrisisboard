@@ -99,6 +99,6 @@ export const updateSortingMethod = (method) => {
  * @param  {String} searchInput
  * @return {action}
  */
-export const search = (searchInput) => { 
+export const search_filtering_sync = (searchInput) => { 
   return { type: SEARCH_FILTERING_SYNC, payload: searchInput };
 }
