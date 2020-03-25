@@ -12,7 +12,7 @@ class SearchBar extends Component {
 
     return (
       <div className={styles.search}>
-        <label className={styles.searchLabel} for="search">
+        <label className={styles.searchLabel} htmlFor="search">
           Search Discussions:
         </label>
         <input

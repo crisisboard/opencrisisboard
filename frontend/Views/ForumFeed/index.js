@@ -112,7 +112,7 @@ class ForumFeed extends Component {
           <FeedBox
             type='general'
             loading={fetchingDiscussions}
-            discussions={searchInput ? filteredDiscussions : discussions}
+             discussions={searchInput ? filteredDiscussions : discussions}
             currentForum={currentForum}
             onChangeSortingMethod={this.handleSortingChange.bind(this)}
             activeSortingMethod={sortingMethod}
