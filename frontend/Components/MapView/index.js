@@ -48,15 +48,19 @@ class MapView extends Component {
           onChildMouseLeave={this.onChildMouseLeave}
           yesIWantToUseGoogleMapApiInternals
         >
-          {discussions && discussions.map(discussion => (
-            <DiscussionPin
-              // TODO: Discussions should really have a proper id field in the db
-              key={discussion._id}
-              lat={discussion.geoLocation.lat}
-              lng={discussion.geoLocation.lng}
-              text={'Marker baby'}
-            />
-          ))}
+          {discussions && discussions.map((discussion, index) => {
+            console.log('mapping discs to pins:', discussion, index);
+            return (
+              <DiscussionPin
+                // TODO: Discussions should really have a proper id field in the db
+                key={index}
+                numberTag={index + 1}
+                lat={discussion.geoLocation.lat}
+                lng={discussion.geoLocation.lng}
+                discussion={discussion}
+              />
+            )
+          })}
         </GoogleMapReact>
       </div>
     );

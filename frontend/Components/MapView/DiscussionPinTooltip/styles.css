@@ -1,0 +1,16 @@
+.discussionPinTooltipContainer {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 2;
+}
+
+.discussionPinTooltipText {
+  font-size: 14px;
+  display: inline;
+}
+
+.discussionPinCloseButtonSVG {
+  display: inline;
+}

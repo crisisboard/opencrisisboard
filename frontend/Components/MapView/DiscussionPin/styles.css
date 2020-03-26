@@ -1,0 +1,15 @@
+.discussionPinContainer {
+  text-align: center;
+  background-color: red;
+  border-radius: 5px;
+  min-width: 20px;
+  min-height: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.discussionPinNumberTag {
+  color: black;
+  font-size: 16px;
+}
