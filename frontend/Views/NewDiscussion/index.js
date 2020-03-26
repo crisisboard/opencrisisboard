@@ -95,7 +95,10 @@ class NewDiscussion extends Component {
     Geocode.fromAddress(address).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        this.props.updateDiscussionGeoLocation({lat, lng});
+        this.props.updateDiscussionGeoLocation({
+            lat,
+            lng
+          })
       },
       error => {
         console.error(error);

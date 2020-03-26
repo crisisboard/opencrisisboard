@@ -27,12 +27,16 @@ export const postDiscussion = (userId, forumId, currentForum) => {
 
     // validate discussion inputs
     // discussion values are in redux state
+
+    // TODO: Move this validation into a utils lib
     const {
       title,
       content,
       tags,
       pinned,
+      geoLocation
     } = getState().newDiscussion;
+    console.log('inside action', getState().newDiscussion);
 
     let validated = true;
 
@@ -77,6 +81,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
         content,
         tags,
         pinned,
+        geoLocation
       }).then(
         (data) => {
           if (data.data.postCreated === true) {
@@ -152,6 +157,8 @@ export const updateDiscussionTags = (value) => {
 };
 
 // TODO: The geolocation doesn't actually get written to the database even though there is a field in the model for it. fix this
+// TODO: The geolocation should also instead be a part of the discussion POST request, not updated client-side only in the frontend
+// TODO: after the discussion is created
 /**
  * update the geolocation in redux state
  * @param  {Object} value

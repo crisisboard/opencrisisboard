@@ -45,6 +45,7 @@ const getDiscussion = (discussion_slug, discussion_id) => {
  * @return {Promise}
  */
 const createDiscussion = (discussion) => {
+  console.log('discussion:', discussion);
   return new Promise((resolve, reject) => {
     const newDiscussion = new Discussion({
       forum_id: discussion.forumId,
@@ -58,7 +59,7 @@ const createDiscussion = (discussion) => {
       favorites: [],
       tags: discussion.tags,
       pinned: discussion.pinned,
-      geolocation: discussion.geoLocation,
+      geoLocation: discussion.geoLocation,
     });
 
     newDiscussion.save((error) => {
