@@ -27,10 +27,11 @@ class MapView extends Component {
   }
 
   render () {
-
     const {
       discussions
     } = this.props;
+
+    console.log('inside mapview', discussions);
 
     return (
       <div className={styles.mapViewContainer}>
