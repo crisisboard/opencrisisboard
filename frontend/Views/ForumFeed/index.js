@@ -13,7 +13,7 @@ import {
 import NewDiscussionButton from 'Components/NewDiscussionButton';
 import FeedBox from 'Components/FeedBox';
 import SideBar from 'Components/SideBar';
-
+import SearchBar from 'Components/SearchBar';
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
@@ -22,7 +22,7 @@ class ForumFeed extends Component {
     const {
       currentForumId,
       getDiscussions,
-      getPinnedDiscussions,
+      getPinnedDiscussions, 
     } = this.props;
 
     // get the discussions and pinned discussions
@@ -80,6 +80,8 @@ class ForumFeed extends Component {
       fetchingPinnedDiscussions,
       sortingMethod,
       error,
+      searchInput,
+      filteredDiscussions
     } = this.props;
 
     if (error) {
@@ -103,11 +105,11 @@ class ForumFeed extends Component {
             discussions={pinnedDiscussions}
             currentForum={currentForum}
           />
-
+          <SearchBar />
           <FeedBox
             type='general'
             loading={fetchingDiscussions}
-            discussions={discussions}
+             discussions={searchInput ? filteredDiscussions : discussions}
             currentForum={currentForum}
             onChangeSortingMethod={this.handleSortingChange.bind(this)}
             activeSortingMethod={sortingMethod}
@@ -136,6 +138,8 @@ export default connect(
     sortingMethod: state.feed.sortingMethod,
     pinnedDiscussions: state.feed.pinnedDiscussions,
     error: state.feed.error,
+    searchInput: state.feed.searchInput,
+    filteredDiscussions:state.feed.filteredDiscussions
   }; },
   (dispatch) => { return {
     getDiscussions: (currentForumId, feedChanged, sortingMethod, sortingChanged) => { dispatch(getDiscussions(currentForumId, feedChanged, sortingMethod, sortingChanged)); },

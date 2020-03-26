@@ -1,0 +1,24 @@
+/**
+ * SearchBar component styles
+ */
+
+.search {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+  align-items:center;
+}
+
+.searchBox {
+  flex: 2;
+  padding: 10px;
+}
+
+.searchLabel {
+  padding: 10px 10px 10px 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
