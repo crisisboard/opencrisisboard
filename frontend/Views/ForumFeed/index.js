@@ -130,6 +130,7 @@ class ForumFeed extends Component {
 
         </div>
 
+        {/* TODO: Get rid of this awful sidebar and move the new discussion button somewhere that makes sense UI-wise */}
         <div className={appLayout.secondaryContent}>
           <SideBar currentForum={currentForum} />
         </div>
