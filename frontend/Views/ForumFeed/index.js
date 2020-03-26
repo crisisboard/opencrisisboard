@@ -120,8 +120,10 @@ class ForumFeed extends Component {
 
           <MapView
             loading={fetchingDiscussions}
-            discussions={[]}
+            pinnedDiscussions={pinnedDiscussions}
+            discussions={discussions}
             currentForum={currentForum}
+            // TODO: Use getBrowserLocation utility to set the center of the map, have a default center just in case user denies access
             center={{lat: 49.2, lng: -123.1}}
             zoom={12}
           />

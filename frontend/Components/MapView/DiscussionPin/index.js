@@ -3,7 +3,11 @@ import classnames from 'classnames';
 import styles from './styles.css';
 
 const DiscussionPin = (props) => {
-
+  return (
+    <div>
+      {props.text}
+    </div>
+  )
 };
 
 DiscussionPin.defaultProps = {

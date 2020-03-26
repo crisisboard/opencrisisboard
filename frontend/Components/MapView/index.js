@@ -28,10 +28,11 @@ class MapView extends Component {
 
   render () {
     const {
+      pinnedDiscussions,
       discussions
     } = this.props;
 
-    console.log('inside mapview', discussions);
+    console.log('inside mapview discs', pinnedDiscussions, discussions);
 
     return (
       <div className={styles.mapViewContainer}>
@@ -47,9 +48,13 @@ class MapView extends Component {
           onChildMouseLeave={this.onChildMouseLeave}
           yesIWantToUseGoogleMapApiInternals
         >
-          {discussions.map(discussion => (
+          {discussions && discussions.map(discussion => (
             <DiscussionPin
-              // TODO: add data props
+              // TODO: Discussions should really have a proper id field in the db
+              key={discussion._id}
+              lat={discussion.geoLocation.lat}
+              lng={discussion.geoLocation.lng}
+              text={'Marker baby'}
             />
           ))}
         </GoogleMapReact>
@@ -59,10 +64,12 @@ class MapView extends Component {
 }
 
 MapView.defaultProps = {
+  pinnedDiscussions: [],
   discussions: []
 };
 
 MapView.PropTypes = {
+  pinnedDiscussions: React.PropTypes.array,
   discussions: React.PropTypes.array
 };
 
