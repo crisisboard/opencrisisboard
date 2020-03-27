@@ -73,7 +73,7 @@ class ForumFeed extends Component {
       sortingMethod,
       error,
       searchInput,
-      filteredDiscussions
+      filteredDiscussions,
       authenticated
     } = this.props;
 

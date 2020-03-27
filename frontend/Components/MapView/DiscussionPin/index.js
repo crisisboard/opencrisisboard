@@ -46,7 +46,7 @@ class DiscussionPin extends Component {
 }
 
 DiscussionPin.defaultProps = {
-
+  // TODO: Fill these in
 };
 
 DiscussionPin.PropTypes = {
