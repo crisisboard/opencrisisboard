@@ -26,5 +26,7 @@
 }
 
 .feedBoxContainer {
-
+  @media largeBP {
+    min-width: 40%;
+  }
 }

@@ -21,7 +21,7 @@ const DiscussionPinTooltip = (props) => {
     </div>
     <div className={styles.tooltipTextWrapper}>
       <p className={styles.tooltipText}>
-        {props.discussion}
+        {props.discussion.title}
       </p>
     </div>
   </div> : null;

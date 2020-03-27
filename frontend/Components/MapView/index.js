@@ -7,23 +7,13 @@ import { MAP_KEY } from '../../../config/credentials';
 import DiscussionPin from './DiscussionPin';
 import GoogleMapReact from 'google-map-react';
 
+// TODO: Maybe this can be a functional component
 class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       center: this.props.center
     };
-
-    this.onChildMouseEnter = this.onChildMouseEnter.bind(this);
-    this.onChildMouseLeave = this.onChildMouseLeave.bind(this);
-  }
-
-  onChildMouseEnter () {
-
-  }
-
-  onChildMouseLeave () {
-
   }
 
   render () {
@@ -49,7 +39,6 @@ class MapView extends Component {
           yesIWantToUseGoogleMapApiInternals
         >
           {discussions && discussions.map((discussion, index) => {
-            console.log('mapping discs to pins:', discussion, index);
             return (
               <DiscussionPin
                 // TODO: Discussions should really have a proper id field in the db
