@@ -1,6 +1,9 @@
+@value borderColor from 'SharedStyles/globalStyles';
+
 .discussionPinContainer {
   text-align: center;
-  background-color: red;
+  background-color: /* #e7f1f9 */ #ffffff;
+  border: 1px solid borderColor;
   border-radius: 5px;
   min-width: 20px;
   min-height: 20px;

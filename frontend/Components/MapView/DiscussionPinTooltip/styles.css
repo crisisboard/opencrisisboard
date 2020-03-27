@@ -1,12 +1,28 @@
+@value borderColor from 'SharedStyles/globalStyles';
+
 .tooltip {
-  background-color: white;
+  background-color: /* #e7f1f9 */ #ffffff;
   padding: 5px;
   border-radius: 5px;
+  border: 1px solid borderColor;
   position: absolute;
   z-index: 2;
-  bottom: 0;
+  bottom: 20px;
   transform: translateX(-50%);
   min-width: 120px;
+  &:hover {
+    cursor: default;
+  }
+}
+
+.tooltipArrowSVG {
+  position: absolute;
+  bottom: -14px;
+  left: 45%;
+}
+
+.tooltipArrowSVGPoly {
+  fill: /* #e7f1f9 */ #ffffff;
   &:hover {
     cursor: default;
   }
@@ -20,6 +36,7 @@
   font-size: 14px;
   margin: 0;
   padding: 5px;
+  color: black;
 }
 
 .closeButtonSVGWrapper {
@@ -34,4 +51,5 @@
 .closeButtonSVG {
   width: 14px;
   height: 14px;
+  color: black;
 }

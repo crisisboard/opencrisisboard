@@ -43,7 +43,7 @@ class DiscussionPin extends Component {
       </div>
     );
   }
-};
+}
 
 DiscussionPin.defaultProps = {
 
@@ -54,6 +54,7 @@ DiscussionPin.PropTypes = {
   numberTag: React.PropTypes.number,
   lat: React.PropTypes.number,
   lng: React.PropTypes.number,
+  discussion: React.PropTypes.Object
 };
 
 export default DiscussionPin;
