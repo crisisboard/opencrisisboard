@@ -1,16 +1,37 @@
-.discussionPinTooltipContainer {
+.tooltip {
   background-color: white;
   padding: 5px;
   border-radius: 5px;
   position: absolute;
   z-index: 2;
+  bottom: 0;
+  transform: translateX(-50%);
+  min-width: 120px;
+  &:hover {
+    cursor: default;
+  }
 }
 
-.discussionPinTooltipText {
+.tooltipTextWrapper {
+  text-align: center;
+}
+
+.tooltipText {
   font-size: 14px;
-  display: inline;
+  margin: 0;
+  padding: 5px;
 }
 
-.discussionPinCloseButtonSVG {
-  display: inline;
+.closeButtonSVGWrapper {
+  top: 0;
+  max-width: 15px;
+  padding: 2px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.closeButtonSVG {
+  width: 14px;
+  height: 14px;
 }

@@ -27,12 +27,12 @@ class MapView extends Component {
   }
 
   render () {
+
+    // TODO: Do I need pinned and non-pinned discussions?
     const {
       pinnedDiscussions,
       discussions
     } = this.props;
-
-    console.log('inside mapview discs', pinnedDiscussions, discussions);
 
     return (
       <div className={styles.mapViewContainer}>

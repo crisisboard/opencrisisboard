@@ -32,7 +32,7 @@ class NewDiscussionButton extends React.Component {
 NewDiscussionButton.propTypes = {
   authenticated: React.PropTypes.bool,
   currentForum: React.PropTypes.string
-}
+};
 
 const mapStateToProps = state => ({ authenticated: state.user.authenticated });
 

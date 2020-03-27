@@ -16,7 +16,6 @@ class DiscussionPin extends Component {
   }
 
   handleOpenTooltip () {
-    console.log('open tooltip');
     this.setState({
       tooltipOpen: true
     });
@@ -30,8 +29,12 @@ class DiscussionPin extends Component {
 
   render () {
     return (
-      <div className={styles.discussionPinContainer} onClick={this.handleOpenTooltip}>
-        <p className={styles.discussionPinNumberTag}>{this.props.numberTag}</p>
+      <div>
+        <div className={styles.discussionPinContainer} onClick={this.handleOpenTooltip}>
+          <p className={styles.discussionPinNumberTag}>
+            {this.props.numberTag}
+          </p>
+        </div>
         <DiscussionPinTooltip
           discussion={this.props.discussion}
           open={this.state.tooltipOpen}
@@ -50,7 +53,7 @@ DiscussionPin.PropTypes = {
   key: React.PropTypes.number,
   numberTag: React.PropTypes.number,
   lat: React.PropTypes.number,
-  lng: React.PropTypes.number
+  lng: React.PropTypes.number,
 };
 
 export default DiscussionPin;

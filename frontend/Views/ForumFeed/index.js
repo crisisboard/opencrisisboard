@@ -63,16 +63,6 @@ class ForumFeed extends Component {
     }
   }
 
-  renderNewDiscussionButtion() {
-    const { currentForum } = this.props;
-
-    return (
-      <div className={classnames(appLayout.showOnMediumBP, styles.newDiscussionBtn)}>
-        <NewDiscussionButton currentForum={currentForum} />
-      </div>
-    );
-  }
-
   render() {
     const {
       currentForum,
@@ -84,6 +74,7 @@ class ForumFeed extends Component {
       error,
       searchInput,
       filteredDiscussions
+      authenticated
     } = this.props;
 
     if (error) {
@@ -99,7 +90,6 @@ class ForumFeed extends Component {
         <Helmet><title>{`OpenCrisisBoard | ${currentForum}`}</title></Helmet>
 
         <div className={classnames(appLayout.primaryContent, styles.forumFeedContainer)}>
-          { this.renderNewDiscussionButtion() }
           <div className={styles.feedBoxContainer}>
             <FeedBox
               type='pinned'
@@ -116,8 +106,13 @@ class ForumFeed extends Component {
               onChangeSortingMethod={this.handleSortingChange.bind(this)}
               activeSortingMethod={sortingMethod}
             />
+
+            <div className={styles.newDiscussionBtn}>
+              <NewDiscussionButton currentForum={currentForum} authenticated={authenticated}/>
+            </div>
           </div>
 
+          {/* TODO: Implement mobile behaviour (don't show) for MapView */}
           <MapView
             loading={fetchingDiscussions}
             pinnedDiscussions={pinnedDiscussions}
@@ -128,11 +123,6 @@ class ForumFeed extends Component {
             zoom={12}
           />
 
-        </div>
-
-        {/* TODO: Get rid of this awful sidebar and move the new discussion button somewhere that makes sense UI-wise */}
-        <div className={appLayout.secondaryContent}>
-          <SideBar currentForum={currentForum} />
         </div>
       </div>
     );
@@ -154,7 +144,8 @@ export default connect(
     pinnedDiscussions: state.feed.pinnedDiscussions,
     error: state.feed.error,
     searchInput: state.feed.searchInput,
-    filteredDiscussions:state.feed.filteredDiscussions
+    filteredDiscussions:state.feed.filteredDiscussions,
+    authenticated: state.app.authenticated
   }; },
   (dispatch) => { return {
     getDiscussions: (currentForumId, feedChanged, sortingMethod, sortingChanged) => { dispatch(getDiscussions(currentForumId, feedChanged, sortingMethod, sortingChanged)); },
