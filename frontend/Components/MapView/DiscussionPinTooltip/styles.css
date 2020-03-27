@@ -32,11 +32,19 @@
   text-align: center;
 }
 
-.tooltipText {
+.tooltipTextTitle {
   font-size: 14px;
   margin: 0;
   padding: 5px;
   color: black;
+}
+
+.tooltipTextAuthor {
+
+}
+
+.tooltipDiscussionLink {
+  text-decoration: none;
 }
 
 .closeButtonSVGWrapper {
