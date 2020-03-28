@@ -106,7 +106,8 @@ class NewDiscussion extends Component {
     );
   }
 
-  // TODO: This too should be a util
+  // This method is supposed to return an IMG URL SRC for the google map when creating a new post
+  // TODO: Just use the GoogleMapReact component for this instead
   getMapAddress() {
     const { geoLocation } = this.props.newDiscussion;
     if (!geoLocation) return null;

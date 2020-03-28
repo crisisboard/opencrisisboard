@@ -12,7 +12,6 @@ import {
 
 import NewDiscussionButton from 'Components/NewDiscussionButton';
 import FeedBox from 'Components/FeedBox';
-import SideBar from 'Components/SideBar';
 import SearchBar from 'Components/SearchBar';
 import MapView from 'Components/MapView';
 
@@ -94,14 +93,16 @@ class ForumFeed extends Component {
             <FeedBox
               type='pinned'
               loading={fetchingPinnedDiscussions}
-              discussions={searchInput ? filteredDiscussions : discussions}
+              discussions={pinnedDiscussions}
               currentForum={currentForum}
             />
+
+            <SearchBar />
 
             <FeedBox
               type='general'
               loading={fetchingDiscussions}
-              discussions={discussions}
+              discussions={searchInput ? filteredDiscussions : discussions}
               currentForum={currentForum}
               onChangeSortingMethod={this.handleSortingChange.bind(this)}
               activeSortingMethod={sortingMethod}
