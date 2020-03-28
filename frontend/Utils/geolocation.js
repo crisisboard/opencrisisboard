@@ -5,19 +5,19 @@ import Geocode from 'react-geocode';
  * @returns {Object} geoLocation object {lat, lng}, geoLocation.error will be truthy if an error occurred
  */
 export const getBrowserLocation = () => {
+  const geoLocation = {};
   if (!navigator.geolocation) {
-    return { error: 'User has denied access to the location in their browser' };
+    geoLocation.error = 'User has denied access to the location in their browser';
   } else {
-    return navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.getCurrentPosition(
       position => {
-        return {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+        geoLocation.lat = position.coords.latitude;
+        geoLocation.lng = position.coords.longitude;
       },
-      error => { return { error }; }
+      error => { geoLocation.error = error; }
     );
   }
+  return geoLocation;
 };
 
 /**

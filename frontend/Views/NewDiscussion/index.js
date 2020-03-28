@@ -2,13 +2,15 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import Geocode from "react-geocode";
+import Geocode from 'react-geocode';
 import classnames from 'classnames';
 
-import { MAP_KEY } from "../../../config/credentials";
+import { MAP_KEY } from '../../../config/credentials';
 import RichEditor from 'Components/RichEditor';
 import PinButton from 'Components/NewDiscussion/PinButton';
 import TagsInput from 'Components/NewDiscussion/TagsInput';
+
+import { getBrowserLocation } from '../../Utils/geolocation';
 
 import {
   postDiscussion,
@@ -43,7 +45,7 @@ class NewDiscussion extends Component {
     } = this.props;
 
     this.setUserAndForumID(user, forums, currentForum);
-    this.getBrowserLocation();
+    this.getAndUpdateBrowserLocation();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,21 +73,14 @@ class NewDiscussion extends Component {
     }
   }
 
-  // TODO: This should be in a utils directory or something, not part of a component
-  getBrowserLocation() {
-    if (!navigator.geolocation) {
-      this.setState({ browserLocationNotAvailable: true })
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.props.updateDiscussionGeoLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          })
-        },
-        error => this.setState({ browserLocationNotAvailable: true })
-      )
+  getAndUpdateBrowserLocation() {
+    const geoLocation = getBrowserLocation();
+    if (!geoLocation.error) {
+      this.props.updateDiscussionGeoLocation(geoLocation);
     }
+    this.setState({
+      browserLocationNotAvailable: !!geoLocation.error
+    });
   }
 
   // TODO: This should also be a util
