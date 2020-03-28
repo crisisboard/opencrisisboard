@@ -4,6 +4,6 @@
 
 import axios from 'axios';
 
-export const fetchAuthViaPhone = (number) => {
-  return axios.get(`/api/user/authViaPhone?number=${number}`);
+export const fetchAuthViaPhone = (name, number) => {
+  return axios.get(`/api/user/authViaPhone?name=${name}&number=${number}`);
 };

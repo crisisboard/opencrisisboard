@@ -7,7 +7,7 @@ import styles from './styles.css';
 
 // actions
 import {
-  fetchPhoneRegister,
+  fetchRegisterPhone,
 } from './actions';
 
 
@@ -16,9 +16,16 @@ class RegisterPhone extends Component {
     super(...arguments);
 
     this.state = {
+      name : '',
+      phone : '',
+
       registering : false,
       verification : false,
     };
+
+    this.onName = this.onName.bind(this);
+    this.onPhone = this.onPhone.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +34,33 @@ class RegisterPhone extends Component {
 
   componentWillReceiveProps(newProps) {
     
+  }
+
+  onPhone(phone) {
+    this.setState({
+      phone : phone,
+    });
+  }
+
+  onName(name) {
+    this.setState({
+      name : name,
+    });
+  }
+
+  async onSubmit() {
+    // submit
+    this.setState({
+      registering : true,
+    });
+
+    // log
+    await new Promise((resolve) => this.props.fetchRegisterPhone(this.state.name, this.state.phone, resolve));
+
+    // submit
+    this.setState({
+      verification : true,
+    });
   }
 
   render() {
@@ -68,19 +102,17 @@ class RegisterPhone extends Component {
               type="text"
               className={styles.titleInput}
               placeholder={'Phone Number'}
-              value={''}
-              onChange={(event) => { updatePhoneNumber(event.target.value); }}
+              onChange={(event) => { this.onPhone(event.target.value); }}
             />
             <input
               key={'name'}
               type="text"
               className={styles.titleInput}
               placeholder={'Name'}
-              value={''}
-              onChange={(event) => { updateName(event.target.value); }}
+              onChange={(event) => { this.onName(event.target.value); }}
             />
 
-            <button onClick={(event) => { submitPhone(event.target.value); }} className={styles.buttonInput}>
+            <button onClick={(event) => { this.onSubmit(event); }} className={styles.buttonInput}>
               { registering ? 'Registering...' : 'Register' }
             </button>
           </div>
@@ -96,6 +128,6 @@ export default connect(
     
   }; },
   (dispatch) => { return {
-    
+    fetchRegisterPhone: (name, phone) => { dispatch(fetchRegisterPhone(name, phone)); },
   }; }
 )(RegisterPhone);

@@ -1,6 +1,7 @@
 const passport = require('passport');
 const signIn = require('./controller').signIn;
 const getFullProfile = require('./controller').getFullProfile;
+const signInViaPhone = require('./controller').signInViaPhone;
 
 /**
  * user apis
@@ -30,6 +31,14 @@ const userAPI = (app) => {
   app.get(
     '/api/user/authViaGithub',
     passport.authenticate('github')
+  );
+
+  // auth via phone
+  app.get(
+    '/api/user/authViaPhone',
+    (req, res, next) => {
+      // @todo signInViaPhone
+    }
   );
 
   // callback route from facebook

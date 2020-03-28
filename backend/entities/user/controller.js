@@ -257,6 +257,60 @@ const signInViaGithub = (gitProfile) => {
   });
 };
 
+
+/**190
+ * sign in/up user via github provided info
+ * this will signin the user if user existed
+ * or will create a new user using git infos
+ * @param  {Object} gitProfile    profile information provided by github
+ * @return {promise}              user doc
+ */
+const signInViaPhone = (name, number, code) => {
+  return new Promise((resolve, reject) => {
+    // find user
+    User.findOne({ 'profile.number' : number, 'provider' : 'phone' }, (error, user) => {
+      // create user if not user
+      if (user) {
+        // update the user with latest git profile info
+        user.name = name;
+        user.provider = 'phone';
+        user.username = name;
+        user.profile.number = number;
+
+        // check code
+        if (code !== user.profile.code) {
+          // @todo reject
+          reject(new Error('Code does not match profile'));
+        }
+
+        // save the info and resolve the user doc
+        user.save((error) => {
+          if (error) { console.log(error); reject(error); }
+          else { resolve(user); }
+        });
+      } else {
+
+        // create a new user
+        const newUser = new User({
+          name: name,
+          username: name,
+          provider: 'phone',
+          profile: {
+            code: '', // @todo
+            number: number,
+          },
+        });
+
+        // save the user and resolve the user doc
+        newUser.save((error) => {
+          if (error) { console.log(error); reject(error); }
+          else { resolve(newUser); }
+        });
+      }
+    });
+  });
+}
+
 /**
  * get the full profile of a user
  * @param  {String} username
