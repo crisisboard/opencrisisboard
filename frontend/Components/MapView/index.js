@@ -38,6 +38,7 @@ class MapView extends Component {
           onChildMouseLeave={this.onChildMouseLeave}
           yesIWantToUseGoogleMapApiInternals
         >
+          {/* TODO: pinned discussions also need to be shown here, duh */}
           {discussions && discussions.map((discussion, index) => {
             return (
               <DiscussionPin

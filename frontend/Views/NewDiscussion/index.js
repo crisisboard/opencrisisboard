@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import Geocode from 'react-geocode';
 import classnames from 'classnames';
 
 import { MAP_KEY } from '../../../config/credentials';
@@ -10,7 +9,10 @@ import RichEditor from 'Components/RichEditor';
 import PinButton from 'Components/NewDiscussion/PinButton';
 import TagsInput from 'Components/NewDiscussion/TagsInput';
 
-import { getBrowserLocation } from '../../Utils/geolocation';
+import {
+  getBrowserLocation,
+  getGeolocationFromAddress
+} from '../../Utils/geolocation';
 
 import {
   postDiscussion,
@@ -83,22 +85,15 @@ class NewDiscussion extends Component {
     });
   }
 
-  // TODO: This should also be a util
-  getGeolocationFromAddress() {
+  // NEED TO TEST THIS
+  getAndUpdateGeolocationFromAddress() {
     const { address } = this.state;
-
-    Geocode.fromAddress(address).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        this.props.updateDiscussionGeoLocation({
-            lat,
-            lng
-          })
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    const geoLocation = getGeolocationFromAddress(address);
+    if (!geoLocation.error) {
+      this.props.updateDiscussionGeoLocation(geoLocation);
+    } else {
+      console.log(geoLocation.error)
+    }
   }
 
   // This method is supposed to return an IMG URL SRC for the google map when creating a new post
@@ -160,7 +155,7 @@ class NewDiscussion extends Component {
           onChange={(event) => { this.setState({ address: event.target.value }); }}
           onBlur={(event) => {
             const { value } = event.target;
-            if (value !== '') this.getGeolocationFromAddress();
+            if (value !== '') this.getAndUpdateGeolocationFromAddress();
           }}
         />,
         (role === 'admin') && <PinButton
