@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import classnames from 'classnames';
 
-import { MAP_KEY } from '../../../config/credentials';
 import RichEditor from 'Components/RichEditor';
 import PinButton from 'Components/NewDiscussion/PinButton';
 import TagsInput from 'Components/NewDiscussion/TagsInput';
@@ -96,15 +95,6 @@ class NewDiscussion extends Component {
     }
   }
 
-  // This method is supposed to return an IMG URL SRC for the google map when creating a new post
-  // TODO: Just use the GoogleMapReact component for this instead
-  getMapAddress() {
-    const { geoLocation } = this.props.newDiscussion;
-    if (!geoLocation) return null;
-
-    return `https://maps.googleapis.com/maps/api/staticmap?center=${geoLocation.lat},${geoLocation.lng}&zoom=12&size=400x400&key=${MAP_KEY}`
-  }
-
   renderEditor() {
     const {
       authenticated,
@@ -176,11 +166,6 @@ class NewDiscussion extends Component {
             onChange={(value) => { updateDiscussionContent(value); }}
             onSave={() => postDiscussion(userId, forumId, currentForum)}
           />
-          {geoLocation && <img
-            className={styles.locationMap}
-            src={this.getMapAddress()}
-            alt="Map of the given location"
-          />}
         </div>
       ];
     }

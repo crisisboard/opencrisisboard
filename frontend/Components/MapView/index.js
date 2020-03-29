@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import styles from './styles.css';
-
-import { MAP_KEY } from '../../../config/credentials';
 
 import DiscussionPin from './DiscussionPin';
 import GoogleMapReact from 'google-map-react';
 
-// TODO: Maybe this can be a functional component
+import { MAP_KEY } from '../../../config/credentials';
+
 class MapView extends Component {
   constructor(props) {
     super(props);
@@ -17,8 +15,6 @@ class MapView extends Component {
   }
 
   render () {
-
-    // TODO: Do I need pinned and non-pinned discussions?
     const {
       pinnedDiscussions,
       discussions
@@ -43,13 +39,10 @@ class MapView extends Component {
           onChildMouseLeave={this.onChildMouseLeave}
           yesIWantToUseGoogleMapApiInternals
         >
-          {/* TODO: pinned discussions also need to be shown here, duh */}
           {allDiscussions && allDiscussions.map((discussion, index) => {
             return (
               <DiscussionPin
-                // TODO: Discussions should really have a proper id field in the db
                 key={index}
-                numberTag={index + 1}
                 lat={discussion.geoLocation.lat}
                 lng={discussion.geoLocation.lng}
                 discussion={discussion}
