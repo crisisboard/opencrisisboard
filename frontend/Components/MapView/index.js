@@ -25,8 +25,15 @@ class MapView extends Component {
       allDiscussions = discussions.concat(pinnedDiscussions);
     }
 
+    let containerClassName = '';
+    if (this.props.forumFeedMapViewContainer) {
+      containerClassName = styles.mapViewContainer;
+    } else if (this.props.singleDiscussionMapViewContainer) {
+      containerClassName = styles.singleDiscussionMapViewContainer;
+    }
+
     return (
-      <div className={styles.mapViewContainer}>
+      <div className={containerClassName}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: MAP_KEY,
@@ -57,12 +64,20 @@ class MapView extends Component {
 
 MapView.defaultProps = {
   pinnedDiscussions: [],
-  discussions: []
+  discussions: [],
+  forumFeedMapViewContainer: false,
+  singleDiscussionMapViewContainer: false,
+  center: {} // TODO: default center ENV VAR here
 };
 
 MapView.PropTypes = {
   pinnedDiscussions: React.PropTypes.array,
-  discussions: React.PropTypes.array
+  discussions: React.PropTypes.array,
+  center: React.PropTypes.Object,
+
+  // Only one of the following container bools can be set to true, this defines the size of the MapView
+  forumFeedMapViewContainer: React.PropTypes.bool,
+  singleDiscussionMapViewContainer: React.PropTypes.bool
 };
 
 export default MapView;

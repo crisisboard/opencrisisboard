@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import classnames from 'classnames';
 
 import {
   getDiscussion,
@@ -15,9 +15,12 @@ import {
   deleteOpinion,
 } from './actions';
 
+import { getBrowserLocation } from '../../Utils/geolocation';
+
 import Discussion from 'Components/SingleDiscussion/Discussion';
 import ReplyBox from 'Components/SingleDiscussion/ReplyBox';
 import Opinion from 'Components/SingleDiscussion/Opinion';
+import MapView from 'Components/MapView';
 
 import styles from './styles.css';
 import appLayout from 'SharedStyles/appLayout.css';
@@ -152,6 +155,15 @@ class SingleDiscussion extends Component {
     // check if user favorated the discussion
     const userFavorited = this.userFavoritedDiscussion(this.props.userId, favorites);
 
+    const mapViewChildComponent = (
+      <MapView
+        discussions={[discussion]}
+        singleDiscussionMapViewContainer
+        center={getBrowserLocation()}
+        zoom={10}
+      />
+    );
+
     return (
       <div className={appLayout.constraintWidth}>
         <Helmet><title>{`${title} | OpenCrisisBoard`}</title></Helmet>
@@ -173,6 +185,7 @@ class SingleDiscussion extends Component {
           allowDelete={allowDelete}
           deletingDiscussion={deletingDiscussion}
           deleteAction={this.deleteDiscussion.bind(this)}
+          mapViewChildComponent={mapViewChildComponent}
         />
 
         { opinionError && <div className={styles.errorMsg}>{opinionError}</div> }

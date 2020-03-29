@@ -136,7 +136,7 @@ class NewDiscussion extends Component {
           value={title}
           onChange={(event) => { updateDiscussionTitle(event.target.value); }}
         />,
-        browserLocationNotAvailable && <input
+        <input
           key={'address'}
           type="text"
           className={styles.addressInput}

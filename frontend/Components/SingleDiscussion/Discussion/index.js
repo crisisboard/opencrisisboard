@@ -29,6 +29,7 @@ class Discussion extends Component {
       allowDelete,
       deletingDiscussion,
       deleteAction,
+      mapViewChildComponent
     } = this.props;
 
     let dateDisplay = moment(discDate);
@@ -58,7 +59,10 @@ class Discussion extends Component {
           </div>
         </div>
 
-        <div className={styles.discTitle}>{discTitle}</div>
+        <div className={styles.discTitle}>
+          {discTitle}
+          {mapViewChildComponent && mapViewChildComponent}
+        </div>
         <div className={styles.discContent}>
           <RichEditor
             readOnly={true}
@@ -106,6 +110,7 @@ Discussion.defaultProps = {
   allowDelete: false,
   deletingDiscussion: false,
   deleteAction: () => { },
+  mapViewChildComponent: null
 };
 
 Discussion.propTypes = {
@@ -125,6 +130,7 @@ Discussion.propTypes = {
   allowDelete: React.PropTypes.bool,
   deletingDiscussion: React.PropTypes.bool,
   deleteAction: React.PropTypes.func,
+  mapViewChildComponent: React.PropTypes.CustomComponent
 };
 
 export default Discussion;
