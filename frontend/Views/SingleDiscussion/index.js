@@ -104,6 +104,18 @@ class SingleDiscussion extends Component {
     deleteOpinion(opinionId, discussion);
   }
 
+  renderMapViewChildComponent() {
+    const { discussion } = this.props;
+    return (
+      <MapView
+        discussions={[discussion]}
+        singleDiscussionMapViewContainer
+        center={getBrowserLocation()}
+        zoom={10}
+      />
+    );
+  }
+
   render() {
     const {
       userAuthenticated,
@@ -155,15 +167,6 @@ class SingleDiscussion extends Component {
     // check if user favorated the discussion
     const userFavorited = this.userFavoritedDiscussion(this.props.userId, favorites);
 
-    const mapViewChildComponent = (
-      <MapView
-        discussions={[discussion]}
-        singleDiscussionMapViewContainer
-        center={getBrowserLocation()}
-        zoom={10}
-      />
-    );
-
     return (
       <div className={appLayout.constraintWidth}>
         <Helmet><title>{`${title} | OpenCrisisBoard`}</title></Helmet>
@@ -185,7 +188,7 @@ class SingleDiscussion extends Component {
           allowDelete={allowDelete}
           deletingDiscussion={deletingDiscussion}
           deleteAction={this.deleteDiscussion.bind(this)}
-          mapViewChildComponent={mapViewChildComponent}
+          mapViewChildComponent={this.renderMapViewChildComponent()}
         />
 
         { opinionError && <div className={styles.errorMsg}>{opinionError}</div> }

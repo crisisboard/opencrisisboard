@@ -129,8 +129,7 @@ Discussion.propTypes = {
   toggleingFavorite: React.PropTypes.bool,
   allowDelete: React.PropTypes.bool,
   deletingDiscussion: React.PropTypes.bool,
-  deleteAction: React.PropTypes.func,
-  mapViewChildComponent: React.PropTypes.CustomComponent
+  deleteAction: React.PropTypes.func
 };
 
 export default Discussion;
