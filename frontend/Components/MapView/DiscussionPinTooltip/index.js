@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import styles from './styles.css';
 
 const DiscussionPinTooltip = (props) => {
-  console.log('dicussion:', props.discussion);
   return props.open ? <div className={styles.tooltip}>
     <div className={styles.closeButtonSVGWrapper} onClick={props.handleClose}>
       <svg

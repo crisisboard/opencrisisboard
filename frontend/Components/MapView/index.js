@@ -24,6 +24,11 @@ class MapView extends Component {
       discussions
     } = this.props;
 
+    let allDiscussions = discussions;
+    if (discussions && pinnedDiscussions) {
+      allDiscussions = discussions.concat(pinnedDiscussions);
+    }
+
     return (
       <div className={styles.mapViewContainer}>
         <GoogleMapReact
@@ -39,7 +44,7 @@ class MapView extends Component {
           yesIWantToUseGoogleMapApiInternals
         >
           {/* TODO: pinned discussions also need to be shown here, duh */}
-          {discussions && discussions.map((discussion, index) => {
+          {allDiscussions && allDiscussions.map((discussion, index) => {
             return (
               <DiscussionPin
                 // TODO: Discussions should really have a proper id field in the db

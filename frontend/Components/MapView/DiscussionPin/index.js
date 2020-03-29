@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
+import Moment from 'moment';
 import styles from './styles.css';
 
 import DiscussionPinTooltip from '../DiscussionPinTooltip';
@@ -28,11 +28,14 @@ class DiscussionPin extends Component {
   }
 
   render () {
+    const time = Moment(this.props.discussion.date);
+    const timeDisplay = time.from(Moment());
+
     return (
       <div>
         <div className={styles.discussionPinContainer} onClick={this.handleOpenTooltip}>
           <p className={styles.discussionPinNumberTag}>
-            {this.props.numberTag}
+            {timeDisplay}
           </p>
         </div>
         <DiscussionPinTooltip
@@ -51,7 +54,6 @@ DiscussionPin.defaultProps = {
 
 DiscussionPin.PropTypes = {
   key: React.PropTypes.number,
-  numberTag: React.PropTypes.number,
   lat: React.PropTypes.number,
   lng: React.PropTypes.number,
   discussion: React.PropTypes.Object
