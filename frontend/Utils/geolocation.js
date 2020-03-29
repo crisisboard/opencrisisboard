@@ -1,5 +1,31 @@
 import Geocode from 'react-geocode';
 
+// Credit to https://www.w3.org/2003/01/geo/test/ustowns/latlong.htm for this data
+const defaultCentersMap = {
+  'San Francisco': {
+    lat: 37.75,
+    lng: 122.68
+  },
+  'New York City': {
+    lat: 40.77,
+    lng: 73.98
+  },
+  'Los Angeles': {
+    lat: 33.93,
+    lng: 118.40
+  }
+};
+
+export const getDefaultCenter = (cityString) => {
+  if (!!defaultCentersMap[cityString]) {
+    return defaultCentersMap[cityString]
+  } else {
+    return {
+      error: 'City provided is not a valid selection for a default center'
+    }
+  }
+};
+
 /**
  * getBrowserLocation - get's the user's location from the browser navigator API
  * @returns {Object} geoLocation object {lat, lng}, geoLocation.error will be truthy if an error occurred
