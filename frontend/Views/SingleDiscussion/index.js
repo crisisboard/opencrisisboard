@@ -15,7 +15,12 @@ import {
   deleteOpinion,
 } from './actions';
 
-import { getBrowserLocation } from '../../Utils/geolocation';
+import {
+  getBrowserLocation,
+  getDefaultCenter
+} from '../../Utils/geolocation';
+
+import { MAP_DEFAULT_CENTER } from '../../../config/credentials';
 
 import Discussion from 'Components/SingleDiscussion/Discussion';
 import ReplyBox from 'Components/SingleDiscussion/ReplyBox';
@@ -106,6 +111,7 @@ class SingleDiscussion extends Component {
 
   renderMapViewChildComponent() {
     const { discussion } = this.props;
+
     return (
       <MapView
         discussions={[discussion]}

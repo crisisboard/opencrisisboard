@@ -1,5 +1,11 @@
 import Geocode from 'react-geocode';
 
+import { MAP_KEY } from '../../config/credentials';
+
+// geocode configs
+Geocode.setApiKey(MAP_KEY);
+Geocode.setLanguage('en');
+
 // Credit to https://www.w3.org/2003/01/geo/test/ustowns/latlong.htm for this data
 const defaultCentersMap = {
   'San Francisco': {
@@ -16,19 +22,18 @@ const defaultCentersMap = {
   }
 };
 
+// TODO: (Post-demo) return an error instead of SF in the error case
 export const getDefaultCenter = (cityString) => {
   if (!!defaultCentersMap[cityString]) {
     return defaultCentersMap[cityString]
   } else {
-    return {
-      error: 'City provided is not a valid selection for a default center'
-    }
+    return defaultCentersMap['San Francisco'];
   }
 };
 
 /**
  * getBrowserLocation - get's the user's location from the browser navigator API
- * @returns {Object} geoLocation object {lat, lng}, geoLocation.error will be truthy if an error occurred
+ * @returns {Promise} promise to a geoLocation object {lat, lng}, geoLocation.error will be truthy if an error occurred
  */
 export const getBrowserLocation = () => {
   const geoLocation = {};

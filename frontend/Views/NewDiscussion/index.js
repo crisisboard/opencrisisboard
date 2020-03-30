@@ -84,15 +84,17 @@ class NewDiscussion extends Component {
     });
   }
 
-  // NEED TO TEST THIS
   getAndUpdateGeolocationFromAddress() {
     const { address } = this.state;
-    const geoLocation = getGeolocationFromAddress(address);
-    if (!geoLocation.error) {
-      this.props.updateDiscussionGeoLocation(geoLocation);
-    } else {
-      console.log(geoLocation.error)
-    }
+    getGeolocationFromAddress(address)
+    .then(geoLocation => {
+      console.log('geoLocation received:', geoLocation);
+      if (!geoLocation.error) {
+        this.props.updateDiscussionGeoLocation(geoLocation);
+      } else {
+        console.log(geoLocation.error);
+      }
+    })
   }
 
   renderEditor() {
