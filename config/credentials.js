@@ -1,6 +1,10 @@
 module.exports = {
   DBURL : process.env.DBURL_URI || process.env.DBURL || 'mongodb://localhost:27017/reforum',
 
+  // twilio details
+  TWI_APPID : process.env.TWI_APPID || null,
+  TWI_SECRET : process.env.TWI_SECRET || null,
+
   // facebook details
   FB_APPID : process.env.FB_APPID || null,
   FB_CBURL : process.env.FB_CBURL || null,
@@ -18,5 +22,5 @@ module.exports = {
   GH_SECRET : process.env.GH_SECRET || null,
 
   // google map key for geocode and map
-  MAP_KEY: process.env.MAP_KEY || ""
+  MAP_KEY : process.env.MAP_KEY || ""
 };

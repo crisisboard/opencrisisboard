@@ -13,11 +13,11 @@ import {
  * @param  {String} userSlug
  * @return {action}
  */
-export const fetchRegisterPhone = (name, number, resolve) => {
+export const fetchRegisterPhone = (name, number, code, resolve) => {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_PHONE_REGISTER_START });
 
-    fetchAuthViaPhone(name, number).then(
+    fetchAuthViaPhone(name, number, code).then(
       data => {
         if (data.data.error) {
           dispatch({ type: FETCH_PHONE_REGISTER_FAILURE })

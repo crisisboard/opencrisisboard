@@ -17,6 +17,7 @@ class RegisterPhone extends Component {
 
     this.state = {
       name : '',
+      code : null,
       phone : '',
 
       registering : false,
@@ -48,6 +49,12 @@ class RegisterPhone extends Component {
     });
   }
 
+  onCode(code) {
+    this.setState({
+      code : code,
+    });
+  }
+
   async onSubmit() {
     // submit
     this.setState({
@@ -55,10 +62,16 @@ class RegisterPhone extends Component {
     });
 
     // log
-    await new Promise((resolve) => this.props.fetchRegisterPhone(this.state.name, this.state.phone, resolve));
+    const done = await new Promise((resolve) => this.props.fetchRegisterPhone(this.state.name, this.state.phone, this.state.code, resolve));
+
+    // redirect
+    if (done.user) {
+      window.location = '/';
+    }
 
     // submit
     this.setState({
+      registering  : false,
       verification : true,
     });
   }
@@ -87,11 +100,10 @@ class RegisterPhone extends Component {
               type="text"
               className={styles.titleInput}
               placeholder={'Verification Code'}
-              value={''}
-              onChange={(event) => { updateCode(event.target.value); }}
+              onChange={(event) => { this.onCode(event.target.value); }}
             />
 
-            <button onClick={(event) => { submitRegistration(event.target.value); }} className={styles.buttonInput}>
+            <button onClick={(event) => { this.onSubmit(event); }} className={styles.buttonInput}>
               { registering ? 'Submitting...' : 'Submit' }
             </button>
           </div>
@@ -128,6 +140,6 @@ export default connect(
     
   }; },
   (dispatch) => { return {
-    fetchRegisterPhone: (name, phone) => { dispatch(fetchRegisterPhone(name, phone)); },
+    fetchRegisterPhone: (name, phone, code, resolve) => { dispatch(fetchRegisterPhone(name, phone, code, resolve)); },
   }; }
 )(RegisterPhone);

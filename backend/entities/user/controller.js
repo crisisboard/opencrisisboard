@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const twilio = require('twilio');
 const asyncEach = require('async/each');
 
 // controllers
@@ -7,6 +8,7 @@ const getAllOpinions = require('../opinion/controller').getAllOpinions;
 // models
 const User = require('./model');
 const Discussion = require('../discussion/model');
+const credentials = require('../../../config/credentials');
 const Opinion = require('../opinion/model');
 
 /**
@@ -258,7 +260,7 @@ const signInViaGithub = (gitProfile) => {
 };
 
 
-/**190
+/**
  * sign in/up user via github provided info
  * this will signin the user if user existed
  * or will create a new user using git infos
@@ -267,8 +269,11 @@ const signInViaGithub = (gitProfile) => {
  */
 const signInViaPhone = (name, number, code) => {
   return new Promise((resolve, reject) => {
+    // check client
+    global.twilioClient = global.twilioClient || twilio(credentials.TWI_APPID, credentials.TWI_SECRET);
+
     // find user
-    User.findOne({ 'profile.number' : number, 'provider' : 'phone' }, (error, user) => {
+    User.findOne({ 'profile.number' : number, 'provider' : 'phone' }, async (error, user) => {
       // create user if not user
       if (user) {
         // update the user with latest git profile info
@@ -278,33 +283,75 @@ const signInViaPhone = (name, number, code) => {
         user.profile.number = number;
 
         // check code
-        if (code !== user.profile.code) {
+        if (code && parseInt(code) !== parseInt(user.profile.code)) {
           // @todo reject
           reject(new Error('Code does not match profile'));
+        } else if (!code) {
+          // check code
+          user.profile.code = Math.floor(1000 + Math.random() * 9000);
+
+          // save the info and resolve the user doc
+          return User.findOneAndUpdate({
+            'profile.number' : number, 'provider' : 'phone'
+          }, {
+            $set : {
+              profile : user.profile
+            },
+           }, async (error) => {
+            if (error) { console.log(error); return reject(error); }
+
+            // try/catch
+            try {
+              // create message
+              await twilioClient.messages.create({
+                to   : number,
+                body : `Please enter the code ${user.profile.code} to login to OpenCrisisBoard.`,
+                from : 'Login',
+              });
+            } catch (e) {
+              reject(e);
+            }
+
+            // resolve
+            return resolve(null);
+          });
         }
 
-        // save the info and resolve the user doc
+        // save the user and resolve the user doc
         user.save((error) => {
           if (error) { console.log(error); reject(error); }
           else { resolve(user); }
         });
       } else {
-
         // create a new user
         const newUser = new User({
-          name: name,
-          username: name,
-          provider: 'phone',
-          profile: {
-            code: '', // @todo
-            number: number,
+          name     : name,
+          username : name,
+          provider : 'phone',
+          profile  : {
+            code   : Math.floor(1000 + Math.random() * 9000),
+            number : number,
           },
         });
 
         // save the user and resolve the user doc
-        newUser.save((error) => {
-          if (error) { console.log(error); reject(error); }
-          else { resolve(newUser); }
+        newUser.save(async (error) => {
+          if (error) { console.log(error); return reject(error); }
+
+          // try/catch
+          try {
+            // create message
+            await twilioClient.messages.create({
+              to   : number,
+              body : `Please enter the code ${newUser.profile.code} to login to OpenCrisisBoard.`,
+              from : 'Login',
+            });
+          } catch (e) {
+            reject(e);
+          }
+
+          // resolve null
+          resolve(null);
         });
       }
     });
@@ -361,6 +408,7 @@ const getFullProfile = (username) => {
 module.exports = {
   getUser,
   getFullProfile,
+  signInViaPhone,
   signInViaGithub,
   signInViaTwitter,
   signInViaFacebook,
