@@ -5,6 +5,8 @@ import {
   MAP_DEFAULT_CENTER
 } from '../../config/credentials';
 
+import _ from 'lodash';
+
 // geocode configs
 Geocode.setApiKey(MAP_KEY);
 Geocode.setLanguage('en');
@@ -25,39 +27,26 @@ const defaultCentersMap = {
   }
 };
 
-// TODO: (Post-demo) return an error instead of SF in the error case
+
 export const getDefaultCenter = () => {
-  let center = getBrowserLocation();
-  console.log('center after getting browser location', center);
-  if ((!center.lat && !center.lng) || center.error) {
-    center = defaultCentersMap[MAP_DEFAULT_CENTER];
-    console.log('center is:', center);
-    if (!center) {
-      center = defaultCentersMap['SanFrancisco'];
-    }
+  if (defaultCentersMap[MAP_DEFAULT_CENTER]) {
+    return defaultCentersMap[MAP_DEFAULT_CENTER];
+  } else {
+    return defaultCentersMap['SanFrancisco'];
   }
-  console.log('returning center:', center);
-  return center;
 };
 
 /**
  * getBrowserLocation - get's the user's location from the browser navigator API
- * @returns {Promise} promise to a geoLocation object {lat, lng}, geoLocation.error will be truthy if an error occurred
+ * @params successCallback, errorCallback
+ * @returns {void}
  */
-export const getBrowserLocation = () => {
-  const geoLocation = {};
+export const getBrowserLocation = (successCallback, errorCallback) => {
   if (!navigator.geolocation) {
-    geoLocation.error = 'User has denied access to the location in their browser';
+    errorCallback('User has denied access to the location in their browser');
   } else {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        geoLocation.lat = position.coords.latitude;
-        geoLocation.lng = position.coords.longitude;
-      },
-      error => { geoLocation.error = error; }
-    );
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   }
-  return geoLocation;
 };
 
 /**

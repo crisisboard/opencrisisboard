@@ -9,9 +9,6 @@ import { MAP_KEY } from '../../../config/credentials';
 class MapView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      center: this.props.center
-    };
   }
 
   render () {
@@ -40,7 +37,6 @@ class MapView extends Component {
             language: 'en'
           }}
           defaultCenter={this.props.center}
-          center={this.state.center}
           defaultZoom={this.props.zoom}
           onChildMouseEnter={this.onChildMouseEnter}
           onChildMouseLeave={this.onChildMouseLeave}
@@ -67,13 +63,11 @@ MapView.defaultProps = {
   discussions: [],
   forumFeedMapViewContainer: false,
   singleDiscussionMapViewContainer: false,
-  center: {} // TODO: default center ENV VAR here
 };
 
 MapView.PropTypes = {
   pinnedDiscussions: React.PropTypes.array,
   discussions: React.PropTypes.array,
-  center: React.PropTypes.Object,
 
   // Only one of the following container bools can be set to true, this defines the size of the MapView
   forumFeedMapViewContainer: React.PropTypes.bool,

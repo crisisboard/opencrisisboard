@@ -16,13 +16,20 @@ import SearchBar from 'Components/SearchBar';
 import MapView from 'Components/MapView';
 
 import {
-  getDefaultCenter
+  getDefaultCenter,
+  getBrowserLocation
 } from '../../Utils/geolocation';
 
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
 class ForumFeed extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mapCenter: {}
+    }
+  }
   componentDidMount() {
     const {
       currentForumId,
@@ -33,6 +40,15 @@ class ForumFeed extends Component {
     // get the discussions and pinned discussions
     getDiscussions(currentForumId());
     getPinnedDiscussions(currentForumId());
+
+    getBrowserLocation((position) => {
+      this.setState({
+        mapCenter: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+      })
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -80,6 +96,15 @@ class ForumFeed extends Component {
       authenticated
     } = this.props;
 
+    let {
+      mapCenter
+    } = this.state;
+
+    let mapCenterProp = mapCenter;
+    if (_.isEmpty(mapCenter)) {
+      mapCenterProp = getDefaultCenter();
+    }
+
     if (error) {
       return (
         <div className={classnames(styles.errorMsg)}>
@@ -123,7 +148,7 @@ class ForumFeed extends Component {
             pinnedDiscussions={pinnedDiscussions}
             discussions={discussions}
             currentForum={currentForum}
-            center={getDefaultCenter()}
+            center={mapCenterProp}
             forumFeedMapViewContainer
             zoom={12}
           />
