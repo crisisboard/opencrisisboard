@@ -23,3 +23,6 @@ coverage
 
 # environment variables
 .env
+
+# credentials environment variables
+config/credentials.js

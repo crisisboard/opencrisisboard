@@ -33,12 +33,12 @@ export const appReducer = (state = initialState, action) => {
     case START_FETCHING_FORUMS:
       return Object.assign({}, state, {
         fetchingForums: true,
-      });;
+      });
 
     case STOP_FETCHING_FORUMS:
       return Object.assign({}, state, {
         fetchingForums: false,
-      });;
+      });
 
     case FETCHING_FORUMS_SUCCESS:
       return Object.assign({}, state, {

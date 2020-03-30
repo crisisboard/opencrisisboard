@@ -9,6 +9,10 @@
   font-weight: bold;
 }
 
+.forumInfo {
+  margin-left: 10px;
+}
+
 .errorMsg {
   margin-top: 5px;
   color: rgba(231, 76, 60,1.0);

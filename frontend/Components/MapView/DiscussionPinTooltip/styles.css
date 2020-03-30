@@ -1,0 +1,64 @@
+@value borderColor from 'SharedStyles/globalStyles';
+
+.tooltip {
+  background-color: /* #e7f1f9 */ #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid borderColor;
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  transform: translateX(-50%);
+  min-width: 120px;
+  &:hover {
+    cursor: default;
+  }
+}
+
+.tooltipArrowSVG {
+  position: absolute;
+  bottom: -14px;
+  left: 45%;
+}
+
+.tooltipArrowSVGPoly {
+  fill: #ffffff;
+  &:hover {
+    cursor: default;
+  }
+}
+
+.tooltipTextWrapper {
+  text-align: center;
+}
+
+.tooltipTextTitle {
+  font-size: 14px;
+  margin: 0;
+  padding: 5px;
+  color: black;
+}
+
+.tooltipAuthorLink {
+  text-decoration: none;
+}
+
+.tooltipDiscussionLink {
+  text-decoration: none;
+  color: black;
+}
+
+.closeButtonSVGWrapper {
+  top: 0;
+  max-width: 15px;
+  padding: 2px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.closeButtonSVG {
+  width: 14px;
+  height: 14px;
+  color: black;
+}

@@ -58,7 +58,7 @@ const createDiscussion = (discussion) => {
       favorites: [],
       tags: discussion.tags,
       pinned: discussion.pinned,
-      geolocation: discussion.geoLocation,
+      geoLocation: discussion.geoLocation,
     });
 
     newDiscussion.save((error) => {

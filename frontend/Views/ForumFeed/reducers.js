@@ -29,12 +29,12 @@ export const feedReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         fetchingDiscussions: true,
         error: null,
-      });;
+      });
 
     case STOP_FETCHING_DISCUSSIONS:
       return Object.assign({}, state, {
         fetchingDiscussions: false,
-      });;
+      });
 
     case FETCHING_DISCUSSIONS_SUCCESS:
       return Object.assign({}, state, {
@@ -77,7 +77,7 @@ export const feedReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         sortingMethod: action.payload,
       });
-    
+
     case SEARCH_FILTERING_SYNC:
       const searchInput = action.payload;
       const filteredDiscussions = state.discussions.filter((discussion) => discussion.title.toLowerCase().includes(searchInput.toLowerCase()));
@@ -85,14 +85,14 @@ export const feedReducer = (state = initialState, action) => {
         filteredDiscussions:filteredDiscussions,
         searchInput:searchInput
       })
-    
+
     case INVALID_FORUM:
       return Object.assign({}, state, {
         error: 'Sorry, couldn\'t find the forum.',
         fetchingPinnedDiscussions: false,
         fetchingDiscussions: false,
       });
-    
+
     default:
       return state;
   }

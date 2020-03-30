@@ -23,6 +23,7 @@
 
 .showOnMediumBP {
   display: none;
+  @media largeBP { display: inherit; }
   @media mediumBP { display: inherit; }
   @media smallBP { display: inherit; }
 }

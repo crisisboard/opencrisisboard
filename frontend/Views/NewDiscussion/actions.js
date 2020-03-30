@@ -1,7 +1,6 @@
 import { browserHistory } from 'react-router';
 import {
   POSTING_DISCUSSION_START,
-  POSTING_DISCUSSION_END,
   POSTING_DISCUSSION_SUCCESS,
   POSTING_DISCUSSION_FAILURE,
 
@@ -28,12 +27,16 @@ export const postDiscussion = (userId, forumId, currentForum) => {
 
     // validate discussion inputs
     // discussion values are in redux state
+
+    // TODO: Move this validation into a utils lib
     const {
       title,
       content,
       tags,
       pinned,
+      geoLocation
     } = getState().newDiscussion;
+    console.log('inside action', getState().newDiscussion);
 
     let validated = true;
 
@@ -78,13 +81,14 @@ export const postDiscussion = (userId, forumId, currentForum) => {
         content,
         tags,
         pinned,
+        geoLocation
       }).then(
         (data) => {
           if (data.data.postCreated === true) {
             dispatch({ type: POSTING_DISCUSSION_SUCCESS });
             setTimeout(() => { dispatch({ type: CLEAR_SUCCESS_MESSAGE }); }, 2000);
 
-            // issue a redirect to the newly reacted discussion
+            // issue a redirect to the newly created discussion
             browserHistory.push(`/${currentForum}/discussion/${data.data.discussion_slug}`);
           } else {
             dispatch({

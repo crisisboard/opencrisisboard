@@ -20,7 +20,10 @@ const initialState = {
   content: null,
   tags: [],
   pinned: false,
-  geoLocation: null,
+  geoLocation: {
+    lat: null,
+    lng: null
+  },
 };
 
 export const newDiscussionReducer = (state = initialState, action) => {

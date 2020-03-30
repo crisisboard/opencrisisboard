@@ -72,13 +72,12 @@
 }
 
 .postInfo {
+  margin-left: 20px;
   & .info {
     margin-left: 20px;
     font-size: 12px;
     font-weight: 700;
     text-transform: lowercase;
     color: secondaryFontColor;
-
-    &:first-child { margin-left: 0px; }
   }
 }

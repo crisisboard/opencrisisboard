@@ -12,22 +12,39 @@ import {
 
 import NewDiscussionButton from 'Components/NewDiscussionButton';
 import FeedBox from 'Components/FeedBox';
-import SideBar from 'Components/SideBar';
 import SearchBar from 'Components/SearchBar';
+import MapView from 'Components/MapView';
+
+import {
+  getDefaultCenter,
+  getBrowserLocation
+} from '../../Utils/geolocation';
+
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
 
 class ForumFeed extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mapCenter: {},
+      mapCenterStateSet: false
+    };
+
+  }
+
   componentDidMount() {
     const {
       currentForumId,
       getDiscussions,
-      getPinnedDiscussions, 
+      getPinnedDiscussions,
     } = this.props;
 
     // get the discussions and pinned discussions
     getDiscussions(currentForumId());
     getPinnedDiscussions(currentForumId());
+
+    this.setMapLocation();
   }
 
   componentDidUpdate(prevProps) {
@@ -47,6 +64,23 @@ class ForumFeed extends Component {
     }
   }
 
+  setMapLocation() {
+    getBrowserLocation(position => {
+      this.setState({
+        mapCenter: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        },
+        mapCenterStateSet: true
+      });
+    }, error => {
+      this.setState({
+        mapCenter: getDefaultCenter(),
+        mapCenterStateSet: true
+      });
+    });
+  }
+
   handleSortingChange(newSortingMethod) {
     const {
       currentForumId,
@@ -61,16 +95,6 @@ class ForumFeed extends Component {
     }
   }
 
-  renderNewDiscussionButtion() {
-    const { currentForum } = this.props;
-
-    return (
-      <div className={classnames(appLayout.showOnMediumBP, styles.newDiscussionBtn)}>
-        <NewDiscussionButton currentForum={currentForum} />
-      </div>
-    );
-  }
-
   render() {
     const {
       currentForum,
@@ -81,8 +105,14 @@ class ForumFeed extends Component {
       sortingMethod,
       error,
       searchInput,
-      filteredDiscussions
+      filteredDiscussions,
+      authenticated
     } = this.props;
+
+    let {
+      mapCenter,
+      mapCenterStateSet
+    } = this.state;
 
     if (error) {
       return (
@@ -96,28 +126,42 @@ class ForumFeed extends Component {
       <div className={classnames(appLayout.constraintWidth, styles.contentArea)}>
         <Helmet><title>{`OpenCrisisBoard | ${currentForum}`}</title></Helmet>
 
-        <div className={appLayout.primaryContent}>
-          { this.renderNewDiscussionButtion() }
+        <div className={classnames(appLayout.primaryContent, styles.forumFeedContainer)}>
+          <div className={styles.feedBoxContainer}>
+            <FeedBox
+              type='pinned'
+              loading={fetchingPinnedDiscussions}
+              discussions={pinnedDiscussions}
+              currentForum={currentForum}
+            />
 
-          <FeedBox
-            type='pinned'
-            loading={fetchingPinnedDiscussions}
-            discussions={pinnedDiscussions}
-            currentForum={currentForum}
-          />
-          <SearchBar />
-          <FeedBox
-            type='general'
+            <SearchBar />
+
+            <FeedBox
+              type='general'
+              loading={fetchingDiscussions}
+              discussions={searchInput ? filteredDiscussions : discussions}
+              currentForum={currentForum}
+              onChangeSortingMethod={this.handleSortingChange.bind(this)}
+              activeSortingMethod={sortingMethod}
+            />
+
+            <div className={styles.newDiscussionBtn}>
+              <NewDiscussionButton currentForum={currentForum} authenticated={authenticated}/>
+            </div>
+          </div>
+
+          <MapView
             loading={fetchingDiscussions}
-             discussions={searchInput ? filteredDiscussions : discussions}
+            pinnedDiscussions={pinnedDiscussions}
+            discussions={discussions}
             currentForum={currentForum}
-            onChangeSortingMethod={this.handleSortingChange.bind(this)}
-            activeSortingMethod={sortingMethod}
+            center={mapCenter}
+            mapCenterStateSet={mapCenterStateSet}
+            forumFeedMapViewContainer
+            zoom={12}
           />
-        </div>
 
-        <div className={appLayout.secondaryContent}>
-          <SideBar currentForum={currentForum} />
         </div>
       </div>
     );
@@ -139,7 +183,8 @@ export default connect(
     pinnedDiscussions: state.feed.pinnedDiscussions,
     error: state.feed.error,
     searchInput: state.feed.searchInput,
-    filteredDiscussions:state.feed.filteredDiscussions
+    filteredDiscussions:state.feed.filteredDiscussions,
+    authenticated: state.app.authenticated
   }; },
   (dispatch) => { return {
     getDiscussions: (currentForumId, feedChanged, sortingMethod, sortingChanged) => { dispatch(getDiscussions(currentForumId, feedChanged, sortingMethod, sortingChanged)); },

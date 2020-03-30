@@ -20,3 +20,13 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.forumFeedContainer {
+  display: flex;
+}
+
+.feedBoxContainer {
+  @media largeBP {
+    min-width: 40%;
+  }
+}

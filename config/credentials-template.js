@@ -18,5 +18,9 @@ module.exports = {
   GH_SECRET : process.env.GH_SECRET || null,
 
   // google map key for geocode and map
-  MAP_KEY: ""
+  MAP_KEY: process.env.MAP_KEY || "",
+
+  // fill in these values to center the map views in the app
+  MAP_DEFAULT_CENTER_LATITUDE: process.env.MAP_DEFAULT_CENTER_LATITUDE || 37.7749,
+  MAP_DEFAULT_CENTER_LONGITUDE: process.env.MAP_DEFAULT_CENTER_LONGITUDE || -122.4194
 };

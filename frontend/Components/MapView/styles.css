@@ -1,0 +1,17 @@
+@value borderColor from 'SharedStyles/globalStyles';
+
+.mapViewContainer {
+  height: 100vh;
+  border: 1px solid borderColor;
+  margin-left: 20px;
+  flex: 1;
+}
+
+.singleDiscussionMapViewContainer {
+  height: 165px;
+  width: 300px;
+  float: right;
+  border: 1px solid borderColor;
+  margin-left: 20px;
+  flex: 1;
+}

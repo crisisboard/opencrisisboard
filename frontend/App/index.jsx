@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-import Geocode from "react-geocode";
-import { MAP_KEY } from "../../config/credentials";
+import Geocode from 'react-geocode';
+import { MAP_KEY } from '../../config/credentials';
 import styles from './styles';
 
 // app store
