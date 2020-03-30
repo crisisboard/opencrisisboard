@@ -19,5 +19,8 @@ module.exports = {
 
   // google map key for geocode and map
   MAP_KEY: process.env.MAP_KEY || "",
-  MAP_DEFAULT_CENTER: process.env.MAP_DEFAULT_CENTER || 'SanFrancisco'
+
+  // fill in these values to center the map views in the app
+  MAP_DEFAULT_CENTER_LATITUDE: process.env.MAP_DEFAULT_CENTER_LATITUDE || 37.7749,
+  MAP_DEFAULT_CENTER_LONGITUDE: process.env.MAP_DEFAULT_CENTER_LONGITUDE || -122.4194
 };

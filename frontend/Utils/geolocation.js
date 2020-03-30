@@ -2,42 +2,24 @@ import Geocode from 'react-geocode';
 
 import {
   MAP_KEY,
-  MAP_DEFAULT_CENTER
+  MAP_DEFAULT_CENTER_LATITUDE,
+  MAP_DEFAULT_CENTER_LONGITUDE
 } from '../../config/credentials';
-
-import _ from 'lodash';
 
 // geocode configs
 Geocode.setApiKey(MAP_KEY);
 Geocode.setLanguage('en');
 
-// Credit to https://www.w3.org/2003/01/geo/test/ustowns/latlong.htm for this data
-const defaultCentersMap = {
-  'SanFrancisco': {
-    lat: 37.7749,
-    lng: -122.4194
-  },
-  'NewYorkCity': {
-    lat: 40.77,
-    lng: -73.98
-  },
-  'LosAngeles': {
-    lat: 33.93,
-    lng: -118.40
-  }
-};
-
-
 export const getDefaultCenter = () => {
-  if (defaultCentersMap[MAP_DEFAULT_CENTER]) {
-    return defaultCentersMap[MAP_DEFAULT_CENTER];
-  } else {
-    return defaultCentersMap['SanFrancisco'];
+  console.log('default center:', MAP_DEFAULT_CENTER_LATITUDE, MAP_DEFAULT_CENTER_LONGITUDE);
+  return {
+    lat: MAP_DEFAULT_CENTER_LATITUDE,
+    lng: MAP_DEFAULT_CENTER_LONGITUDE
   }
 };
 
 /**
- * getBrowserLocation - get's the user's location from the browser navigator API
+ * getBrowserLocation - gets the user location from the browser navigator API and calls a callback
  * @params successCallback, errorCallback
  * @returns {void}
  */
