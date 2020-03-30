@@ -22,7 +22,7 @@
 }
 
 .tooltipArrowSVGPoly {
-  fill: /* #e7f1f9 */ #ffffff;
+  fill: #ffffff;
   &:hover {
     cursor: default;
   }
