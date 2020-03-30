@@ -11,6 +11,6 @@ const userSchema = mongoose.Schema({
   role: { type: String, default: 'user' }, // ['admin', 'moderator', 'user']
   provider : String,
   profile: mongoose.Mixed,
-});
+}, { strict: false });
 
 module.exports = mongoose.model('user', userSchema);

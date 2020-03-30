@@ -1,6 +1,7 @@
 const passport = require('passport');
 const signIn = require('./controller').signIn;
 const getFullProfile = require('./controller').getFullProfile;
+const signInViaPhone = require('./controller').signInViaPhone;
 
 /**
  * user apis
@@ -30,6 +31,37 @@ const userAPI = (app) => {
   app.get(
     '/api/user/authViaGithub',
     passport.authenticate('github')
+  );
+
+  // auth via phone
+  app.get(
+    '/api/user/authViaPhone',
+    (req, res, next) => {
+      signInViaPhone(req.query.name, req.query.number, req.query.code).then((result) => {
+        // check result
+        if (result === null) {
+          // return successfully sent number
+          return res.json({
+            success : true,
+          });
+        }
+
+        // login with result
+        req.login(result, (err) => {
+          // done
+          res.json({
+            user    : result.id,
+            success : true,
+          });
+        });
+      }).catch((e) => {
+        // error
+        return res.json({
+          message : e.toString(),
+          success : false,
+        });
+      });
+    }
   );
 
   // callback route from facebook

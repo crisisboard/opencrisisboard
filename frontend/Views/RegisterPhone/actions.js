@@ -13,14 +13,18 @@ import {
  * @param  {String} userSlug
  * @return {action}
  */
-export const fetchRegisterPhone = (number) => {
+export const fetchRegisterPhone = (name, number, code, resolve) => {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_PHONE_REGISTER_START });
 
-    fetchAuthViaPhone(number).then(
+    fetchAuthViaPhone(name, number, code).then(
       data => {
-        if (data.data.error) dispatch({ type: FETCH_PHONE_REGISTER_FAILURE });
-        else dispatch({ type: FETCH_PHONE_REGISTER_SUCCESS, payload: data.data });
+        if (data.data.error) {
+          dispatch({ type: FETCH_PHONE_REGISTER_FAILURE })
+        } else {
+          dispatch({ type: FETCH_PHONE_REGISTER_SUCCESS, payload: data.data });
+          if (resolve) resolve(data.data);
+        };
       },
       error => dispatch({ type: FETCH_PHONE_REGISTER_FAILURE })
     );
