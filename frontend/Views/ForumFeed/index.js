@@ -15,7 +15,9 @@ import FeedBox from 'Components/FeedBox';
 import SearchBar from 'Components/SearchBar';
 import MapView from 'Components/MapView';
 
-import { getBrowserLocation } from '../../Utils/geolocation';
+import {
+  getDefaultCenter
+} from '../../Utils/geolocation';
 
 import appLayout from 'SharedStyles/appLayout.css';
 import styles from './styles.css';
@@ -121,7 +123,7 @@ class ForumFeed extends Component {
             pinnedDiscussions={pinnedDiscussions}
             discussions={discussions}
             currentForum={currentForum}
-            center={getBrowserLocation()}
+            center={getDefaultCenter()}
             forumFeedMapViewContainer
             zoom={12}
           />

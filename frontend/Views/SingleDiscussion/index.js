@@ -116,7 +116,7 @@ class SingleDiscussion extends Component {
       <MapView
         discussions={[discussion]}
         singleDiscussionMapViewContainer
-        center={getBrowserLocation()}
+        center={getDefaultCenter()}
         zoom={10}
       />
     );

@@ -19,5 +19,5 @@ module.exports = {
 
   // google map key for geocode and map
   MAP_KEY: process.env.MAP_KEY || "",
-  MAP_DEFAULT_CENTER: process.env.MAP_DEFAULT_CENTER || 'San Francisco'
+  MAP_DEFAULT_CENTER: process.env.MAP_DEFAULT_CENTER || 'SanFrancisco'
 };

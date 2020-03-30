@@ -1,6 +1,9 @@
 import Geocode from 'react-geocode';
 
-import { MAP_KEY } from '../../config/credentials';
+import {
+  MAP_KEY,
+  MAP_DEFAULT_CENTER
+} from '../../config/credentials';
 
 // geocode configs
 Geocode.setApiKey(MAP_KEY);
@@ -8,27 +11,33 @@ Geocode.setLanguage('en');
 
 // Credit to https://www.w3.org/2003/01/geo/test/ustowns/latlong.htm for this data
 const defaultCentersMap = {
-  'San Francisco': {
-    lat: 37.75,
-    lng: 122.68
+  'SanFrancisco': {
+    lat: 37.7749,
+    lng: -122.4194
   },
-  'New York City': {
+  'NewYorkCity': {
     lat: 40.77,
-    lng: 73.98
+    lng: -73.98
   },
-  'Los Angeles': {
+  'LosAngeles': {
     lat: 33.93,
-    lng: 118.40
+    lng: -118.40
   }
 };
 
 // TODO: (Post-demo) return an error instead of SF in the error case
-export const getDefaultCenter = (cityString) => {
-  if (!!defaultCentersMap[cityString]) {
-    return defaultCentersMap[cityString]
-  } else {
-    return defaultCentersMap['San Francisco'];
+export const getDefaultCenter = () => {
+  let center = getBrowserLocation();
+  console.log('center after getting browser location', center);
+  if ((!center.lat && !center.lng) || center.error) {
+    center = defaultCentersMap[MAP_DEFAULT_CENTER];
+    console.log('center is:', center);
+    if (!center) {
+      center = defaultCentersMap['SanFrancisco'];
+    }
   }
+  console.log('returning center:', center);
+  return center;
 };
 
 /**
