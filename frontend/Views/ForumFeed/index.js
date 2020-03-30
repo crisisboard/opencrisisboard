@@ -72,15 +72,11 @@ class ForumFeed extends Component {
           lng: position.coords.longitude
         },
         mapCenterStateSet: true
-      }, () => {
-        console.log('mapCenter state set')
       });
     }, error => {
       this.setState({
         mapCenter: getDefaultCenter(),
         mapCenterStateSet: true
-      }, () => {
-        console.log('mapCenter state set to default');
       });
     });
   }
@@ -117,12 +113,6 @@ class ForumFeed extends Component {
       mapCenter,
       mapCenterStateSet
     } = this.state;
-
-    // let mapCenterProp = mapCenter;
-    // if (_.isEmpty(mapCenter)) {
-    //   console.log('center state hasnt been updated yet');
-    //   mapCenterProp = getDefaultCenter();
-    // }
 
     if (error) {
       return (
