@@ -39,12 +39,13 @@
   color: black;
 }
 
-.tooltipTextAuthor {
-
+.tooltipAuthorLink {
+  text-decoration: none;
 }
 
 .tooltipDiscussionLink {
   text-decoration: none;
+  color: black;
 }
 
 .closeButtonSVGWrapper {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -13,11 +12,6 @@ import {
   deletedDiscussionRedirect,
   deleteOpinion,
 } from './actions';
-
-import {
-  getBrowserLocation,
-  getDefaultCenter
-} from '../../Utils/geolocation';
 
 import _ from 'lodash';
 

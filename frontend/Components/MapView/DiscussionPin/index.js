@@ -49,7 +49,9 @@ class DiscussionPin extends Component {
 }
 
 DiscussionPin.defaultProps = {
-  // TODO: Fill these in
+  lat: 0,
+  lng: 0,
+  discussion: {}
 };
 
 DiscussionPin.PropTypes = {

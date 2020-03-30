@@ -72,6 +72,10 @@ export const getGeolocationFromAddress = (address) => {
       geoLocation.error = error;
       return geoLocation;
     }
-  );
+  )
+  .catch(error => {
+    geoLocation.error = error;
+    return geoLocation;
+  });
 };
 

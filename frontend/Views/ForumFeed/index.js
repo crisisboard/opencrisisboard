@@ -96,7 +96,6 @@ class ForumFeed extends Component {
       authenticated
     } = this.props;
 
-    // TODO: reduce duplicate code
     let {
       mapCenter
     } = this.state;
@@ -143,7 +142,6 @@ class ForumFeed extends Component {
             </div>
           </div>
 
-          {/* TODO: Implement mobile behaviour (don't show) for MapView */}
           <MapView
             loading={fetchingDiscussions}
             pinnedDiscussions={pinnedDiscussions}

@@ -156,9 +156,6 @@ export const updateDiscussionTags = (value) => {
   };
 };
 
-// TODO: The geolocation doesn't actually get written to the database even though there is a field in the model for it. fix this
-// TODO: The geolocation should also instead be a part of the discussion POST request, not updated client-side only in the frontend
-// TODO: after the discussion is created
 /**
  * update the geolocation in redux state
  * @param  {Object} value

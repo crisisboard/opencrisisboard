@@ -24,8 +24,10 @@ const DiscussionPinTooltip = (props) => {
       <p className={styles.tooltipTextTitle}>
         {props.discussion.title}
       </p>
-      <p className={styles.tooltipTextAuthor}>
-        Created by: {props.discussion.user.name}
+      <p>
+        By: <Link className={styles.tooltipAuthorLink} to={`/user/${props.discussion.user.username}`}>
+          {props.discussion.user.name}
+        </Link>
       </p>
       <Link className={styles.tooltipDiscussionLink} to={`/${props.discussion.forum.forum_slug}/discussion/${props.discussion.discussion_slug}`}>
         Go to discussion
@@ -35,11 +37,12 @@ const DiscussionPinTooltip = (props) => {
 };
 
 DiscussionPinTooltip.defaultProps = {
-  // TODO: Fill these in
+  open: false,
+  handleClose: () => {},
+  discussion: {}
 };
 
 DiscussionPinTooltip.PropTypes = {
-  link: React.PropTypes.string,
   open: React.PropTypes.bool,
   handleClose: React.PropTypes.func,
   discussion: React.PropTypes.Object

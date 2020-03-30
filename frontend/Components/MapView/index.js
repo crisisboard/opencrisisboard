@@ -14,7 +14,9 @@ class MapView extends Component {
   render () {
     const {
       pinnedDiscussions,
-      discussions
+      discussions,
+      forumFeedMapViewContainer,
+      singleDiscussionMapViewContainer
     } = this.props;
 
     let allDiscussions = discussions;
@@ -23,9 +25,9 @@ class MapView extends Component {
     }
 
     let containerClassName = '';
-    if (this.props.forumFeedMapViewContainer) {
+    if (forumFeedMapViewContainer) {
       containerClassName = styles.mapViewContainer;
-    } else if (this.props.singleDiscussionMapViewContainer) {
+    } else if (singleDiscussionMapViewContainer) {
       containerClassName = styles.singleDiscussionMapViewContainer;
     }
 
