@@ -88,7 +88,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
             dispatch({ type: POSTING_DISCUSSION_SUCCESS });
             setTimeout(() => { dispatch({ type: CLEAR_SUCCESS_MESSAGE }); }, 2000);
 
-            // issue a redirect to the newly reacted discussion
+            // issue a redirect to the newly created discussion
             browserHistory.push(`/${currentForum}/discussion/${data.data.discussion_slug}`);
           } else {
             dispatch({

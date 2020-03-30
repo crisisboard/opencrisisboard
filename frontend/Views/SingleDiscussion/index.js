@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { browserHistory } from 'react-router';
@@ -20,7 +19,7 @@ import {
   getDefaultCenter
 } from '../../Utils/geolocation';
 
-import { MAP_DEFAULT_CENTER } from '../../../config/credentials';
+import _ from 'lodash';
 
 import Discussion from 'Components/SingleDiscussion/Discussion';
 import ReplyBox from 'Components/SingleDiscussion/ReplyBox';
@@ -33,7 +32,9 @@ import appLayout from 'SharedStyles/appLayout.css';
 class SingleDiscussion extends Component {
   constructor(props) {
     super(props);
-    this.state = { opinionContent: '' };
+    this.state = {
+      opinionContent: ''
+    };
   }
 
   componentDidMount() {
@@ -116,8 +117,8 @@ class SingleDiscussion extends Component {
       <MapView
         discussions={[discussion]}
         singleDiscussionMapViewContainer
-        center={getDefaultCenter()}
-        zoom={10}
+        center={discussion.geoLocation}
+        zoom={11}
       />
     );
   }

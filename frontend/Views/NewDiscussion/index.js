@@ -75,12 +75,16 @@ class NewDiscussion extends Component {
   }
 
   getAndUpdateBrowserLocation() {
-    const geoLocation = getBrowserLocation();
-    if (!geoLocation.error) {
+    getBrowserLocation(geoLocation => {
       this.props.updateDiscussionGeoLocation(geoLocation);
-    }
-    this.setState({
-      browserLocationNotAvailable: !!geoLocation.error
+      this.setState({
+        browserLocationNotAvailable: false
+      });
+    }, error => {
+      console.log(error);
+      this.setState({
+        browserLocationNotAvailable: true
+      });
     });
   }
 

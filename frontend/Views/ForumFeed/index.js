@@ -96,6 +96,7 @@ class ForumFeed extends Component {
       authenticated
     } = this.props;
 
+    // TODO: reduce duplicate code
     let {
       mapCenter
     } = this.state;
