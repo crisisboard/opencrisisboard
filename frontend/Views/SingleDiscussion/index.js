@@ -112,6 +112,7 @@ class SingleDiscussion extends Component {
         discussions={[discussion]}
         singleDiscussionMapViewContainer
         center={discussion.geoLocation}
+        mapCenterStateSet={true}
         zoom={11}
       />
     );

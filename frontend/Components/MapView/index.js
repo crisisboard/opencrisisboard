@@ -16,7 +16,10 @@ class MapView extends Component {
       pinnedDiscussions,
       discussions,
       forumFeedMapViewContainer,
-      singleDiscussionMapViewContainer
+      singleDiscussionMapViewContainer,
+      center,
+      zoom,
+      mapCenterStateSet
     } = this.props;
 
     let allDiscussions = discussions;
@@ -31,17 +34,15 @@ class MapView extends Component {
       containerClassName = styles.singleDiscussionMapViewContainer;
     }
 
-    return (
+    return mapCenterStateSet ? (
       <div className={containerClassName}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: MAP_KEY,
             language: 'en'
           }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-          onChildMouseEnter={this.onChildMouseEnter}
-          onChildMouseLeave={this.onChildMouseLeave}
+          center={center}
+          defaultZoom={zoom}
           yesIWantToUseGoogleMapApiInternals
         >
           {allDiscussions && allDiscussions.map((discussion, index) => {
@@ -56,7 +57,7 @@ class MapView extends Component {
           })}
         </GoogleMapReact>
       </div>
-    );
+    ) : null;
   }
 }
 

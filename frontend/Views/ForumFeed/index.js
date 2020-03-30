@@ -27,9 +27,12 @@ class ForumFeed extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapCenter: {}
-    }
+      mapCenter: {},
+      mapCenterStateSet: false
+    };
+
   }
+
   componentDidMount() {
     const {
       currentForumId,
@@ -41,14 +44,7 @@ class ForumFeed extends Component {
     getDiscussions(currentForumId());
     getPinnedDiscussions(currentForumId());
 
-    getBrowserLocation((position) => {
-      this.setState({
-        mapCenter: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-      })
-    });
+    this.setMapLocation();
   }
 
   componentDidUpdate(prevProps) {
@@ -66,6 +62,27 @@ class ForumFeed extends Component {
       getDiscussions(currentForumId(), feedChanged);
       getPinnedDiscussions(currentForumId(), feedChanged);
     }
+  }
+
+  setMapLocation() {
+    getBrowserLocation(position => {
+      this.setState({
+        mapCenter: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        },
+        mapCenterStateSet: true
+      }, () => {
+        console.log('mapCenter state set')
+      });
+    }, error => {
+      this.setState({
+        mapCenter: getDefaultCenter(),
+        mapCenterStateSet: true
+      }, () => {
+        console.log('mapCenter state set to default');
+      });
+    });
   }
 
   handleSortingChange(newSortingMethod) {
@@ -97,13 +114,15 @@ class ForumFeed extends Component {
     } = this.props;
 
     let {
-      mapCenter
+      mapCenter,
+      mapCenterStateSet
     } = this.state;
 
-    let mapCenterProp = mapCenter;
-    if (_.isEmpty(mapCenter)) {
-      mapCenterProp = getDefaultCenter();
-    }
+    // let mapCenterProp = mapCenter;
+    // if (_.isEmpty(mapCenter)) {
+    //   console.log('center state hasnt been updated yet');
+    //   mapCenterProp = getDefaultCenter();
+    // }
 
     if (error) {
       return (
@@ -147,7 +166,8 @@ class ForumFeed extends Component {
             pinnedDiscussions={pinnedDiscussions}
             discussions={discussions}
             currentForum={currentForum}
-            center={mapCenterProp}
+            center={mapCenter}
+            mapCenterStateSet={mapCenterStateSet}
             forumFeedMapViewContainer
             zoom={12}
           />
