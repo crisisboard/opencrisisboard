@@ -56,6 +56,9 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_MAP_KEY': JSON.stringify(process.env.MAP_KEY || 'development')
+  })
   ],
 
   resolve : {
