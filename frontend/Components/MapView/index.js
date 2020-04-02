@@ -4,14 +4,15 @@ import styles from './styles.css';
 import DiscussionPin from './DiscussionPin';
 import GoogleMapReact from 'google-map-react';
 
-import { MAP_KEY } from '../../../config/credentials';
-
 class MapView extends Component {
   constructor(props) {
     super(props);
   }
 
   render () {
+
+    const MAP_KEY = process.env.REACT_APP_MAP_KEY;
+
     const {
       pinnedDiscussions,
       discussions,
