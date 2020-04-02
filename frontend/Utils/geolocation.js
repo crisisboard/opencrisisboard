@@ -1,10 +1,9 @@
 import Geocode from 'react-geocode';
 
-import {
-  MAP_KEY,
-  MAP_DEFAULT_CENTER_LATITUDE,
-  MAP_DEFAULT_CENTER_LONGITUDE
-} from '../../config/credentials';
+
+const MAP_KEY = process.env.REACT_APP_MAP_KEY;
+const MAP_DEFAULT_CENTER_LATITUDE = process.env.REACT_APP_MAP_DEFAULT_CENTER_LATITUDE;
+const MAP_DEFAULT_CENTER_LONGITUDE = process.env.REACT_APP_MAP_DEFAULT_CENTER_LATITUDE;
 
 // geocode configs
 Geocode.setApiKey(MAP_KEY);
