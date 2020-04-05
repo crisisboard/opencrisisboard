@@ -68,7 +68,6 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
-    "google-map-react": "^1.1.7",
     "help": "^3.0.2",
     "leaflet": "^1.6.0",
     "lodash": "^4.17.4",
