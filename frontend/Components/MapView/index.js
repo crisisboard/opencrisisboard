@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import styles from './styles.css';
+import './styles.css';
 
 import DiscussionPin from './DiscussionPin';
 import GoogleMapReact from 'google-map-react';
-
-import { MAP_KEY } from '../../../config/credentials';
 
 class MapView extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class MapView extends Component {
   }
 
   render () {
+
     const {
       pinnedDiscussions,
       discussions,
@@ -27,35 +30,43 @@ class MapView extends Component {
       allDiscussions = discussions.concat(pinnedDiscussions);
     }
 
-    let containerClassName = '';
+    let containerClassName = '', leafletContainerClassName = '';
     if (forumFeedMapViewContainer) {
       containerClassName = styles.mapViewContainer;
+      leafletContainerClassName = styles.leafletContainer;
     } else if (singleDiscussionMapViewContainer) {
       containerClassName = styles.singleDiscussionMapViewContainer;
+      leafletContainerClassName = styles.singleDiscussionLeaftLetContainer;
     }
 
     return mapCenterStateSet ? (
       <div className={containerClassName}>
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: MAP_KEY,
-            language: 'en'
-          }}
+        <Map
           center={center}
-          defaultZoom={zoom}
-          yesIWantToUseGoogleMapApiInternals
-        >
-          {allDiscussions && allDiscussions.map((discussion, index) => {
-            return (
-              <DiscussionPin
-                key={index}
-                lat={discussion.geoLocation.lat}
-                lng={discussion.geoLocation.lng}
-                discussion={discussion}
-              />
+          zoom={zoom}
+          className={leafletContainerClassName}
+          zoomControl={!singleDiscussionMapViewContainer}
+          >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          />
+          {
+            allDiscussions &&
+            allDiscussions.map((discussion, index) =>
+              <Marker key={index}
+                position={[discussion.geoLocation.lat, discussion.geoLocation.lng]}>
+                <Popup>
+                  <DiscussionPin
+                    lat={discussion.geoLocation.lat}
+                    lng={discussion.geoLocation.lng}
+                    discussion={discussion}
+                  />
+                </Popup>
+              </Marker>
             )
-          })}
-        </GoogleMapReact>
+          }
+        </Map>
       </div>
     ) : null;
   }
@@ -65,7 +76,7 @@ MapView.defaultProps = {
   pinnedDiscussions: [],
   discussions: [],
   forumFeedMapViewContainer: false,
-  singleDiscussionMapViewContainer: false,
+  singleDiscussionMapViewContainer: false
 };
 
 MapView.PropTypes = {

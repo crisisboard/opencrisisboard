@@ -48,10 +48,6 @@
     "GH_SECRET": {
       "description": "GitHub Secret Key: https://developer.github.com/program/",
       "required": false
-    },
-    "MAP_KEY": {
-      "required": true,
-      "description": "Google Maps API Key: https://developers.google.com/maps/documentation/javascript/get-api-key"
     }
   },
   "addons": [

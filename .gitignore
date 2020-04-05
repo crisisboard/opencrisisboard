@@ -22,7 +22,10 @@ coverage
 .idea/
 
 # environment variables
-.env
+.env*
 
 # credentials environment variables
 config/credentials.js
+
+# vscode
+.vscode/

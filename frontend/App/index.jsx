@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-import Geocode from 'react-geocode';
-import { MAP_KEY } from '../../config/credentials';
 import styles from './styles';
 
 // app store
@@ -21,13 +19,6 @@ import NewDiscussion from '../Views/NewDiscussion';
 import UserProfile from '../Views/UserProfile';
 import RegisterPhone from '../Views/RegisterPhone';
 import NotFound from '../Views/NotFound';
-
-// geocode configs
-Geocode.setApiKey(MAP_KEY);
-Geocode.setLanguage("en");
-
-// Enable or disable logs. Its optional.
-Geocode.enableDebug();
 
 ReactDOM.render (
   <Provider store={appStore}>

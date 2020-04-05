@@ -56,6 +56,10 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_MAP_DEFAULT_CENTER_LATITUDE': JSON.stringify(process.env.MAP_DEFAULT_CENTER_LATITUDE || ''),
+      'process.env.REACT_APP_MAP_DEFAULT_CENTER_LONGITUDE': JSON.stringify(process.env.MAP_DEFAULT_CENTER_LONGITUDE || '')
+  })
   ],
 
   resolve : {

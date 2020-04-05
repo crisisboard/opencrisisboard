@@ -82,7 +82,6 @@ services:
     - GH_APPID=[GITHUB APP ID HERE]
     - GH_CBURL=[GITHUB CALLBACK URL HERE]
     - GH_SECRET=[GITHUB SECRET HERE]
-    - MAP_KEY=[GOOGLE MAPS KEY HERE]
   mongo:
     image: mongo
     ports:
@@ -162,9 +161,7 @@ module.exports = {
   // github details
   GH_APPID : [GITHUB APP ID HERE],
   GH_CBURL : [GITHUB CALLBACK URL HERE],
-  GH_SECRET : [GITHUB SECRET HERE],
-
-  MAP_KEY : [GOOGLE MAPS KEY HERE]
+  GH_SECRET : [GITHUB SECRET HERE]
 };
 ```
 
@@ -215,6 +212,8 @@ A minimal forum application built with the following technologies:
 * [PassportJS](http://passportjs.org/)
 * [MongoDB](https://www.mongodb.com/)
 * [ReForum](https://github.com/proshoumma/ReForum)
+* [Leaflet v.1.6.0](https://leafletjs.com/2019/11/17/leaflet-1.6.0.html)
+* [React Leaflet v.1.9.0](https://react-leaflet.js.org/docs/en/v1/intro.html)
 
 ## Conclusion
 Any pull request, issues and contribution is very appreciated. 

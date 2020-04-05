@@ -1,14 +1,7 @@
-import Geocode from 'react-geocode';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
-import {
-  MAP_KEY,
-  MAP_DEFAULT_CENTER_LATITUDE,
-  MAP_DEFAULT_CENTER_LONGITUDE
-} from '../../config/credentials';
-
-// geocode configs
-Geocode.setApiKey(MAP_KEY);
-Geocode.setLanguage('en');
+const MAP_DEFAULT_CENTER_LATITUDE = process.env.REACT_APP_MAP_DEFAULT_CENTER_LATITUDE;
+const MAP_DEFAULT_CENTER_LONGITUDE = process.env.REACT_APP_MAP_DEFAULT_CENTER_LATITUDE;
 
 export const getDefaultCenter = () => {
   console.log('default center:', MAP_DEFAULT_CENTER_LATITUDE, MAP_DEFAULT_CENTER_LONGITUDE);
@@ -27,26 +20,34 @@ export const getBrowserLocation = (successCallback, errorCallback) => {
   if (!navigator.geolocation) {
     errorCallback('User has denied access to the location in their browser');
   } else {
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    navigator.geolocation.getCurrentPosition(geoLocation => {
+      successCallback({
+        lat: geoLocation.coords.latitude,
+        lng: geoLocation.coords.longitude
+      });
+    }, errorCallback);
   }
 };
 
 /**
- * getGeolocationFromAddress - uses the react-geocode npm package to get a geoLocation object from an address string
+ * getGeolocationFromAddress - uses the leaflet-geosearch npm package to get a geoLocation object from an address string
  * @param {string} address
  * @returns {Object} geoLocation object {lat, lng}, geoLocation.error will be truthy if an error occurred
  */
-export const getGeolocationFromAddress = (address) => {
+export const getGeolocationFromAddress = async (address) => {
   const geoLocation = {};
-  return Geocode.fromAddress(address)
+
+  return await new OpenStreetMapProvider()
+  .search({ query: address })
   .then(
     response => {
-      if (response && response.results && response.results.length > 0) {
-        geoLocation.lat = response.results[0].geometry.location.lat;
-        geoLocation.lng = response.results[0].geometry.location.lng;
+      console.log( response);
+      if (response && response.length > 0) {
+        geoLocation.lat = parseFloat(response[0].y);
+        geoLocation.lng = parseFloat(response[0].x);
       } else {
-        // This case should only be hit if react-geocode breaks
-        geoLocation.error = 'Response from react-geocode was incorrectly formed'
+        // This case should only be hit if leaflet-geosearch breaks
+        geoLocation.error = 'Response from leaflet-geosearch was incorrectly formed'
       }
       return geoLocation;
     },
