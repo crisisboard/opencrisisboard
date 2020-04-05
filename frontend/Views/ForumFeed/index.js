@@ -68,8 +68,8 @@ class ForumFeed extends Component {
     getBrowserLocation(position => {
       this.setState({
         mapCenter: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lat: position.lat,
+          lng: position.lng
         },
         mapCenterStateSet: true
       });
