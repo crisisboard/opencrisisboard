@@ -74,8 +74,6 @@ export const postDiscussion = (userId, forumId, currentForum) => {
 
     // make api call if post is validated
     if (validated) {
-      const { latitude, longitude } = geoLocation.coords
-
       postDiscussionApi({
         userId,
         forumId,
@@ -83,7 +81,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
         content,
         tags,
         pinned,
-        geoLocation: { lat: latitude, lng: longitude }
+        geoLocation
       }).then(
         (data) => {
           if (data.data.postCreated === true) {
