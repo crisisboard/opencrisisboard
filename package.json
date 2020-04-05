@@ -83,7 +83,6 @@
     "pretty-error": "^2.1.1",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
-    "react-geocode": "^0.2.1",
     "react-helmet": "^5.2.1",
     "react-leaflet": "^1.9.1",
     "react-leaflet-search": "^1.0.3",
