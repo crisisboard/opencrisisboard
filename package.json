@@ -95,6 +95,7 @@
   "devDependencies": {
     "@edenjs/eslint-config-eden": "latest",
     "autoprefixer": "^6.6.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "dotenv": "^8.2.0",
