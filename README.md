@@ -82,7 +82,6 @@ services:
     - GH_APPID=[GITHUB APP ID HERE]
     - GH_CBURL=[GITHUB CALLBACK URL HERE]
     - GH_SECRET=[GITHUB SECRET HERE]
-    - MAP_KEY=[GOOGLE MAPS KEY HERE]
   mongo:
     image: mongo
     ports:
