@@ -22,7 +22,7 @@
   padding: 5px 50px;
   transform: rotate(-45deg) translateY(-5px) translateX(54px);
 
-  z-index: 1;
+  z-index: 9999;
 }
 
 .gitLink {
