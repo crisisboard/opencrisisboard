@@ -6,7 +6,6 @@ import styles from './styles.css';
 import './styles.css';
 
 import DiscussionPin from './DiscussionPin';
-import GoogleMapReact from 'google-map-react';
 
 class MapView extends Component {
   constructor(props) {
