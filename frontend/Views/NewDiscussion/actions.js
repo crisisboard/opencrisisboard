@@ -1,18 +1,16 @@
-import { browserHistory } from 'react-router';
+import { browserHistory } from "react-router";
 import {
   POSTING_DISCUSSION_START,
   POSTING_DISCUSSION_SUCCESS,
   POSTING_DISCUSSION_FAILURE,
-
   UPDATE_DISCUSSION_TITLE,
   UPDATE_DISCUSSION_CONTENT,
   UPDATE_DISCUSSION_PIN_STATUS,
   UPDATE_DISCUSSION_TAGS,
   UPDATE_DISCUSSION_GEO_LOCATION,
-
   CLEAR_SUCCESS_MESSAGE,
-} from './constants';
-import { postDiscussionApi } from './api';
+} from "./constants";
+import { postDiscussionApi } from "./api";
 
 /**
  * post a new discussion
@@ -34,9 +32,9 @@ export const postDiscussion = (userId, forumId, currentForum) => {
       content,
       tags,
       pinned,
-      geoLocation
+      geoLocation,
     } = getState().newDiscussion;
-    console.log('inside action', getState().newDiscussion);
+    console.log("inside action", getState().newDiscussion);
 
     let validated = true;
 
@@ -44,7 +42,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
       validated = false;
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
-        payload: 'Something is wrong with user/forum.',
+        payload: "Something is wrong with user/forum.",
       });
     }
 
@@ -52,7 +50,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
       validated = false;
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
-        payload: 'Title should be at least 15 characters.',
+        payload: "Title should be at least 15 characters.",
       });
     }
 
@@ -60,7 +58,7 @@ export const postDiscussion = (userId, forumId, currentForum) => {
       validated = false;
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
-        payload: 'Please write some content before posting.',
+        payload: "Please write some content before posting.",
       });
     }
 
@@ -68,14 +66,20 @@ export const postDiscussion = (userId, forumId, currentForum) => {
       validated = false;
       return dispatch({
         type: POSTING_DISCUSSION_FAILURE,
-        payload: 'Please provide some tags.',
+        payload: "Please provide some tags.",
+      });
+    }
+
+    if (geoLocation === null || (!geoLocation.lat && !geoLocation.lng)) {
+      validated = false;
+      return dispatch({
+        type: POSTING_DISCUSSION_FAILURE,
+        payload: "Please select an Address.",
       });
     }
 
     // make api call if post is validated
     if (validated) {
-      const { latitude, longitude } = geoLocation.coords
-
       postDiscussionApi({
         userId,
         forumId,
@@ -83,19 +87,24 @@ export const postDiscussion = (userId, forumId, currentForum) => {
         content,
         tags,
         pinned,
-        geoLocation: { lat: latitude, lng: longitude }
+        geoLocation,
       }).then(
         (data) => {
           if (data.data.postCreated === true) {
             dispatch({ type: POSTING_DISCUSSION_SUCCESS });
-            setTimeout(() => { dispatch({ type: CLEAR_SUCCESS_MESSAGE }); }, 2000);
+            setTimeout(() => {
+              dispatch({ type: CLEAR_SUCCESS_MESSAGE });
+            }, 2000);
 
             // issue a redirect to the newly created discussion
-            browserHistory.push(`/${currentForum}/discussion/${data.data.discussion_slug}`);
+            browserHistory.push(
+              `/${currentForum}/discussion/${data.data.discussion_slug}`
+            );
           } else {
             dispatch({
               type: POSTING_DISCUSSION_FAILURE,
-              payload: 'Something is wrong at our server end. Please try again later',
+              payload:
+                "Something is wrong at our server end. Please try again later",
             });
           }
         },
