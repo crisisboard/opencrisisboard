@@ -11,7 +11,10 @@ require('dotenv').config();
 const serverConfigs = require('./config/serverConfig');
 
 // connect to database
-mongoose.connect(serverConfigs.DBURL);
+mongoose.connect(serverConfigs.DBURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // initialize express
 const app = express();

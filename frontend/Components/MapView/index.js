@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
-import styles from './styles.css';
-import './styles.css';
+import styles from "./styles.css";
 
-import DiscussionPin from './DiscussionPin';
-import GoogleMapReact from 'google-map-react';
+import DiscussionPin from "./DiscussionPin";
 
 class MapView extends Component {
   constructor(props) {
     super(props);
   }
 
-  render () {
-
+  render() {
     const {
       pinnedDiscussions,
       discussions,
@@ -22,7 +19,7 @@ class MapView extends Component {
       singleDiscussionMapViewContainer,
       center,
       zoom,
-      mapCenterStateSet
+      mapCenterStateSet,
     } = this.props;
 
     let allDiscussions = discussions;
@@ -30,7 +27,8 @@ class MapView extends Component {
       allDiscussions = discussions.concat(pinnedDiscussions);
     }
 
-    let containerClassName = '', leafletContainerClassName = '';
+    let containerClassName = "",
+      leafletContainerClassName = "";
     if (forumFeedMapViewContainer) {
       containerClassName = styles.mapViewContainer;
       leafletContainerClassName = styles.leafletContainer;
@@ -46,16 +44,20 @@ class MapView extends Component {
           zoom={zoom}
           className={leafletContainerClassName}
           zoomControl={!singleDiscussionMapViewContainer}
-          >
+        >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
-          {
-            allDiscussions &&
-            allDiscussions.map((discussion, index) =>
-              <Marker key={index}
-                position={[discussion.geoLocation.lat, discussion.geoLocation.lng]}>
+          {allDiscussions &&
+            allDiscussions.map((discussion, index) => (
+              <Marker
+                key={index}
+                position={[
+                  discussion.geoLocation.lat,
+                  discussion.geoLocation.lng,
+                ]}
+              >
                 <Popup>
                   <DiscussionPin
                     lat={discussion.geoLocation.lat}
@@ -64,8 +66,7 @@ class MapView extends Component {
                   />
                 </Popup>
               </Marker>
-            )
-          }
+            ))}
         </Map>
       </div>
     ) : null;
@@ -76,7 +77,7 @@ MapView.defaultProps = {
   pinnedDiscussions: [],
   discussions: [],
   forumFeedMapViewContainer: false,
-  singleDiscussionMapViewContainer: false
+  singleDiscussionMapViewContainer: false,
 };
 
 MapView.PropTypes = {
@@ -85,7 +86,7 @@ MapView.PropTypes = {
 
   // Only one of the following container bools can be set to true, this defines the size of the MapView
   forumFeedMapViewContainer: React.PropTypes.bool,
-  singleDiscussionMapViewContainer: React.PropTypes.bool
+  singleDiscussionMapViewContainer: React.PropTypes.bool,
 };
 
 export default MapView;
